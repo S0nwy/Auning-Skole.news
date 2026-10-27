@@ -33,7 +33,7 @@ ul{list-style:none}
 .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
 @media (max-width:600px){.wrap{padding:0 14px}}
 
-/* TOP BAR */
+/* ---------- TOP BAR ---------- */
 .topbar{background:var(--soft);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
 .topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:38px}
 .topbar-date{font-weight:500}
@@ -41,7 +41,7 @@ ul{list-style:none}
 .topbar-links a:hover{color:var(--red)}
 @media (max-width:760px){.topbar-links a:nth-child(-n+2){display:none}}
 
-/* BREAKING */
+/* ---------- BREAKING ---------- */
 .breaking{background:var(--red);color:#fff}
 .breaking .wrap{display:flex;align-items:center;gap:16px;min-height:44px}
 .breaking-label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:11.5px;
@@ -59,7 +59,7 @@ ul{list-style:none}
   .ticker-item{font-size:13px}
 }
 
-/* HEADER */
+/* ---------- HEADER ---------- */
 .site-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
 .header-inner{display:flex;align-items:center;gap:26px;height:66px}
 .logo{flex:none;color:var(--red);font-weight:900;font-size:27px;letter-spacing:-.055em;line-height:1}
@@ -85,7 +85,7 @@ body.nav-open .mobile-nav{display:block}
 }
 @media (min-width:981px){.mobile-nav{display:none!important}}
 
-/* MEDIA */
+/* ---------- MEDIA ---------- */
 .media{position:relative;display:block;overflow:hidden;background:#e8e8e8;border-radius:3px}
 .media img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
 .media:hover img{transform:scale(1.04)}
@@ -93,7 +93,7 @@ body.nav-open .mobile-nav{display:block}
 .r-4x3{aspect-ratio:4/3}
 .r-3x2{aspect-ratio:3/2}
 
-/* HERO */
+/* ---------- HERO ---------- */
 .hero{display:grid;grid-template-columns:1.75fr 1fr;padding:28px 0 10px}
 .hero-main{padding-right:32px;border-right:1px solid var(--line)}
 .hero-side{padding-left:32px;display:flex;flex-direction:column}
@@ -119,7 +119,7 @@ body.nav-open .mobile-nav{display:block}
   .hero-side{padding-left:0;padding-top:8px}
 }
 
-/* SECTIONS */
+/* ---------- SECTIONS ---------- */
 .section{margin-top:48px}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
   border-top:3px solid var(--ink);padding-top:12px;margin-bottom:24px}
@@ -136,14 +136,15 @@ body.nav-open .mobile-nav{display:block}
   .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
   .grid{gap:24px}
 }
+.card{cursor:pointer}
 .card h3{font-size:17px;line-height:1.26;font-weight:700;letter-spacing:-.012em;margin-top:13px}
 .card:hover h3{color:var(--red)}
 .card p{font-size:14px;color:var(--muted);margin-top:7px}
 .card .meta{margin-top:9px}
 
-/* LIVE LIST */
+/* ---------- LIVE LIST ---------- */
 .live-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0 34px}
-.live-item{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.live-item{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline;cursor:pointer}
 .live-time{font-size:13px;font-weight:800;color:var(--red);flex:none;width:44px;
   font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .live-item p{font-size:15px;font-weight:600;line-height:1.32}
@@ -151,18 +152,18 @@ body.nav-open .mobile-nav{display:block}
 @media (max-width:900px){.live-list{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:620px){.live-list{grid-template-columns:1fr}}
 
-/* SPLIT */
+/* ---------- SPLIT ---------- */
 .split{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start}
 @media (max-width:920px){.split{grid-template-columns:1fr;gap:36px}}
 .most-read{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:22px}
 .most-read h2{font-size:17px;font-weight:800;letter-spacing:-.015em;margin-bottom:6px}
-.mr-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #e6e6e6;align-items:flex-start}
+.mr-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #e6e6e6;align-items:flex-start;cursor:pointer}
 .mr-item:last-child{border-bottom:0;padding-bottom:0}
 .mr-num{font-size:22px;font-weight:900;color:var(--red);line-height:1;flex:none;width:26px;letter-spacing:-.04em}
 .mr-item p{font-size:14.5px;font-weight:600;line-height:1.3}
 .mr-item:hover p{color:var(--red)}
 
-/* NEWSLETTER */
+/* ---------- NEWSLETTER ---------- */
 .newsletter{background:var(--ink);color:#fff;border-radius:8px;margin:56px 0 10px;
   padding:44px 46px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
 .newsletter h2{font-size:clamp(21px,2.2vw,28px);font-weight:800;letter-spacing:-.025em;margin-bottom:8px}
@@ -179,7 +180,7 @@ body.nav-open .mobile-nav{display:block}
 .nl-msg.show{display:block}
 @media (max-width:860px){.newsletter{grid-template-columns:1fr;padding:32px 24px}}
 
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:14px}
 .footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:36px;padding-bottom:40px}
 .footer-brand .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:12px}
@@ -194,6 +195,45 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
 .footer-bottom a:hover{color:#fff}
 @media (max-width:820px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
 @media (max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
+/* ---------- MODAL ---------- */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);
+  z-index:200;display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 20px;overflow-y:auto;
+  opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease;
+}
+.modal-overlay.open{opacity:1;visibility:visible}
+.modal{
+  background:#fff;max-width:780px;width:100%;border-radius:8px;
+  transform:translateY(18px) scale(.985);transition:transform .3s cubic-bezier(.2,.7,.3,1);
+  box-shadow:0 20px 60px rgba(0,0,0,.22);overflow:hidden;position:relative;
+}
+.modal-overlay.open .modal{transform:translateY(0) scale(1)}
+.modal-close{
+  position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.92);display:grid;place-items:center;z-index:2;
+  transition:background .15s,transform .15s;
+}
+.modal-close:hover{background:#fff;transform:rotate(90deg)}
+.modal-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#eee}
+.modal-body{padding:30px 34px 38px}
+.modal-body .kicker{margin-bottom:8px}
+.modal-body h1{font-size:clamp(22px,2.6vw,32px);line-height:1.15;letter-spacing:-.025em;font-weight:800;margin-bottom:12px}
+.modal-body .meta{margin-top:0;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.modal-body p{font-size:16.5px;line-height:1.65;color:#222;margin-bottom:16px}
+.modal-body p:last-of-type{margin-bottom:0}
+.modal-source{
+  margin-top:24px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:13.5px;color:var(--muted);
+}
+.modal-source a{color:var(--red);font-weight:600}
+.modal-source a:hover{text-decoration:underline}
+@media (max-width:560px){
+  .modal-overlay{padding:0}
+  .modal{border-radius:0;min-height:100vh}
+  .modal-body{padding:24px 20px 32px}
+}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -223,7 +263,7 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
     <div class="ticker" id="ticker">
       <a class="ticker-item active" href="#">Over 100 forældre mødte op på Auning Skole i aften</a>
       <a class="ticker-item" href="#">1,7 mio. kr. frigivet til nyt faglokale</a>
-      <a class="ticker-item" href="#">Læringscentret lukkede ungdomsbiblioteket — det var en aprilsnar</a>
+      <a class="ticker-item" href="#">Læringscentret “lukkede” biblioteket — det var en aprilsnar</a>
     </div>
   </div>
 </div>
@@ -263,44 +303,40 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
   <!-- HERO -->
   <section class="hero">
     <div class="hero-main">
-      <a href="#" class="media r-16x9">
+      <div class="media r-16x9" data-article="0">
         <img src="https://picsum.photos/seed/auning-hero-real/1200/675" alt="Auning Skole">
-      </a>
-      <span class="kicker">Skolestruktur</span>
-      <h1 class="hero-title"><a href="#">Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”</a></h1>
-      <p class="hero-dek">Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs. I dag går børnene fra Langhøjskolen, Allingåbroskolen og Rougsøskolen videre til Auning Skole i 7. klasse — men den ordning kan snart være fortid.</p>
-      <div class="meta">
-        <span>Af lokalredaktionen</span><span class="sep">·</span><span>5. oktober 2026</span>
       </div>
+      <span class="kicker">Skolestruktur</span>
+      <h1 class="hero-title"><a href="#" data-article="0">Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”</a></h1>
+      <p class="hero-dek">Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs. I dag går børnene fra Langhøjskolen, Allingåbroskolen og Rougsøskolen videre til Auning Skole i 7. klasse — men den ordning kan snart være fortid.</p>
+      <div class="meta"><span>Af lokalredaktionen</span><span class="sep">·</span><span>5. oktober 2026</span></div>
     </div>
 
     <div class="hero-side">
-      <a href="#" class="side-item">
+      <div class="side-item" data-article="1">
         <div>
           <span class="kicker">Budget</span>
           <h3>1,7 millioner kroner frigivet: Auning Skole får nyt faglokale</h3>
           <div class="meta"><span>10. marts 2026</span></div>
         </div>
         <div class="media r-4x3"><img src="https://picsum.photos/seed/auning-2-real/300/225" alt="" loading="lazy"></div>
-      </a>
-
-      <a href="#" class="side-item">
+      </div>
+      <div class="side-item" data-article="2">
         <div>
           <span class="kicker">Dialogmøde</span>
           <h3>150 borgere stillede op: Skoleområdet mangler 10 millioner</h3>
           <div class="meta"><span>9. oktober 2026</span></div>
         </div>
         <div class="media r-4x3"><img src="https://picsum.photos/seed/auning-3-real/300/225" alt="" loading="lazy"></div>
-      </a>
-
-      <a href="#" class="side-item">
+      </div>
+      <div class="side-item" data-article="3">
         <div>
           <span class="kicker">Hverdag</span>
           <h3>Læringscentret “lukkede” biblioteket: Det var en aprilsnar</h3>
           <div class="meta"><span>1. april 2025</span></div>
         </div>
         <div class="media r-4x3"><img src="https://picsum.photos/seed/auning-4-real/300/225" alt="" loading="lazy"></div>
-      </a>
+      </div>
     </div>
   </section>
 
@@ -310,18 +346,7 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
       <h2>Seneste nyt om Auning Skole</h2>
       <a href="#" class="more">Se alle →</a>
     </div>
-
-    <div class="live-list">
-      <a href="#" class="live-item"><span class="live-time">5. okt</span><p>Flere end hundrede forældre samlet på Auning Skole</p></a>
-      <a href="#" class="live-item"><span class="live-time">9. okt</span><p>150 borgere til dialogmøde om skolestruktur</p></a>
-      <a href="#" class="live-item"><span class="live-time">10. mar</span><p>Økonomiudvalget godkender 1,7 mio. kr. til faglokale</p></a>
-      <a href="#" class="live-item"><span class="live-time">12. jun</span><p>Nyt faglokale kan blive 1,2 mio. kr. dyrere end planlagt</p></a>
-      <a href="#" class="live-item"><span class="live-time">1. apr</span><p>Læringscentret laver aprilsnar med ungdomsbiblioteket</p></a>
-      <a href="#" class="live-item"><span class="live-time">2026</span><p>Skolebestyrelsen er på både Facebook og Instagram</p></a>
-      <a href="#" class="live-item"><span class="live-time">2026</span><p>Auning Skole har knap 700 elever og 120 ansatte</p></a>
-      <a href="#" class="live-item"><span class="live-time">2025</span><p>Høringssvar fra forældre og lærere om fremtidens folkeskole</p></a>
-      <a href="#" class="live-item"><span class="live-time">2025</span><p>Elever fra 5.–8. klasse deltog i Naturvidenskabsfestival</p></a>
-    </div>
+    <div class="live-list" id="latestList"></div>
   </section>
 
   <!-- SKOLESTRUKTUR -->
@@ -330,36 +355,7 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
       <h2>Skolestruktur i Norddjurs</h2>
       <a href="#" class="more">Mere →</a>
     </div>
-
-    <div class="grid grid-4">
-      <a href="#" class="card">
-        <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-5-real/600/400" alt="" loading="lazy"></div>
-        <h3>Tre skoler er i spil til lukning: Langhøjskolen, Allingåbroskolen og Rougsøskolen</h3>
-        <p>Ifølge TV2 Østjylland peger politikerne på et skoleområde, der ventes at sprænge budgettet med 10 millioner kroner næste år.</p>
-        <div class="meta"><span>9. oktober 2026</span></div>
-      </a>
-
-      <a href="#" class="card">
-        <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-6-real/600/400" alt="" loading="lazy"></div>
-        <h3>“Det er nu, vi skal sige fra”: Forældre samlet på skolen</h3>
-        <p>Mødet på Auning Skole var arrangeret, fordi forældrene vil have svar på, hvad der sker med deres børns skole efter 6. klasse.</p>
-        <div class="meta"><span>5. oktober 2026</span></div>
-      </a>
-
-      <a href="#" class="card">
-        <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-7-real/600/400" alt="" loading="lazy"></div>
-        <h3>Borgere kan stadig sende høringssvar ind</h3>
-        <p>Fristen for at komme med input til Fremtidens Folkeskole i Norddjurs var 15. oktober.</p>
-        <div class="meta"><span>Oktober 2026</span></div>
-      </a>
-
-      <a href="#" class="card">
-        <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-8-real/600/400" alt="" loading="lazy"></div>
-        <h3>Skolebestyrelsen følger sagen tæt</h3>
-        <p>Du kan følge med i skolebestyrelsens arbejde på Facebook (Auningskolebestyrelse) og Instagram (@auning_skolebestyrelse).</p>
-        <div class="meta"><span>Løbende</span></div>
-      </a>
-    </div>
+    <div class="grid grid-4" id="structureGrid"></div>
   </section>
 
   <!-- SPLIT: SKOLEN I PRAKSIS + MEST LÆST -->
@@ -370,45 +366,11 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
           <h2>Skolen i praksis</h2>
           <a href="#" class="more">Mere →</a>
         </div>
-
-        <div class="grid grid-2">
-          <a href="#" class="card">
-            <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-9-real/600/400" alt="" loading="lazy"></div>
-            <h3>Nyt håndværks- og designlokale på vej — men måske i to etaper</h3>
-            <p>Den fulde løsning koster cirka 3,6 millioner kroner. Derfor kigger skolen på en første etape med et træværksted.</p>
-            <div class="meta"><span>12. juni 2026</span></div>
-          </a>
-
-          <a href="#" class="card">
-            <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-10-real/600/400" alt="" loading="lazy"></div>
-            <h3>Aprilsnar: “Vi skal lige læse 1.009 ungdomsbøger igennem”</h3>
-            <p>Læringscentret på Auning Skole spærrede ungdomsbiblioteket af med rød-hvidt bånd og skrev, at de skulle tjekke bøgerne for sex. Det var en joke.</p>
-            <div class="meta"><span>1. april 2025</span></div>
-          </a>
-
-          <a href="#" class="card">
-            <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-11-real/600/400" alt="" loading="lazy"></div>
-            <h3>Knap 700 elever og 120 ansatte</h3>
-            <p>Auning Skole dækker 0.–9. klasse og har både specialklasser, modtagelsesklasser og mellemformer.</p>
-            <div class="meta"><span>2026</span></div>
-          </a>
-
-          <a href="#" class="card">
-            <div class="media r-3x2"><img src="https://picsum.photos/seed/auning-12-real/600/400" alt="" loading="lazy"></div>
-            <h3>Eleverne var med til at bestemme</h3>
-            <p>Elevrådet på Auning Skole har repræsentanter i skolebestyrelsen, og eleverne bliver inddraget i skolens prioriteringer.</p>
-            <div class="meta"><span>Løbende</span></div>
-          </a>
-        </div>
+        <div class="grid grid-2" id="practiceGrid"></div>
       </div>
-
       <aside class="most-read">
         <h2>Mest læst</h2>
-        <a href="#" class="mr-item"><span class="mr-num">1</span><p>Flere end 100 forældre mødte op på Auning Skole</p></a>
-        <a href="#" class="mr-item"><span class="mr-num">2</span><p>1,7 mio. kr. frigivet til nyt faglokale</p></a>
-        <a href="#" class="mr-item"><span class="mr-num">3</span><p>150 borgere til dialogmøde om skolestruktur</p></a>
-        <a href="#" class="mr-item"><span class="mr-num">4</span><p>Nyt faglokale kan sprænge budgettet</p></a>
-        <a href="#" class="mr-item"><span class="mr-num">5</span><p>Læringscentrets aprilsnar gik viralt</p></a>
+        <div id="mostReadList"></div>
       </aside>
     </div>
   </section>
@@ -436,18 +398,9 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
         <a href="#" class="logo">AUNING</a>
         <p>Uafhængige nyheder om Auning Skole og Norddjurs Kommune. Opdateret hele døgnet.</p>
       </div>
-      <div class="footer-col">
-        <h4>Sektioner</h4>
-        <a href="#">Skolen</a><a href="#">Norddjurs</a><a href="#">Politik</a><a href="#">Forældre</a>
-      </div>
-      <div class="footer-col">
-        <h4>Mere</h4>
-        <a href="#">Sport</a><a href="#">Kultur</a><a href="#">Vejr</a><a href="#">Debat</a>
-      </div>
-      <div class="footer-col">
-        <h4>Om</h4>
-        <a href="#">Kontakt</a><a href="#">Job</a><a href="#">Privatlivspolitik</a><a href="#">Cookieindstillinger</a>
-      </div>
+      <div class="footer-col"><h4>Sektioner</h4><a href="#">Skolen</a><a href="#">Norddjurs</a><a href="#">Politik</a><a href="#">Forældre</a></div>
+      <div class="footer-col"><h4>Mere</h4><a href="#">Sport</a><a href="#">Kultur</a><a href="#">Vejr</a><a href="#">Debat</a></div>
+      <div class="footer-col"><h4>Om</h4><a href="#">Kontakt</a><a href="#">Job</a><a href="#">Privatlivspolitik</a><a href="#">Cookieindstillinger</a></div>
     </div>
     <div class="footer-bottom">
       <span>© <span id="year"></span> Auning Skole Nyheder. Alle rettigheder forbeholdes.</span>
@@ -456,52 +409,282 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
   </div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
+  <article class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="Luk">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <img class="modal-img" id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <span class="kicker" id="modalKicker"></span>
+      <h1 id="modalTitle"></h1>
+      <div class="meta" id="modalMeta"></div>
+      <div id="modalText"></div>
+      <div class="modal-source" id="modalSource"></div>
+    </div>
+  </article>
+</div>
+
 <script>
-/* Dato */
+/* ================= DATA ================= */
+const articles = [
+  {
+    id: 0,
+    kicker: "Skolestruktur",
+    title: "Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”",
+    date: "5. oktober 2026",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-hero-real/1200/675",
+    source: "TV2 Østjylland",
+    sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",
+    text: `<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune.</p>
+<p>I dag går børnene fra Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted videre til Auning Skole, når de skal i 7. klasse. Men den ordning kan snart være fortid.</p>
+<p>Politikerne i Norddjurs peger på et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Tre skoler i den nordvestlige del af kommunen er i spil til lukning.</p>
+<p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre.</p>
+<p>Borgere kan stadig sende høringssvar frem til 15. oktober.</p>`
+  },
+  {
+    id: 1,
+    kicker: "Budget",
+    title: "1,7 millioner kroner frigivet: Auning Skole får nyt faglokale",
+    date: "10. marts 2026",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-2-real/600/400",
+    source: "Norddjurs Kommune",
+    sourceUrl: "https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",
+    text: `<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole.</p>
+<p>Pengene blev afsat i forbindelse med budgettet for 2026–2029 og skal bruges til et faglokale til håndværk og design.</p>
+<p>Derudover var der i 2025 et mindreforbrug på 0,7 millioner kroner på anlægsprojektet “Faglokaler inde og ude”, som også vedrører Auning Skole.</p>
+<p>Lokalet skal etableres i tæt dialog med skolen, og Børne-, Familie- og Skoleudvalget tager senere stilling til udbudsform og tildelingskriterier.</p>`
+  },
+  {
+    id: 2,
+    kicker: "Dialogmøde",
+    title: "150 borgere stillede op: Skoleområdet mangler 10 millioner",
+    date: "9. oktober 2026",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-3-real/600/400",
+    source: "TV2 Østjylland",
+    sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",
+    text: `<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune.</p>
+<p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted.</p>
+<p>Politikerne peger på et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år.</p>
+<p>Borgere kan sende høringssvar frem til 15. oktober.</p>`
+  },
+  {
+    id: 3,
+    kicker: "Hverdag",
+    title: "Læringscentret “lukkede” biblioteket: Det var en aprilsnar",
+    date: "1. april 2025",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-4-real/600/400",
+    source: "Folkeskolen.dk",
+    sourceUrl: "https://www.folkeskolen.dk/er-du-blevet-holdt-for-nar-i-dag/",
+    text: `<p>En afdeling af Læringscentret på Auning Skole var 1. april lukket af med rød-hvidt afspærringsbånd.</p>
+<p>Læringscentret delte et billede på Facebook med teksten: “Vi har desværre set os nødsaget til at lukke ungdomsbiblioteket på ubestemt tid, mens vi gennemlæser alle de 1009 ungdomsbøger, vi har.”</p>
+<p>Det var naturligvis en aprilsnar.</p>
+<p>“Vi giver besked, når her igen er trygt for de unge at låne bøger,” lød det i opslaget.</p>`
+  },
+  {
+    id: 4,
+    kicker: "Økonomi",
+    title: "Nyt faglokale kan blive 1,2 millioner kroner dyrere end planlagt",
+    date: "12. juni 2026",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-5-real/600/400",
+    source: "Norddjurs Kommune",
+    sourceUrl: "https://norddjurs.meetingsplus.dk/welcome-da/udvalg/borne-familie-og-skoleudvalget/mode-den-24-juni-2026/protocol/73-notat-anlaegsprojekt-vedr-etablering-af-nyt-faglokale-pa-auning-skolepdf",
+    text: `<p>Det nye håndværks- og designlokale på Auning Skole kan blive dyrere end først antaget.</p>
+<p>En ekstern rådgiver har vurderet, at det ønskede lokale forventes at koste cirka 3,6 millioner kroner — cirka 1,2 millioner kroner over budgettet.</p>
+<p>Årsagerne er blandt andet udgifter til sanering og nedbrydning, etablering af delvist nyt terrændæk samt omfanget af tekniske installationer.</p>
+<p>Hvis der ikke kan findes flere penge, er Auning Skole indstillet på at dele projektet op i to etaper. Første etape vil være et træværksted til cirka 2,4 millioner kroner.</p>`
+  },
+  {
+    id: 5,
+    kicker: "Borgermøde",
+    title: "Fremtidens Folkeskole blev drøftet i Auning",
+    date: "10. juni 2026",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-6-real/600/400",
+    source: "Din Avis",
+    sourceUrl: "https://dinavis.dk/samfund/ECE19377952/fremtidens-folkeskole-i-norddjurs-droeftes-nu-ved-borgermoeder-i-skoledistrikterne/",
+    text: `<p>Det første af fire borgermøder om Fremtidens Folkeskole i Norddjurs blev afviklet tirsdag 9. juni.</p>
+<p>Cirka 40 borgere havde tilmeldt sig borgermødet i Auning.</p>
+<p>Borgmester Kasper Bjerregaard lagde vægt på, at mødet ikke handlede om skolelukninger, men om at få input til de overordnede anbefalinger.</p>
+<p>Deltagerne blev opdelt i grupper, der drøftede emner som “Robuste folkeskoler med stærke fællesskaber” og “Fysiske rammer der er fleksible og motiverende”.</p>`
+  },
+  {
+    id: 6,
+    kicker: "Om skolen",
+    title: "Auning Skole: Knap 700 elever og 120 ansatte",
+    date: "2024",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-7-real/600/400",
+    source: "Vores Auning",
+    sourceUrl: "https://vores-auning.dk/h/uddannelse/auning-skole/a/",
+    text: `<p>Auning Skole ligger i Auning by i Norddjurs Kommune på Djursland og dækker børnehaveklasse til og med 9. klasse.</p>
+<p>Med 682 elever i 2024 er den en af de større folkeskoler i kommunen.</p>
+<p>Skolen er organiseret i tre trin: indskoling fra børnehaveklasse til 3. klasse, mellemtrin fra 4. til 6. klasse og udskoling fra 7. til 9. klasse.</p>
+<p>Der er 120 ansatte, herunder ledelse, lærere, pædagoger, tekniske servicemedarbejdere samt administrativt- og rengøringspersonale.</p>`
+  },
+  {
+    id: 7,
+    kicker: "Sociale medier",
+    title: "Følg Auning Skole på Facebook",
+    date: "Løbende",
+    byline: "Af lokalredaktionen",
+    image: "https://picsum.photos/seed/auning-8-real/600/400",
+    source: "Auning Skole",
+    sourceUrl: "https://www.facebook.com/AuningSkole",
+    text: `<p>Auning Skole deler billeder og videoer fra undervisningen og hverdagen på skolens Facebook-side.</p>
+<p>“Hvis du gerne vil se mere fra vores hverdag her på Auning Skole, kan du følge vores Facebookside,” skriver skolen på Aula.</p>
+<p>Du kan finde Facebook-siden på <a href="https://www.facebook.com/AuningSkole" target="_blank" rel="noopener">facebook.com/AuningSkole</a>.</p>
+<p>Skolebestyrelsen kan også følges på Facebook (Auningskolebestyrelse) og Instagram (@auning_skolebestyrelse).</p>`
+  }
+];
+
+/* ================= RENDER ================= */
+const latestIds = [0, 2, 1, 4, 3, 5, 6, 7];
+const structureIds = [0, 2, 5, 1];
+const practiceIds = [4, 3, 6, 7];
+const mostReadIds = [0, 1, 2, 4, 3];
+
+const latestList = document.getElementById('latestList');
+const structureGrid = document.getElementById('structureGrid');
+const practiceGrid = document.getElementById('practiceGrid');
+const mostReadList = document.getElementById('mostReadList');
+
+function renderLatest(id) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  const el = document.createElement('div');
+  el.className = 'live-item';
+  el.dataset.article = id;
+  el.innerHTML = `<span class="live-time">${a.date.split(' ')[0]}.</span><p>${a.title}</p>`;
+  latestList.appendChild(el);
+}
+
+function renderCard(id) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return '';
+  return `<div class="card" data-article="${id}">
+    <div class="media r-3x2"><img src="${a.image}" alt="" loading="lazy"></div>
+    <h3>${a.title}</h3>
+    <p>${a.kicker}</p>
+    <div class="meta"><span>${a.date}</span></div>
+  </div>`;
+}
+
+function renderMostRead(id, index) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  const el = document.createElement('div');
+  el.className = 'mr-item';
+  el.dataset.article = id;
+  el.innerHTML = `<span class="mr-num">${index + 1}</span><p>${a.title}</p>`;
+  mostReadList.appendChild(el);
+}
+
+latestIds.forEach(renderLatest);
+structureGrid.innerHTML = structureIds.map(renderCard).join('');
+practiceGrid.innerHTML = practiceIds.map(renderCard).join('');
+mostReadIds.forEach((id, i) => renderMostRead(id, i));
+
+/* ================= MODAL ================= */
+const overlay = document.getElementById('modalOverlay');
+const modalImg = document.getElementById('modalImg');
+const modalKicker = document.getElementById('modalKicker');
+const modalTitle = document.getElementById('modalTitle');
+const modalMeta = document.getElementById('modalMeta');
+const modalText = document.getElementById('modalText');
+const modalSource = document.getElementById('modalSource');
+const modalClose = document.getElementById('modalClose');
+
+let lastFocused = null;
+
+function openArticle(id) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  lastFocused = document.activeElement;
+
+  modalImg.src = a.image;
+  modalImg.alt = a.title;
+  modalKicker.textContent = a.kicker;
+  modalTitle.textContent = a.title;
+  modalMeta.innerHTML = `<span>${a.byline}</span><span class="sep">·</span><span>${a.date}</span>`;
+  modalText.innerHTML = a.text;
+  modalSource.innerHTML = `Kilde: <a href="${a.sourceUrl}" target="_blank" rel="noopener">${a.source}</a>`;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  modalClose.focus();
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocused) lastFocused.focus();
+}
+
+document.addEventListener('click', (e) => {
+  const trigger = e.target.closest('[data-article]');
+  if (trigger) {
+    e.preventDefault();
+    openArticle(Number(trigger.dataset.article));
+  }
+});
+
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+});
+
+/* ================= MISC ================= */
 (function () {
-  var d = new Date();
-  var s = d.toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  var el = document.getElementById('today');
+  const d = new Date();
+  const s = d.toLocaleDateString('da-DK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const el = document.getElementById('today');
   if (el) el.textContent = s.charAt(0).toUpperCase() + s.slice(1);
-  var y = document.getElementById('year');
+  const y = document.getElementById('year');
   if (y) y.textContent = d.getFullYear();
 })();
 
-/* Ticker */
 (function () {
-  var items = document.querySelectorAll('.ticker-item');
+  const items = document.querySelectorAll('.ticker-item');
   if (items.length < 2) return;
-  var i = 0;
-  setInterval(function () {
+  let i = 0;
+  setInterval(() => {
     items[i].classList.remove('active');
     i = (i + 1) % items.length;
     items[i].classList.add('active');
   }, 5000);
 })();
 
-/* Mobilmenu */
 (function () {
-  var btn = document.getElementById('menuBtn');
-  var body = document.body;
+  const btn = document.getElementById('menuBtn');
+  const body = document.body;
   if (!btn) return;
-  btn.addEventListener('click', function () {
+  btn.addEventListener('click', () => {
     body.classList.toggle('nav-open');
     btn.setAttribute('aria-expanded', body.classList.contains('nav-open'));
   });
-  document.querySelectorAll('#mobileNav a').forEach(function (a) {
-    a.addEventListener('click', function () {
+  document.querySelectorAll('#mobileNav a').forEach(a => {
+    a.addEventListener('click', () => {
       body.classList.remove('nav-open');
       btn.setAttribute('aria-expanded', 'false');
     });
   });
 })();
 
-/* Nyhedsbrev */
 (function () {
-  var form = document.getElementById('nlForm');
-  var msg = document.getElementById('nlMsg');
+  const form = document.getElementById('nlForm');
+  const msg = document.getElementById('nlMsg');
   if (!form) return;
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     msg.classList.add('show');
     form.reset();
