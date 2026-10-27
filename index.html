@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NORD — News</title>
+<meta name="description" content="NORD brings you the latest news from Denmark and around the world.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#d6001c;
+  --red-dark:#a80015;
+  --ink:#0d0d0d;
+  --muted:#5f5f5f;
+  --line:#e3e3e3;
+  --soft:#f6f6f6;
+  --maxw:1260px;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);
+  background:#fff;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+@media (max-width:600px){.wrap{padding:0 14px}}
+
+/* ---------- TOP BAR ---------- */
+.topbar{background:var(--soft);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:38px}
+.topbar-date{font-weight:500}
+.topbar-date strong{color:var(--ink);font-weight:700}
+.topbar-links{display:flex;gap:20px;font-weight:600}
+.topbar-links a:hover{color:var(--red)}
+@media (max-width:760px){.topbar-links a:nth-child(-n+2){display:none}}
+
+/* ---------- BREAKING ---------- */
+.breaking{background:var(--red);color:#fff}
+.breaking .wrap{display:flex;align-items:center;gap:16px;min-height:44px}
+.breaking-label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;flex:none}
+.dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+.ticker{position:relative;flex:1;min-width:0;height:44px;overflow:hidden}
+.ticker-item{position:absolute;inset:0;display:flex;align-items:center;
+  font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.ticker-item.active{opacity:1;transform:translateY(0)}
+.ticker-item:hover{text-decoration:underline}
+@media (max-width:520px){
+  .breaking-label span:last-child{display:none}
+  .ticker-item{font-size:13px}
+}
+
+/* ---------- HEADER ---------- */
+.site-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
+.header-inner{display:flex;align-items:center;gap:26px;height:66px}
+.logo{
+  flex:none;color:var(--red);font-weight:900;font-size:27px;letter-spacing:-.055em;
+  line-height:1;transition:opacity .15s;
+}
+.logo:hover{opacity:.8}
+.nav{display:flex;flex:1;align-items:stretch;height:66px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{
+  display:flex;align-items:center;padding:0 15px;font-size:15px;font-weight:600;
+  border-bottom:3px solid transparent;white-space:nowrap;
+  transition:color .15s,border-color .15s;
+}
+.nav a:hover,.nav a.active{color:var(--red);border-bottom-color:var(--red)}
+.actions{display:flex;align-items:center;gap:4px;flex:none}
+.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;transition:background .15s}
+.icon-btn:hover{background:var(--soft)}
+.menu-btn{display:none}
+
+.mobile-nav{display:none;border-top:1px solid var(--line);background:#fff}
+body.nav-open .mobile-nav{display:block}
+.mobile-nav a{display:block;padding:15px 20px;border-bottom:1px solid var(--line);font-weight:600;font-size:16px}
+.mobile-nav a:hover{color:var(--red)}
+
+@media (max-width:980px){
+  .nav{display:none}
+  .menu-btn{display:grid}
+  .header-inner{gap:10px;height:58px}
+  .site-header .logo{flex:1;font-size:24px}
+}
+@media (min-width:981px){.mobile-nav{display:none!important}}
+
+/* ---------- MEDIA ---------- */
+.media{position:relative;display:block;overflow:hidden;background:#e8e8e8;border-radius:3px}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
+.media:hover img{transform:scale(1.04)}
+.r-16x9{aspect-ratio:16/9}
+.r-4x3{aspect-ratio:4/3}
+.r-3x2{aspect-ratio:3/2}
+
+/* ---------- HERO ---------- */
+.hero{display:grid;grid-template-columns:1.75fr 1fr;padding:28px 0 10px}
+.hero-main{padding-right:32px;border-right:1px solid var(--line)}
+.hero-side{padding-left:32px;display:flex;flex-direction:column}
+
+.kicker{
+  display:inline-block;color:var(--red);font-weight:800;font-size:11.5px;
+  letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px;
+}
+.hero-main .kicker{margin-top:20px}
+.hero-title{
+  font-size:clamp(27px,3.2vw,44px);line-height:1.06;letter-spacing:-.028em;
+  font-weight:800;margin-bottom:12px;
+}
+.hero-title a:hover{color:var(--red)}
+.hero-dek{font-size:clamp(15px,1.3vw,17.5px);color:var(--muted);max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:14px}
+.meta .sep{opacity:.5}
+
+.side-item{
+  display:grid;grid-template-columns:1fr 108px;gap:16px;align-items:start;
+  padding:18px 0;border-bottom:1px solid var(--line);
+}
+.side-item:first-child{padding-top:0}
+.side-item:last-child{border-bottom:0;padding-bottom:0}
+.side-item h3{font-size:16.5px;line-height:1.26;font-weight:700;letter-spacing:-.012em}
+.side-item:hover h3{color:var(--red)}
+.side-item .meta{margin-top:8px;font-size:12.5px}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:20px}
+  .hero-main{padding-right:0;border-right:0;padding-bottom:24px;border-bottom:1px solid var(--line)}
+  .hero-side{padding-left:0;padding-top:8px}
+}
+
+/* ---------- SECTIONS ---------- */
+.section{margin-top:48px}
+.section-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  border-top:3px solid var(--ink);padding-top:12px;margin-bottom:24px;
+}
+.section-head h2{font-size:clamp(20px,2vw,26px);font-weight:800;letter-spacing:-.025em;line-height:1.1}
+.section-head .more{font-size:13.5px;font-weight:700;color:var(--red);white-space:nowrap}
+.section-head .more:hover{text-decoration:underline}
+
+.grid{display:grid;gap:28px 26px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+@media (max-width:1000px){.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){
+  .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+  .grid{gap:24px}
+}
+
+.card h3{font-size:17px;line-height:1.26;font-weight:700;letter-spacing:-.012em;margin-top:13px}
+.card:hover h3{color:var(--red)}
+.card p{font-size:14px;color:var(--muted);margin-top:7px}
+.card .meta{margin-top:9px}
+
+/* ---------- LIVE LIST ---------- */
+.live-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0 34px}
+.live-item{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.live-time{
+  font-size:13px;font-weight:800;color:var(--red);flex:none;width:44px;
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+}
+.live-item p{font-size:15px;font-weight:600;line-height:1.32}
+.live-item:hover p{color:var(--red)}
+@media (max-width:900px){.live-list{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.live-list{grid-template-columns:1fr}}
+
+/* ---------- SPLIT ---------- */
+.split{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start}
+@media (max-width:920px){.split{grid-template-columns:1fr;gap:36px}}
+
+.most-read{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:22px}
+.most-read h2{font-size:17px;font-weight:800;letter-spacing:-.015em;margin-bottom:6px}
+.mr-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #e6e6e6;align-items:flex-start}
+.mr-item:last-child{border-bottom:0;padding-bottom:0}
+.mr-num{font-size:22px;font-weight:900;color:var(--red);line-height:1;flex:none;width:26px;letter-spacing:-.04em}
+.mr-item p{font-size:14.5px;font-weight:600;line-height:1.3}
+.mr-item:hover p{color:var(--red)}
+
+/* ---------- NEWSLETTER ---------- */
+.newsletter{
+  background:var(--ink);color:#fff;border-radius:8px;margin:56px 0 10px;
+  padding:44px 46px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+}
+.newsletter h2{font-size:clamp(21px,2.2vw,28px);font-weight:800;letter-spacing:-.025em;margin-bottom:8px}
+.newsletter p{color:#b4b4b4;font-size:15px;max-width:52ch}
+.nl-form{display:flex;gap:10px;flex-wrap:wrap}
+.nl-form input{
+  font:inherit;font-size:15px;padding:0 16px;height:48px;width:270px;max-width:100%;
+  border:1px solid #3a3a3a;background:#1c1c1c;color:#fff;border-radius:4px;
+}
+.nl-form input::placeholder{color:#8a8a8a}
+.nl-form input:focus{outline:none;border-color:var(--red)}
+.nl-form button{
+  height:48px;padding:0 26px;background:var(--red);color:#fff;font-weight:700;
+  font-size:15px;border-radius:4px;transition:background .15s;
+}
+.nl-form button:hover{background:var(--red-dark)}
+.nl-msg{font-size:14px;color:#7ee2a8;margin-top:10px;display:none}
+.nl-msg.show{display:block}
+@media (max-width:860px){
+  .newsletter{grid-template-columns:1fr;padding:32px 24px}
+}
+
+/* ---------- FOOTER ---------- */
+footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:14px}
+.footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:36px;padding-bottom:40px}
+.footer-brand .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:12px}
+.footer-brand p{color:#8f8f8f;font-size:13.5px;max-width:34ch;line-height:1.6}
+.footer-col h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:.13em;color:#fff;
+  margin-bottom:14px;font-weight:800;
+}
+.footer-col a{display:block;padding:6px 0;color:#a8a8a8;transition:color .15s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{
+  border-top:1px solid #262626;padding:20px 0;display:flex;flex-wrap:wrap;
+  justify-content:space-between;gap:14px;font-size:12.5px;color:#7c7c7c;
+}
+.footer-bottom div{display:flex;gap:20px;flex-wrap:wrap}
+.footer-bottom a:hover{color:#fff}
+@media (max-width:820px){.footer-grid{grid-template-columns:1fr 1fr;gap:28px}}
+@media (max-width:480px){.footer-grid{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-date" id="today">Today</div>
+    <nav class="topbar-links" aria-label="Secondary">
+      <a href="#">Live</a>
+      <a href="#">TV</a>
+      <a href="#">Radio</a>
+      <a href="#">Newsletter</a>
+      <a href="#">Log in</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============ BREAKING ============ -->
+<div class="breaking">
+  <div class="wrap">
+    <div class="breaking-label"><span class="dot"></span><span>Breaking</span></div>
+    <div class="ticker" id="ticker">
+      <a class="ticker-item active" href="#">Central bank raises interest rates for the fourth time this year</a>
+      <a class="ticker-item" href="#">Storm warning issued for the west coast — gusts up to 110 km/h</a>
+      <a class="ticker-item" href="#">National team qualifies for the World Cup after a late winner</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#" class="logo" aria-label="NORD home">NORD</a>
+
+    <nav class="nav" aria-label="Main">
+      <a href="#" class="active">Home</a>
+      <a href="#">Denmark</a>
+      <a href="#">World</a>
+      <a href="#">Politics</a>
+      <a href="#">Business</a>
+      <a href="#">Culture</a>
+      <a href="#">Sport</a>
+      <a href="#">Tech</a>
+      <a href="#">Weather</a>
+    </nav>
+
+    <div class="actions">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/>
+        </svg>
+      </button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#">Denmark</a>
+    <a href="#">World</a>
+    <a href="#">Politics</a>
+    <a href="#">Business</a>
+    <a href="#">Culture</a>
+    <a href="#">Sport</a>
+    <a href="#">Tech</a>
+    <a href="#">Weather</a>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-main">
+      <a href="#" class="media r-16x9">
+        <img src="https://picsum.photos/seed/nord-hero/1200/675" alt="">
+      </a>
+      <span class="kicker">Politics</span>
+      <h1 class="hero-title"><a href="#">Parliament passes sweeping climate bill after 14-hour debate</a></h1>
+      <p class="hero-dek">The new legislation commits the country to cutting emissions by 70 percent before 2030 — but critics say the funding is nowhere near enough to get there.</p>
+      <div class="meta">
+        <span>By Anna Lindqvist</span><span class="sep">·</span><span>2 hours ago</span>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <a href="#" class="side-item">
+        <div>
+          <span class="kicker">World</span>
+          <h3>EU leaders reach agreement on new migration framework</h3>
+          <div class="meta"><span>1 hour ago</span></div>
+        </div>
+        <div class="media r-4x3"><img src="https://picsum.photos/seed/nord-2/300/225" alt="" loading="lazy"></div>
+      </a>
+
+      <a href="#" class="side-item">
+        <div>
+          <span class="kicker">Business</span>
+          <h3>Shipping giant reports record profits as freight rates soar</h3>
+          <div class="meta"><span>3 hours ago</span></div>
+        </div>
+        <div class="media r-4x3"><img src="https://picsum.photos/seed/nord-3/300/225" alt="" loading="lazy"></div>
+      </a>
+
+      <a href="#" class="side-item">
+        <div>
+          <span class="kicker">Culture</span>
+          <h3>The Danish film taking European festivals by storm</h3>
+          <div class="meta"><span>4 hours ago</span></div>
+        </div>
+        <div class="media r-4x3"><img src="https://picsum.photos/seed/nord-4/300/225" alt="" loading="lazy"></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- LATEST NEWS -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Latest news</h2>
+      <a href="#" class="more">See all →</a>
+    </div>
+
+    <div class="live-list">
+      <a href="#" class="live-item"><span class="live-time">12:41</span><p>Police close major motorway after multi-vehicle accident near Aarhus</p></a>
+      <a href="#" class="live-item"><span class="live-time">12:18</span><p>New figures show inflation easing for the third month in a row</p></a>
+      <a href="#" class="live-item"><span class="live-time">11:56</span><p>Two charged over vandalism at national museum overnight</p></a>
+      <a href="#" class="live-item"><span class="live-time">11:30</span><p>Airport warns of long queues as security staff strike continues</p></a>
+      <a href="#" class="live-item"><span class="live-time">10:47</span><p>Record number of students apply for engineering degrees</p></a>
+      <a href="#" class="live-item"><span class="live-time">10:12</span><p>Weather service upgrades storm warning to level three</p></a>
+      <a href="#" class="live-item"><span class="live-time">09:38</span><p>City council approves plan for car-free zone in the centre</p></a>
+      <a href="#" class="live-item"><span class="live-time">09:05</span><p>Football club confirms new head coach on a three-year deal</p></a>
+      <a href="#" class="live-item"><span class="live-time">08:24</span><p>Health authorities report drop in seasonal flu cases</p></a>
+    </div>
+  </section>
+
+  <!-- DENMARK -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Denmark</h2>
+      <a href="#" class="more">More →</a>
+    </div>
+
+    <div class="grid grid-4">
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-5/600/400" alt="" loading="lazy"></div>
+        <h3>Housing prices in Copenhagen hit new record high</h3>
+        <p>Analysts warn the market is overheating in several districts.</p>
+        <div class="meta"><span>5 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-6/600/400" alt="" loading="lazy"></div>
+        <h3>New high-speed rail line clears final planning hurdle</h3>
+        <p>Construction is expected to begin early next year.</p>
+        <div class="meta"><span>6 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-7/600/400" alt="" loading="lazy"></div>
+        <h3>Schools trial ban on smartphones during the school day</h3>
+        <p>Teachers report calmer classrooms after just two weeks.</p>
+        <div class="meta"><span>7 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-8/600/400" alt="" loading="lazy"></div>
+        <h3>Coastal towns prepare for rising sea levels</h3>
+        <p>New flood defences are being built along the western coast.</p>
+        <div class="meta"><span>8 hours ago</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- SPLIT: CULTURE + MOST READ -->
+  <section class="section">
+    <div class="split">
+      <div>
+        <div class="section-head">
+          <h2>Culture</h2>
+          <a href="#" class="more">More →</a>
+        </div>
+
+        <div class="grid grid-2">
+          <a href="#" class="card">
+            <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-9/600/400" alt="" loading="lazy"></div>
+            <h3>Review: A bold and unsettling debut from a new Danish director</h3>
+            <p>★★★★☆ — A film that refuses to give easy answers.</p>
+            <div class="meta"><span>Yesterday</span></div>
+          </a>
+
+          <a href="#" class="card">
+            <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-10/600/400" alt="" loading="lazy"></div>
+            <h3>Museum reopens after two-year renovation</h3>
+            <p>The new wing doubles the gallery space and adds a rooftop garden.</p>
+            <div class="meta"><span>Yesterday</span></div>
+          </a>
+
+          <a href="#" class="card">
+            <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-11/600/400" alt="" loading="lazy"></div>
+            <h3>The book everyone in Copenhagen is talking about</h3>
+            <p>A quiet family drama that has sold 40,000 copies in a month.</p>
+            <div class="meta"><span>2 days ago</span></div>
+          </a>
+
+          <a href="#" class="card">
+            <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-12/600/400" alt="" loading="lazy"></div>
+            <h3>Festival announces first wave of acts for next summer</h3>
+            <p>Tickets go on sale on Friday morning.</p>
+            <div class="meta"><span>2 days ago</span></div>
+          </a>
+        </div>
+      </div>
+
+      <aside class="most-read">
+        <h2>Most read</h2>
+        <a href="#" class="mr-item"><span class="mr-num">1</span><p>Interest rate hike: what it means for your mortgage</p></a>
+        <a href="#" class="mr-item"><span class="mr-num">2</span><p>Storm warning upgraded — here is what to expect</p></a>
+        <a href="#" class="mr-item"><span class="mr-num">3</span><p>Why house prices keep climbing despite the slowdown</p></a>
+        <a href="#" class="mr-item"><span class="mr-num">4</span><p>The smartphone ban that teachers say actually works</p></a>
+        <a href="#" class="mr-item"><span class="mr-num">5</span><p>National team qualifies for the World Cup</p></a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SPORT -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Sport</h2>
+      <a href="#" class="more">More →</a>
+    </div>
+
+    <div class="grid grid-4">
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-13/600/400" alt="" loading="lazy"></div>
+        <h3>Late winner sends the national team to the World Cup</h3>
+        <div class="meta"><span>2 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-14/600/400" alt="" loading="lazy"></div>
+        <h3>Handball: Champions League spot secured after away win</h3>
+        <div class="meta"><span>4 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-15/600/400" alt="" loading="lazy"></div>
+        <h3>Cycling: Young rider takes surprise stage victory</h3>
+        <div class="meta"><span>5 hours ago</span></div>
+      </a>
+
+      <a href="#" class="card">
+        <div class="media r-3x2"><img src="https://picsum.photos/seed/nord-16/600/400" alt="" loading="lazy"></div>
+        <h3>Swimming: National record broken twice in one evening</h3>
+        <div class="meta"><span>6 hours ago</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div>
+      <h2>Get the morning briefing</h2>
+      <p>The five stories you need to know about, delivered to your inbox every weekday at 7 a.m.</p>
+      <div class="nl-msg" id="nlMsg">Thanks — you're signed up!</div>
+    </div>
+    <form class="nl-form" id="nlForm">
+      <input type="email" placeholder="Your email address" aria-label="Your email address" required>
+      <button type="submit">Sign up</button>
+    </form>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">NORD</a>
+        <p>Independent news from Denmark and around the world. Updated around the clock.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sections</h4>
+        <a href="#">Denmark</a>
+        <a href="#">World</a>
+        <a href="#">Politics</a>
+        <a href="#">Business</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>More</h4>
+        <a href="#">Culture</a>
+        <a href="#">Sport</a>
+        <a href="#">Tech</a>
+        <a href="#">Weather</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>About</h4>
+        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Cookie settings</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> NORD Media. All rights reserved.</span>
+      <div>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Date in top bar ---- */
+(function () {
+  var d = new Date();
+  var s = d.toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+  var el = document.getElementById('today');
+  if (el) el.innerHTML = s.charAt(0).toUpperCase() + s.slice(1);
+  var y = document.getElementById('year');
+  if (y) y.textContent = d.getFullYear();
+})();
+
+/* ---- Breaking news ticker ---- */
+(function () {
+  var items = document.querySelectorAll('.ticker-item');
+  if (items.length < 2) return;
+  var i = 0;
+  setInterval(function () {
+    items[i].classList.remove('active');
+    i = (i + 1) % items.length;
+    items[i].classList.add('active');
+  }, 5000);
+})();
+
+/* ---- Mobile menu ---- */
+(function () {
+  var btn = document.getElementById('menuBtn');
+  var body = document.body;
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    body.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', body.classList.contains('nav-open'));
+  });
+  // close when a link is clicked
+  document.querySelectorAll('#mobileNav a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      body.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+
+/* ---- Newsletter demo ---- */
+(function () {
+  var form = document.getElementById('nlForm');
+  var msg = document.getElementById('nlMsg');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.classList.add('show');
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
