@@ -16,7 +16,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  color:var(--ink);background:#fff;line-height:1.5;-webkit-font-smoothing:antialiased;
+  color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -71,9 +71,9 @@ body.nav-open .mobile-nav{display:block}
 @media (min-width:981px){.mobile-nav{display:none!important}}
 
 /* MEDIA */
-.media{position:relative;display:block;overflow:hidden;background:#e8e8e8;border-radius:3px}
-.media img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.2,.7,.3,1)}
-.media:hover img{transform:scale(1.04)}
+.media{position:relative;display:block;overflow:hidden;background:#e8e8e8;border-radius:4px}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.media:hover img{transform:scale(1.06)}
 .r-16x9{aspect-ratio:16/9}.r-4x3{aspect-ratio:4/3}.r-3x2{aspect-ratio:3/2}
 
 /* HERO */
@@ -131,7 +131,7 @@ body.nav-open .mobile-nav{display:block}
 /* SPLIT */
 .split{display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:start}
 @media (max-width:920px){.split{grid-template-columns:1fr;gap:36px}}
-.most-read{background:var(--soft);border:1px solid var(--line);border-radius:5px;padding:22px}
+.most-read{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:22px}
 .most-read h2{font-size:17px;font-weight:800;letter-spacing:-.015em;margin-bottom:6px}
 .mr-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid #e6e6e6;align-items:flex-start;cursor:pointer}
 .mr-item:last-child{border-bottom:0;padding-bottom:0}
@@ -171,23 +171,23 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
 @media (max-width:480px){.footer-grid{grid-template-columns:1fr}}
 
 /* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
   z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;
-  opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease}
 .modal-overlay.open{opacity:1;visibility:visible}
-.modal{background:#fff;max-width:780px;width:100%;border-radius:8px;
-  transform:translateY(18px) scale(.985);transition:transform .3s cubic-bezier(.2,.7,.3,1);
-  box-shadow:0 20px 60px rgba(0,0,0,.22);overflow:hidden;position:relative}
+.modal{background:#fff;max-width:780px;width:100%;border-radius:10px;
+  transform:translateY(20px) scale(.99);transition:transform .35s cubic-bezier(.2,.7,.3,1);
+  box-shadow:0 25px 70px rgba(0,0,0,.25);overflow:hidden;position:relative}
 .modal-overlay.open .modal{transform:translateY(0) scale(1)}
-.modal-close{position:absolute;top:12px;right:12px;width:38px;height:38px;border-radius:50%;
-  background:rgba(255,255,255,.92);display:grid;place-items:center;z-index:2;transition:background .15s,transform .15s}
+.modal-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+  background:rgba(255,255,255,.95);display:grid;place-items:center;z-index:2;transition:background .15s,transform .15s}
 .modal-close:hover{background:#fff;transform:rotate(90deg)}
 .modal-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:#eee}
-.modal-body{padding:30px 34px 38px}
+.modal-body{padding:32px 36px 40px}
 .modal-body .kicker{margin-bottom:8px}
 .modal-body h1{font-size:clamp(22px,2.6vw,32px);line-height:1.15;letter-spacing:-.025em;font-weight:800;margin-bottom:12px}
 .modal-body .meta{margin-top:0;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line)}
-.modal-body p{font-size:16.5px;line-height:1.65;color:#222;margin-bottom:16px}
+.modal-body p{font-size:17px;line-height:1.7;color:#222;margin-bottom:18px}
 .modal-body p:last-of-type{margin-bottom:0}
 .modal-source{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
 .modal-source a{color:var(--red);font-weight:600}
@@ -245,6 +245,7 @@ footer{background:#111;color:#c9c9c9;margin-top:56px;padding-top:46px;font-size:
   <section class="hero">
     <div class="hero-main">
       <div class="media r-16x9" data-article="0">
+        <!-- 👇 REPLACE THIS IMAGE URL with your downloaded photo, e.g. "images/auning-skole-building.jpg" -->
         <img src="https://picsum.photos/seed/auning-hero-school/1200/675" alt="Auning Skole">
       </div>
       <span class="kicker">Skolestruktur</span>
@@ -342,11 +343,11 @@ const articles = [
     image: "https://picsum.photos/seed/auning-hero-school/1200/675",
     source: "TV2 Østjylland",
     sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",
-    text: `<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune. Mødet var arrangeret i forlængelse af kommunens arbejde med at forme “Fremtidens Folkeskole”, som for alvor gik i gang i foråret, og hvor planerne nu er blevet til konkrete forslag.[reference:1]</p>
-<p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. I dag flytter børnene fra disse skoler til Auning Skole, når de skal i syvende klasse. Men den ordning kan snart være fortid.[reference:2]</p>
-<p>Ifølge TV2 Østjylland peger politikerne på to mulige modeller. Enten at samle alle eleverne på én skole og lukke de to andre. Eller at lade én af skolerne have elever helt fra 0. til 9. klasse og lade de to andre have elever op til 3. eller 6. klasse.[reference:3]</p>
+    text: `<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune. Mødet var arrangeret i forlængelse af kommunens arbejde med at forme “Fremtidens Folkeskole”, som for alvor gik i gang i foråret, og hvor planerne nu er blevet til konkrete forslag.</p>
+<p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. I dag flytter børnene fra disse skoler til Auning Skole, når de skal i syvende klasse. Men den ordning kan snart være fortid.</p>
+<p>Ifølge TV2 Østjylland peger politikerne på to mulige modeller. Enten at samle alle eleverne på én skole og lukke de to andre. Eller at lade én af skolerne have elever helt fra 0. til 9. klasse og lade de to andre have elever op til 3. eller 6. klasse.</p>
 <p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre på mødet.</p>
-<p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Borgere kan stadig sende høringssvar frem til 15. oktober.[reference:4]</p>
+<p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Borgere kan stadig sende høringssvar frem til 15. oktober.</p>
 <p>Debatten fortsætter i kommunalbestyrelsen, hvor der skal træffes endelig beslutning om skolestrukturen. For forældrene på Auning Skole handler det ikke kun om deres egen skole, men om hele lokalsamfundet i den nordvestlige del af Norddjurs.</p>`
   },
   {
@@ -359,10 +360,10 @@ const articles = [
     source: "Auning Skole / GovServ",
     sourceUrl: "https://www.govserv.org/DK/Auning/121146535415310/Auning-Skole",
     text: `<p>Det er ikke et almindeligt motionsløb, når Auning Skoles udskoling afholder “Løb for Livet”. Det er et 24-timers aktivitetsmaraton, der starter klokken 10.00 dagen før efterårsferien.</p>
-<p>“Klokken 10.00 i dag lød startskuddet til dette års Løb for livet, som det næste døgn afvikles i hele vores udskoling,” har skolen tidligere skrevet om arrangementet.[reference:5]</p>
-<p>Løb for livet er en pendant til det klassiske motionsløb, som mange skoler traditionen tro afvikler fredag op til efterårsferien. Men Auning Skoles udskoling laver alle mulige andre former for motion det næste døgn. Eleverne skal deltage på skift i de mange aktiviteter — bl.a. skal hver klasse holde en motionscykel kørende hele døgnet, og klasserne dyster om at ro længst på tid.[reference:6]</p>
-<p>På skolen er lokalerne pyntet i tema ud fra det land, som den enkelte klasse har fået tildelt. Om aftenen går det løs med bl.a. ridning på rodeotyr, disko-svømning, UV-fodbold og meget mere.[reference:7]</p>
-<p>“Et helt døgn med fuld knald på og masser af bevægelse — og helt sikkert masser af trætte unge mennesker i morgen kl. 10, når det hele slutter og efterårsferien starter,” har skolen skrevet.[reference:8]</p>
+<p>“Klokken 10.00 i dag lød startskuddet til dette års Løb for livet, som det næste døgn afvikles i hele vores udskoling,” har skolen tidligere skrevet om arrangementet.</p>
+<p>Løb for livet er en pendant til det klassiske motionsløb, som mange skoler traditionen tro afvikler fredag op til efterårsferien. Men Auning Skoles udskoling laver alle mulige andre former for motion det næste døgn. Eleverne skal deltage på skift i de mange aktiviteter — bl.a. skal hver klasse holde en motionscykel kørende hele døgnet, og klasserne dyster om at ro længst på tid.</p>
+<p>På skolen er lokalerne pyntet i tema ud fra det land, som den enkelte klasse har fået tildelt. Om aftenen går det løs med bl.a. ridning på rodeotyr, disko-svømning, UV-fodbold og meget mere.</p>
+<p>“Et helt døgn med fuld knald på og masser af bevægelse — og helt sikkert masser af trætte unge mennesker i morgen kl. 10, når det hele slutter og efterårsferien starter,” har skolen skrevet.</p>
 <p>For eleverne er Løb for Livet blevet en fast tradition og et af de arrangementer, de ser frem til. Det kræver planlægning, engagement og ikke mindst masser af energi fra både elever og lærere.</p>`
   },
   {
@@ -374,10 +375,10 @@ const articles = [
     image: "https://picsum.photos/seed/auning-budget/600/400",
     source: "Norddjurs Kommune",
     sourceUrl: "https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",
-    text: `<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole. Beslutningen blev truffet den 10. marts 2026 og følger op på budgetaftalen for 2026–2029, hvor beløbet blev afsat.[reference:9]</p>
-<p>Midlerne skal bruges til etablering af et faglokale til håndværk og design på Auning Skole. Ifølge sagsfremstillingen skal lokalet etableres i tæt dialog med skolen, og Børne-, Familie- og Skoleudvalget tager på et senere møde stilling til udbudsform og tildelingskriterier for bygge- og anlægsarbejderne.[reference:10]</p>
-<p>Derudover var der i 2025 et mindreforbrug på 0,7 millioner kroner på anlægsprojektet “Faglokaler inde og ude”, som også vedrører Auning Skole. Dette beløb søges overført til 2026 i forbindelse med behandlingen af regnskab 2025.[reference:11]</p>
-<p>Sagen skal ses i sammenhæng med den gennemførte byggetekniske analyse på skoleområdet. Beslutningen i Økonomiudvalget var en tiltrædelse af indstillingen fra direktøren for Sundhed, Læring og Trivsel.[reference:12]</p>
+    text: `<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole. Beslutningen blev truffet den 10. marts 2026 og følger op på budgetaftalen for 2026–2029, hvor beløbet blev afsat.</p>
+<p>Midlerne skal bruges til etablering af et faglokale til håndværk og design på Auning Skole. Ifølge sagsfremstillingen skal lokalet etableres i tæt dialog med skolen, og Børne-, Familie- og Skoleudvalget tager på et senere møde stilling til udbudsform og tildelingskriterier for bygge- og anlægsarbejderne.</p>
+<p>Derudover var der i 2025 et mindreforbrug på 0,7 millioner kroner på anlægsprojektet “Faglokaler inde og ude”, som også vedrører Auning Skole. Dette beløb søges overført til 2026 i forbindelse med behandlingen af regnskab 2025.</p>
+<p>Sagen skal ses i sammenhæng med den gennemførte byggetekniske analyse på skoleområdet. Beslutningen i Økonomiudvalget var en tiltrædelse af indstillingen fra direktøren for Sundhed, Læring og Trivsel.</p>
 <p>For Auning Skole betyder det, at arbejdet med at forbedre de fysiske rammer for håndværk og design nu kan gå videre. Skolen har i flere år haft fokus på praksisfaglighed og erhvervsrettede forløb, og det nye lokale skal understøtte denne indsats.</p>`
   },
   {
@@ -389,9 +390,9 @@ const articles = [
     image: "https://picsum.photos/seed/auning-meeting/600/400",
     source: "TV2 Østjylland",
     sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",
-    text: `<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune. Mødet var en del af den høringsproces, hvor borgere kan sende input frem til 15. oktober.[reference:13]</p>
-<p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. Politikerne peger på et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år.[reference:14]</p>
-<p>Forældre og borgere på mødet efterlyste klarhed over, hvad der skal ske med Auning Skoles udskoling, hvis de tre fødeskoler lukkes eller ændres. I dag går eleverne fra de tre skoler videre til Auning Skole i syvende klasse, men den ordning kan blive ændret som en del af den nye struktur.[reference:15]</p>
+    text: `<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune. Mødet var en del af den høringsproces, hvor borgere kan sende input frem til 15. oktober.</p>
+<p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. Politikerne peger på et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år.</p>
+<p>Forældre og borgere på mødet efterlyste klarhed over, hvad der skal ske med Auning Skoles udskoling, hvis de tre fødeskoler lukkes eller ændres. I dag går eleverne fra de tre skoler videre til Auning Skole i syvende klasse, men den ordning kan blive ændret som en del af den nye struktur.</p>
 <p>Dialogen fortsætter i kommunalbestyrelsen, og der er lagt op til en bred politisk behandling af sagen. For Auning Skole og lokalsamfundet handler det om at sikre en bæredygtig skolestruktur, der både tager hensyn til økonomien og til børnenes hverdag.</p>`
   },
   {
@@ -405,7 +406,7 @@ const articles = [
     sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/det-har-aendret-silas-skolegang",
     text: `<p>15-årige Silas Hilmer Gregersen går i niende klasse på den erhvervs- og praksisfaglige linje på Auning Skole. Hver fredag sendes han ud i erhvervspraktik og svejser små dele sammen til en miniature gokart-model.</p>
 <p>“Det er vigtigt for mig, fordi i klasselokalet kan jeg ikke sidde helt stille. Jeg vil hellere ud at bruge hænderne,” siger han.</p>
-<p>Auning Skole har i flere år haft fokus på at gøre undervisningen mere praksisnær og relevant for eleverne. Skolen beskriver selv, at “bevægelse, leg og læring er en naturlig del af undervisningen” og at man arbejder målrettet med at skabe miljøer, hvor “barnet ses, lærer, trives, deltager og tar livet”.[reference:16]</p>
+<p>Auning Skole har i flere år haft fokus på at gøre undervisningen mere praksisnær og relevant for eleverne. Skolen beskriver selv, at “bevægelse, leg og læring er en naturlig del af undervisningen” og at man arbejder målrettet med at skabe miljøer, hvor “barnet ses, lærer, trives, deltager og tar livet”.</p>
 <p>Norddjurs Kommune er ifølge en undersøgelse fra Dansk Industri blandt de bedste i Danmark til samarbejde mellem skoler og virksomheder. Det betyder, at elever som Silas får mulighed for at prøve kræfter med rigtige arbejdsopgaver allerede i folkeskolen.</p>
 <p>For Silas har det ændret hans skolegang. Han trives bedre, når han får lov til at arbejde med hænderne, og han har fået en klarere idé om, hvad han gerne vil efter niende klasse.</p>`
   },
@@ -418,11 +419,11 @@ const articles = [
     image: "https://picsum.photos/seed/auning-ukraine/600/400",
     source: "TV2 Østjylland",
     sourceUrl: "https://www.tv2ostjylland.dk/norddjurs/imponerende-indsats-skoleelever-loeber-bager-og-rydder-op-til-fordel-for-ukrainske-boern",
-    text: `<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine. Det begyndte med hjemmebagte muffins og armbånd, men voksede hurtigt til en indsats, der involverede store dele af byen.[reference:17]</p>
-<p>Fra begyndelsen var målet 10.000 kroner. Men siden greb det om sig, flere ville hjælpe til, og nu er målet nået adskillige gange. I dag er indsamlingen nået op på 52.910 kroner.[reference:18][reference:19]</p>
-<p>“Jeg er mega imponeret af og stolt over de her børn, der har givet den en ordentlig skalle, og jeg er stolt over at være i en by, hvor folk støtter og griber de ideer, som skolen sender ud. Det er megafedt og inspirerende at være lærer og barn i,” siger Kasper Fur Eriksen, der er lærer hos mellemtrinet på Auning Skole.[reference:20]</p>
-<p>Eleverne bagte et par hundrede muffins og lavede armbånd, som blev solgt til familie, venner og bekendte. Lærerne oprettede en konto ved Red Barnet, så eleverne løbende kunne følge med i, hvor mange penge der var samlet ind.[reference:21]</p>
-<p>Siden rykkede indsamlingen videre. Eleverne samlede 227 kilo skrald ind i byen, vaskede vinduer, tømte opvaskemaskiner og lavede havearbejde for at tjene penge. Hele skolen blev også inviteret til et sponsorløb, hvor familier kunne donere penge per løbet kilometer.[reference:22]</p>
+    text: `<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine. Det begyndte med hjemmebagte muffins og armbånd, men voksede hurtigt til en indsats, der involverede store dele af byen.</p>
+<p>Fra begyndelsen var målet 10.000 kroner. Men siden greb det om sig, flere ville hjælpe til, og nu er målet nået adskillige gange. I dag er indsamlingen nået op på 52.910 kroner.</p>
+<p>“Jeg er mega imponeret af og stolt over de her børn, der har givet den en ordentlig skalle, og jeg er stolt over at være i en by, hvor folk støtter og griber de ideer, som skolen sender ud. Det er megafedt og inspirerende at være lærer og barn i,” siger Kasper Fur Eriksen, der er lærer hos mellemtrinet på Auning Skole.</p>
+<p>Eleverne bagte et par hundrede muffins og lavede armbånd, som blev solgt til familie, venner og bekendte. Lærerne oprettede en konto ved Red Barnet, så eleverne løbende kunne følge med i, hvor mange penge der var samlet ind.</p>
+<p>Siden rykkede indsamlingen videre. Eleverne samlede 227 kilo skrald ind i byen, vaskede vinduer, tømte opvaskemaskiner og lavede havearbejde for at tjene penge. Hele skolen blev også inviteret til et sponsorløb, hvor familier kunne donere penge per løbet kilometer.</p>
 <p>Indsatsen viser, hvordan Auning Skole arbejder med at gøre eleverne til medskabere og engagere dem i samfundet omkring dem. Det er ikke første gang, skolen sætter fokus på fællesskab og ansvar — men det er et af de mest markante eksempler.</p>`
   },
   {
@@ -434,12 +435,12 @@ const articles = [
     image: "https://picsum.photos/seed/auning-football/600/400",
     source: "Din Avis",
     sourceUrl: "https://dinavis.dk/sport/ECE18824841/skolefodboldhold-imponerer-flot-i-landsdaekkende-turnering-i-30aaret-for-historisk-sejr-i-skolefodboldturneringen/",
-    text: `<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen. Både pigernes og drengenes hold nåede kredsfinalerne og dermed blandt de 16 bedste skolehold i Danmark.[reference:23]</p>
-<p>I kredsfinalerne måtte begge Auning-mandskaber imidlertid strække gevær. Pigerne tabte 4-1 til Morten Børup Skolen fra Skanderborg på hjemmebane. Drengene tabte 3-0 til Østerhåbskolen Torsted på Vivild Gymnastik- og Idrætsefterskoles kunstgræsbane.[reference:24]</p>
-<p>De to holds cheftræner, lærer Casper Zolon, roser begge hold for imponerende præstationer undervejs i turneringen. Han nævner, at det er et udtryk for, at der er fin grøde i ungdomsfodbolden i det vestlige Norddjurs.[reference:25]</p>
-<p>Det er i år 30 år siden, at Auning Skoles piger gik hele vejen i turneringen til Parken i København, hvor de også tog pokalen med hjem efter flot spil og finalesejr.[reference:26]</p>
-<p>Præstationen i 2025 er ikke gået ubemærket hen på Auning Skole. Skolens store elevråd havde før finalerne, sammen med nogle af lærerne i udskolingen, arrangeret en hyldest til deres kammerater på skolefodboldholdene. Alle elever i udskolingen stod klar med flag og klappede deres kammerater op ad gangen med ønsket om held og lykke og god energi til de kommende kampe.[reference:27]</p>
-<p>Nogle forældre bød sig hurtigt til, da de hørte om ideen, og fik lavet en aftale med Rema 1000 Allingåbro, som gav flødeboller til alle elever i udskolingen.[reference:28]</p>
+    text: `<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen. Både pigernes og drengenes hold nåede kredsfinalerne og dermed blandt de 16 bedste skolehold i Danmark.</p>
+<p>I kredsfinalerne måtte begge Auning-mandskaber imidlertid strække gevær. Pigerne tabte 4-1 til Morten Børup Skolen fra Skanderborg på hjemmebane. Drengene tabte 3-0 til Østerhåbskolen Torsted på Vivild Gymnastik- og Idrætsefterskoles kunstgræsbane.</p>
+<p>De to holds cheftræner, lærer Casper Zolon, roser begge hold for imponerende præstationer undervejs i turneringen. Han nævner, at det er et udtryk for, at der er fin grøde i ungdomsfodbolden i det vestlige Norddjurs.</p>
+<p>Det er i år 30 år siden, at Auning Skoles piger gik hele vejen i turneringen til Parken i København, hvor de også tog pokalen med hjem efter flot spil og finalesejr.</p>
+<p>Præstationen i 2025 er ikke gået ubemærket hen på Auning Skole. Skolens store elevråd havde før finalerne, sammen med nogle af lærerne i udskolingen, arrangeret en hyldest til deres kammerater på skolefodboldholdene. Alle elever i udskolingen stod klar med flag og klappede deres kammerater op ad gangen med ønsket om held og lykke og god energi til de kommende kampe.</p>
+<p>Nogle forældre bød sig hurtigt til, da de hørte om ideen, og fik lavet en aftale med Rema 1000 Allingåbro, som gav flødeboller til alle elever i udskolingen.</p>
 <p>For Auning Skole er fodboldsuccesen ikke kun et spørgsmål om resultater. Det handler også om fællesskab, sammenhold og stolthed — og om at give eleverne oplevelser, de husker.</p>`
   },
   {
@@ -454,7 +455,7 @@ const articles = [
     text: `<p>I 1. klasse på Auning Skole læste og skrev eleverne korte, lydrette ord, der passede til halloween. Da sommeren nærmede sig, handlede det om pralbønnens vej fra kim til plante.</p>
 <p>Undervisningen var en del af projektet (Selv)sikker læsestart, hvor der er fokus på læse- og skriveundervisning, der er meningsfuld for eleverne. Målet er at skabe en undervisning, hvor eleverne oplever, at det de læser og skriver, giver mening i deres egen hverdag.</p>
 <p>Henriette Romme Lund, specialkonsulent i Nationalt Videncenter for Læsning, besøgte skolen og talte med lærerne Kirsten Bilde Fogh og Kirsten Gjødvad Klinge om, hvordan de greb undervisningen an.</p>
-<p>På Auning Skole er der generelt fokus på at skabe en tryg, forudsigelig og overskuelig hverdag for eleverne. Skolen arbejder målrettet på at udvikle elevernes faglige, sociale og personlige kompetencer, og læsning er en central del af dette arbejde.[reference:29]</p>
+<p>På Auning Skole er der generelt fokus på at skabe en tryg, forudsigelig og overskuelig hverdag for eleverne. Skolen arbejder målrettet på at udvikle elevernes faglige, sociale og personlige kompetencer, og læsning er en central del af dette arbejde.</p>
 <p>Projektet er et eksempel på, hvordan skolen løbende udvikler sin undervisning og søger inspiration udefra for at give eleverne de bedste betingelser for læring.</p>`
   },
   {
@@ -466,11 +467,11 @@ const articles = [
     image: "https://picsum.photos/seed/auning-school-yard/600/400",
     source: "Norddjurs Kommune / Auning Skole",
     sourceUrl: "https://auning-skole.aula.dk/info/auning-skole/generel-information",
-    text: `<p>Auning Skole ligger i Auning by i Norddjurs Kommune på Djursland og dækker børnehaveklasse til og med 9. klasse. Skolen beskriver selv, at den ligger “midt mellem Randers og Grenaa” og rummer “knap 700 elever”.[reference:30]</p>
-<p>Skolen har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. Der er i alt 120 ansatte, herunder ledelse, lærere, pædagoger, tekniske servicemedarbejdere, it-, administrativt- og rengøringspersonale.[reference:31]</p>
-<p>Skolen er organiseret som en faseopdelt skole med en grundskole (indskoling og mellemtrin) og udskoling. Skoledagen starter kl. 8.00, og lærerne møder ind i klassen kl. 7.50. Der er stilletid hver morgen fra 7.50 til 8.00.[reference:32]</p>
-<p>Auning Skole har også SFO, hvor der hver dag er forskellige værksteder, og hvor udeliv og udendørsaktiviteter prioriteres højt. Skolen har desuden et stort udeområde, som bruges i hverdagen.[reference:33]</p>
-<p>Følg skolens hverdag på Facebook: <a href="https://www.facebook.com/AuningSkole" target="_blank" rel="noopener">facebook.com/AuningSkole</a>. Her deler skolen “sjove billeder og videoer fra undervisningen og hverdagen på skolen”.[reference:34]</p>`
+    text: `<p>Auning Skole ligger i Auning by i Norddjurs Kommune på Djursland og dækker børnehaveklasse til og med 9. klasse. Skolen beskriver selv, at den ligger “midt mellem Randers og Grenaa” og rummer “knap 700 elever”[reference:3].</p>
+<p>Skolen har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. Der er i alt 120 ansatte, herunder ledelse, lærere, pædagoger, tekniske servicemedarbejdere, it-, administrativt- og rengøringspersonale[reference:4].</p>
+<p>Skolen er organiseret som en faseopdelt skole med en grundskole (indskoling og mellemtrin) og udskoling. Skoledagen starter kl. 8.00, og lærerne møder ind i klassen kl. 7.50. Der er stilletid hver morgen fra 7.50 til 8.00.</p>
+<p>Auning Skole har også SFO, hvor der hver dag er forskellige værksteder, og hvor udeliv og udendørsaktiviteter prioriteres højt. Skolen har desuden et stort udeområde, som bruges i hverdagen.</p>
+<p>Følg skolens hverdag på Facebook: <a href="https://www.facebook.com/AuningSkole" target="_blank" rel="noopener">facebook.com/AuningSkole</a>. Her deler skolen “sjove billeder og videoer fra undervisningen og hverdagen på skolen”[reference:5].</p>`
   }
 ];
 
