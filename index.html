@@ -30,19 +30,29 @@ ul{list-style:none}
 @keyframes vtFadeIn{from{opacity:0;transform:scale(1.01)}to{opacity:1;transform:scale(1)}}
 
 /* ─── ANNOUNCEMENT BAR ─── */
-.announcement-bar{background:#0a0a0a;color:#fff;border-bottom:1px solid #1a1a1a}
-.announcement-bar .wrap{display:flex;align-items:center;gap:14px;min-height:48px;padding:8px 24px}
+.announcement-bar{background:#0a0a0a;color:#fff;border-bottom:1px solid #1a1a1a;position:relative}
+.announcement-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),#ff4d5e,var(--red));background-size:200% 100%;animation:bar-shimmer 4s linear infinite}
+@keyframes bar-shimmer{0%{background-position:0% 0}100%{background-position:200% 0}}
+.announcement-bar .wrap{display:flex;align-items:center;gap:14px;min-height:52px;padding:9px 24px}
 .announcement-bar-dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none;animation:pulse 1.5s infinite;box-shadow:0 0 0 0 rgba(226,0,26,.7)}
-.announcement-bar-text{flex:1;font-size:14px;font-weight:500;color:#d8d8d8;line-height:1.35}
+.announcement-bar-text{flex:1;font-size:14px;font-weight:500;color:#d8d8d8;line-height:1.35;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .announcement-bar-text strong{color:#fff;font-weight:800;letter-spacing:.02em}
-.announcement-bar-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;padding:8px 16px;background:var(--red);border-radius:2px;transition:background .2s,transform .2s;flex:none;white-space:nowrap}
-.announcement-bar-link:hover{background:var(--red-dark);transform:translateX(2px)}
+.bar-countdown{display:inline-flex;align-items:baseline;gap:2px;font-variant-numeric:tabular-nums;font-weight:800;color:#fff;font-size:14px;letter-spacing:.01em;padding:4px 10px;background:rgba(226,0,26,.15);border-radius:3px;border:1px solid rgba(226,0,26,.3)}
+.bar-countdown-unit{font-size:10.5px;color:#ff8894;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-left:1px}
+.announcement-bar-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;padding:9px 16px;background:var(--red);border-radius:2px;transition:background .2s,transform .2s;flex:none;white-space:nowrap;box-shadow:0 2px 8px rgba(226,0,26,.25)}
+.announcement-bar-link:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(226,0,26,.4)}
 .announcement-bar-link svg{transition:transform .2s}
 .announcement-bar-link:hover svg{transform:translateX(3px)}
-@media(max-width:720px){
-  .announcement-bar-text{font-size:13px}
-  .announcement-bar-text .announcement-bar-sub{display:none}
+@media(max-width:820px){
+  .announcement-bar-text{font-size:13px;gap:8px}
+  .bar-countdown{font-size:12.5px;padding:3px 8px}
+  .bar-countdown-unit{display:none}
   .announcement-bar-link{padding:7px 12px;font-size:12px}
+}
+@media(max-width:560px){
+  .announcement-bar .wrap{gap:10px;padding:8px 16px;min-height:auto}
+  .announcement-bar-text strong{display:none}
+  .announcement-bar-dot{display:none}
 }
 
 /* ─── TOPBAR ─── */
@@ -55,7 +65,7 @@ ul{list-style:none}
 @media(max-width:760px){.topbar-links a:nth-child(-n+3){display:none}}
 
 /* ─── HEADER ─── */
-.site-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line)}
+.site-header{position:sticky;top:0;z-index:60;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.02)}
 .header-inner{display:flex;align-items:center;gap:32px;height:74px}
 .logo{flex:none;color:var(--red);font-weight:900;font-size:34px;letter-spacing:-.06em;line-height:1;transition:opacity .2s}
 .logo:hover{opacity:.8}
@@ -86,11 +96,11 @@ body.nav-open .mobile-nav{display:block}
 @media(max-width:520px){.breaking-label span:last-child{display:none}.ticker-item{font-size:13px}}
 
 /* ─── MEDIA ─── */
-.media{position:relative;display:block;overflow:hidden;background:#e8e8e8}
+.media{position:relative;display:block;overflow:hidden;background:#e8e8e8;transition:box-shadow .3s ease}
 .media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.3,1),opacity .4s}
 .media img.lazy{opacity:0}
 .media img.loaded{opacity:1}
-.media:hover img{transform:scale(1.05)}
+.card:hover .media{box-shadow:0 12px 32px rgba(0,0,0,.14)}
 .r-16x9{aspect-ratio:16/9}.r-4x3{aspect-ratio:4/3}.r-3x2{aspect-ratio:3/2}
 
 /* ─── HERO ─── */
@@ -98,7 +108,6 @@ body.nav-open .mobile-nav{display:block}
 .hero-main{padding-right:44px;border-right:1px solid var(--line)}
 .hero-side{padding-left:44px;display:flex;flex-direction:column}
 .kicker{display:inline-block;color:var(--red);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
-.hero-main .kicker{margin-top:0}
 .hero-title{font-size:clamp(28px,3.3vw,46px);line-height:1.04;letter-spacing:-.032em;font-weight:800;margin-bottom:14px}
 .hero-title a{transition:color .2s}
 .hero-title a:hover{color:var(--red)}
@@ -114,13 +123,32 @@ body.nav-open .mobile-nav{display:block}
 @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:24px}.hero-main{padding-right:0;border-right:0;padding-bottom:28px;border-bottom:1px solid var(--line)}.hero-side{padding-left:0;padding-top:12px}}
 
 /* ─── ANNOUNCEMENT HERO ─── */
-.announcement-hero{background:linear-gradient(135deg,#fff 0%,#fafafa 100%);border:1px solid var(--line);border-left:4px solid var(--red);padding:34px 34px 30px;position:relative}
+.announcement-hero{background:linear-gradient(135deg,#fff 0%,#fafafa 100%);border:1px solid var(--line);border-left:4px solid var(--red);padding:34px 34px 30px;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.06)}
 .announcement-hero .kicker{margin-bottom:12px}
 .announcement-hero .hero-title{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
 .announcement-hero .hero-dek{font-size:clamp(15px,1.4vw,18px);margin-bottom:0}
+
+/* Countdown block inside hero */
+.countdown-wrap{margin:26px 0 0;padding:26px 24px 22px;background:#0a0a0a;color:#fff;border-radius:4px;position:relative;overflow:hidden}
+.countdown-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),#ff4d5e,var(--red));background-size:200% 100%;animation:bar-shimmer 4s linear infinite}
+.countdown-label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#888;font-weight:800;margin-bottom:16px;text-align:center}
+.countdown{display:flex;gap:8px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+.countdown-item{flex:0 1 88px;min-width:0;padding:16px 8px;background:#1a1a1a;border-radius:4px;text-align:center;border:1px solid #2a2a2a;transition:border-color .3s,background .3s}
+.countdown-num{font-size:clamp(28px,4vw,40px);font-weight:900;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;margin-bottom:6px;transition:color .3s}
+.countdown-unit{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#888}
+.countdown-when{font-size:13px;line-height:1.65;color:#b4b4b4;text-align:center}
+.countdown-when strong{color:#fff;font-weight:700}
+.countdown-local{display:block;font-size:12px;color:#888;margin-top:5px;font-variant-numeric:tabular-nums}
+.countdown-local strong{color:#c8c8c8;font-weight:600}
+/* urgent state - under 24h */
+.countdown-wrap.urgent .countdown-item{border-color:rgba(226,0,26,.5);background:#1f1414}
+.countdown-wrap.urgent .countdown-num{color:#ff4d5e;animation:urgentPulse 1.4s ease-in-out infinite}
+@keyframes urgentPulse{0%,100%{opacity:1}50%{opacity:.75}}
+.countdown-wrap.urgent .countdown-label{color:#ff4d5e}
+
 .announcement-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;align-items:center}
-.announcement-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--red);color:#fff;font-size:15px;font-weight:700;border-radius:2px;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 14px rgba(226,0,26,.2)}
-.announcement-cta:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 6px 18px rgba(226,0,26,.28)}
+.announcement-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;background:var(--red);color:#fff;font-size:15px;font-weight:700;border-radius:2px;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 14px rgba(226,0,26,.25)}
+.announcement-cta:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(226,0,26,.35)}
 .announcement-cta svg{transition:transform .2s}
 .announcement-cta:hover svg{transform:translateX(3px)}
 .announcement-expand{padding:14px 24px;background:transparent;color:var(--ink);font-size:15px;font-weight:700;border:1px solid var(--line);border-radius:2px;transition:background .2s,border-color .2s;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
@@ -128,7 +156,7 @@ body.nav-open .mobile-nav{display:block}
 .announcement-expand svg{transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .announcement-expand.open svg{transform:rotate(180deg)}
 .announcement-details{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .6s cubic-bezier(.2,.7,.3,1),opacity .35s ease .05s,margin .3s}
-.announcement-details.open{max-height:900px;opacity:1;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
+.announcement-details.open{max-height:1000px;opacity:1;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
 .announcement-details h3{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px}
 .announcement-details p{font-size:15px;line-height:1.65;color:#3a3a3a;margin-bottom:14px}
 .announcement-details p:last-child{margin-bottom:0}
@@ -139,6 +167,8 @@ body.nav-open .mobile-nav{display:block}
   .announcement-hero{padding:24px 20px}
   .announcement-actions{flex-direction:column;align-items:stretch}
   .announcement-cta,.announcement-expand{justify-content:center;width:100%}
+  .countdown-item{flex:1 1 calc(50% - 4px);padding:14px 6px}
+  .countdown-num{font-size:26px}
 }
 
 /* ─── SECTIONS ─── */
@@ -155,14 +185,14 @@ body.nav-open .mobile-nav{display:block}
 @media(max-width:760px){.grid-3{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.grid-4,.grid-3,.grid-2{grid-template-columns:1fr}}
 .card{cursor:pointer;transition:transform .25s cubic-bezier(.2,.7,.3,1)}
-.card:hover{transform:translateY(-2px)}
+.card:hover{transform:translateY(-3px)}
 .card h3{font-size:17.5px;line-height:1.24;font-weight:700;margin-top:14px;transition:color .2s}
 .card:hover h3{color:var(--red)}
 .card p{font-size:14px;color:var(--muted);margin-top:8px}
 
 /* ─── LIVE LIST ─── */
 .live-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0 40px}
-.live-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline;cursor:pointer;transition:background .15s}
+.live-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline;cursor:pointer;transition:background .15s;padding-left:8px;margin-left:-8px;padding-right:8px;margin-right:-8px;border-radius:3px}
 .live-item:hover{background:var(--soft)}
 .live-time{font-size:13px;font-weight:800;color:var(--red);flex:none;width:48px;font-variant-numeric:tabular-nums}
 .live-item p{font-size:15px;font-weight:600;line-height:1.3;transition:color .2s}
@@ -175,7 +205,7 @@ body.nav-open .mobile-nav{display:block}
 @media(max-width:920px){.split{grid-template-columns:1fr;gap:40px}}
 .most-read{background:var(--soft);border-top:3px solid var(--ink);padding:22px}
 .most-read h2{font-size:16px;font-weight:800;margin-bottom:8px}
-.mr-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #e2e2e2;align-items:flex-start;cursor:pointer;transition:background .15s}
+.mr-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #e2e2e2;align-items:flex-start;cursor:pointer;transition:background .15s;padding-left:6px;margin-left:-6px;padding-right:6px;margin-right:-6px;border-radius:3px}
 .mr-item:hover{background:#efefef}
 .mr-item:last-child{border-bottom:0;padding-bottom:0}
 .mr-num{font-size:22px;font-weight:900;color:var(--red);line-height:1;flex:none;width:28px}
@@ -183,7 +213,7 @@ body.nav-open .mobile-nav{display:block}
 .mr-item:hover p{color:var(--red)}
 
 /* ─── FOLLOW SECTION ─── */
-.follow-section{background:#0a0a0a;color:#fff;margin:64px 0 10px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.follow-section{background:#0a0a0a;color:#fff;margin:64px 0 10px;padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;border-radius:4px}
 .follow-section h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:10px}
 .follow-section p{color:#b4b4b4;font-size:15px;max-width:56ch;line-height:1.55}
 .follow-links{display:flex;gap:12px;flex-wrap:wrap}
@@ -281,18 +311,72 @@ body.reading .read-progress{display:block}
 .info-box a{color:var(--red);font-weight:700;text-decoration:underline}
 .info-box kbd{display:inline-block;background:#fff;border:1px solid #ddd;border-radius:3px;padding:1px 6px;font-size:11px;font-weight:700;box-shadow:0 1px 0 #ddd}
 
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* ─── CRASH VIEW (404) ─── */
+.crash-view{position:fixed;inset:0;background:#050505;color:#fff;display:flex;align-items:center;justify-content:center;z-index:9999;padding:32px 24px;overflow-y:auto;animation:crashIn .8s cubic-bezier(.2,.7,.3,1)}
+@keyframes crashIn{from{opacity:0}to{opacity:1}}
+.crash-content{max-width:600px;width:100%;text-align:center;position:relative}
+.crash-code{font-size:clamp(110px,24vw,200px);font-weight:900;line-height:1;letter-spacing:-.05em;color:#1a1a1a;position:relative;display:inline-block;margin-bottom:16px;font-variant-numeric:tabular-nums}
+.crash-code::before{content:'404';position:absolute;inset:0;color:var(--red);clip-path:inset(38% 0 42% 0);animation:glitch 4s infinite steps(1);opacity:.8}
+.crash-code::after{content:'404';position:absolute;inset:0;color:#fff;clip-path:inset(70% 0 10% 0);opacity:.15;animation:glitch2 5s infinite steps(1)}
+@keyframes glitch{
+  0%,88%,100%{transform:translateX(0);opacity:.7}
+  90%{transform:translateX(-4px);opacity:1}
+  92%{transform:translateX(4px);opacity:1}
+  94%{transform:translateX(-2px);opacity:1}
+  96%{transform:translateX(2px);opacity:1}
+}
+@keyframes glitch2{
+  0%,85%,100%{transform:translateX(0)}
+  87%{transform:translateX(3px)}
+  89%{transform:translateX(-3px)}
+}
+.crash-title{font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.028em;line-height:1.15;margin-bottom:16px;color:#fff}
+.crash-text{font-size:16px;line-height:1.65;color:#a0a0a0;margin-bottom:32px;max-width:46ch;margin-left:auto;margin-right:auto}
+.crash-text a{color:var(--red);font-weight:700;text-decoration:underline}
+.crash-cta{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;background:var(--red);color:#fff;font-weight:700;font-size:15px;border-radius:2px;transition:background .2s,transform .2s,box-shadow .2s;margin-bottom:28px;box-shadow:0 4px 14px rgba(226,0,26,.25)}
+.crash-cta:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(226,0,26,.4)}
+.crash-cta svg{transition:transform .2s}
+.crash-cta:hover svg{transform:translateX(3px)}
+.crash-meta{font-size:11.5px;color:#555;text-transform:uppercase;letter-spacing:.16em;font-weight:700;line-height:1.8}
+.crash-meta strong{color:#888;font-weight:800}
+.crash-fine{margin-top:32px;font-size:11px;color:#333;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+
+/* State: site crashing (transition) */
+body.crashing > *:not(#crashView){opacity:0;pointer-events:none;transition:opacity .8s ease}
+body.crashing{background:#000;transition:background .8s ease}
+
+/* State: crashed (permanent) */
+body.crashed{overflow:hidden;background:#050505}
+body.crashed .announcement-bar,
+body.crashed .topbar,
+body.crashed .site-header,
+body.crashed .breaking,
+body.crashed main,
+body.crashed footer,
+body.crashed .back-top,
+body.crashed .search-overlay,
+body.crashed .modal-backdrop{display:none !important}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 
-<!-- ANNOUNCEMENT BAR (top, always visible) -->
+<!-- ANNOUNCEMENT BAR (with live countdown) -->
 <div class="announcement-bar">
   <div class="wrap">
     <span class="announcement-bar-dot" aria-hidden="true"></span>
     <span class="announcement-bar-text">
-      <strong>Vigtig nyhed:</strong> Auning Skole Nyheder er flyttet
-      <span class="announcement-bar-sub">— den gamle side lukker snart</span>
+      <strong>Siden lukker om</strong>
+      <span class="bar-countdown" id="barCountdown">
+        <span id="barDays">--</span><span class="bar-countdown-unit">d</span>
+        <span id="barHours">--</span><span class="bar-countdown-unit">t</span>
+        <span id="barMins">--</span><span class="bar-countdown-unit">m</span>
+        <span id="barSecs">--</span><span class="bar-countdown-unit">s</span>
+      </span>
     </span>
     <a class="announcement-bar-link" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
       Besøg ny side
@@ -346,7 +430,7 @@ body.reading .read-progress{display:block}
 <div class="breaking" id="breakingBar"><div class="wrap">
   <div class="breaking-label"><span class="dot"></span><span>Breaking</span></div>
   <div class="ticker" id="ticker">
-    <a class="ticker-item active" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">Auning Skole Nyheder er flyttet til ny adresse — besøg den nye side</a>
+    <a class="ticker-item active" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">Auning Skole Nyheder lukker — flytter til ny adresse</a>
     <a class="ticker-item" href="#/artikel/0">Over 100 forældre mødte op på Auning Skole</a>
     <a class="ticker-item" href="#/artikel/2">1,7 mio. kr. frigivet til nyt faglokale</a>
   </div>
@@ -360,6 +444,33 @@ body.reading .read-progress{display:block}
           <span class="kicker">Vigtig nyhed</span>
           <h1 class="hero-title">Auning Skole Nyheder flytter til en ny adresse</h1>
           <p class="hero-dek">Vi har fået et nyt hjem. Fra nu af finder du alle nyheder om Auning Skole, skolestrukturen og lokalsamfundet på vores nye side. Den gamle side lukker snart — så skynd dig at skifte over.</p>
+
+          <div class="countdown-wrap" id="countdownWrap">
+            <div class="countdown-label">Siden lukker om</div>
+            <div class="countdown">
+              <div class="countdown-item">
+                <div class="countdown-num" id="cdDays">--</div>
+                <div class="countdown-unit">Dage</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-num" id="cdHours">--</div>
+                <div class="countdown-unit">Timer</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-num" id="cdMins">--</div>
+                <div class="countdown-unit">Min</div>
+              </div>
+              <div class="countdown-item">
+                <div class="countdown-num" id="cdSecs">--</div>
+                <div class="countdown-unit">Sek</div>
+              </div>
+            </div>
+            <div class="countdown-when">
+              <strong id="cdWhen">1. november 2026 kl. 00:00</strong> i København
+              <span class="countdown-local" id="cdLocalWrap">i din tid: <strong id="cdLocal">…</strong></span>
+            </div>
+          </div>
+
           <div class="announcement-actions">
             <a class="announcement-cta" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
               Besøg den nye side
@@ -478,22 +589,152 @@ body.reading .read-progress{display:block}
   </div>
 </div>
 
+<!-- CRASH VIEW (404) — hidden until countdown ends -->
+<div class="crash-view" id="crashView" hidden role="alert">
+  <div class="crash-content">
+    <div class="crash-code">404</div>
+    <h1 class="crash-title">Siden findes ikke længere</h1>
+    <p class="crash-text">
+      Auning Skole Nyheder på denne adresse er lukket.<br>
+      Alt indhold er flyttet til vores nye hjemmeside.
+    </p>
+    <a class="crash-cta" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
+      Besøg den nye side
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="crash-meta">
+      <strong>Siden lukkede 1. november 2026 kl. 00:00</strong><br>
+      Ny adresse: s0nwyy.github.io/Auning-Skole.news
+    </div>
+    <div class="crash-fine">Auning Skole Nyheder · 2026</div>
+  </div>
+</div>
+
 <script>
-/* ══════════════════ ARTICLES ══════════════════ */
-const articles = [
-  {id:0,kicker:"Skolestruktur",title:"Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”",dek:"Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs.",date:"5. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-hero-school/1200/675",caption:"Auning Skole danner i dag rammen om udskolingen for elever fra flere mindre skoler i Norddjurs.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",text:`<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune. Mødet var arrangeret i forlængelse af kommunens arbejde med at forme “Fremtidens Folkeskole”, som for alvor gik i gang i foråret, og hvor planerne nu er blevet til konkrete forslag.</p><p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. I dag flytter børnene fra disse skoler til Auning Skole, når de skal i syvende klasse. Men den ordning kan snart være fortid.</p><p>Ifølge TV2 Østjylland peger politikerne på to mulige modeller. Enten at samle alle eleverne på én skole og lukke de to andre. Eller at lade én af skolerne have elever helt fra 0. til 9. klasse og lade de to andre have elever op til 3. eller 6. klasse.</p><p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre på mødet.</p><p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Borgere kan stadig sende høringssvar frem til 15. oktober.</p>`},
-  {id:1,kicker:"Løb for Livet",title:"Løb for Livet: 24 timer med natbadminton, disko i svømmehallen og dyst på romaskiner",dek:"Det er ikke et almindeligt motionsløb. Når Auning Skoles udskoling går i gang med Løb for Livet, holder eleverne sig i bevægelse i et helt døgn.",date:"Tradition",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-lob/600/400",caption:"Løb for Livet er et 24-timers aktivitetsmaraton for hele udskolingen på Auning Skole.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",videoUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",text:`<p>Det er ikke et almindeligt motionsløb, når Auning Skoles udskoling afholder “Løb for Livet”. Det er et 24-timers aktivitetsmaraton, der starter klokken 10.00 dagen før efterårsferien — og hvor hele udskolingen er i bevægelse, indtil det hele slutter næste formiddag.</p><p>Eleverne deltager på skift i de mange aktiviteter. Hver klasse skal holde en motionscykel kørende hele døgnet, og klasserne dyster samtidig om at ro længst på tid på skolens romaskiner.</p><p>Programmet er pakket med idrætsaktiviteter, natbadminton, natdisko i svømmehallen, skakturnering, spinningkonkurrence og meget mere.</p>`},
-  {id:2,kicker:"Budget",title:"1,7 millioner kroner frigivet: Auning Skole får nyt faglokale",dek:"Økonomiudvalget i Norddjurs Kommune har godkendt at frigive midlerne til et faglokale til håndværk og design.",date:"10. marts 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-budget/600/400",caption:"Det nye faglokale skal bruges til håndværk og design.",source:"Norddjurs Kommune",sourceUrl:"https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",text:`<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole.</p><p>Midlerne skal bruges til etablering af et faglokale til håndværk og design på Auning Skole.</p>`},
-  {id:3,kicker:"Dialogmøde",title:"150 borgere stillede op: Skoleområdet mangler 10 millioner",dek:"Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne.",date:"9. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-meeting/600/400",caption:"Dialogmødet i Auning samlede omkring 150 borgere.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",text:`<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune.</p><p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted.</p>`},
-  {id:4,kicker:"Hverdag",title:"Hver fredag bliver klasselokalet til et svejseværksted",dek:"15-årige Silas Hilmer Gregersen går på den erhvervs- og praksisfaglige linje på Auning Skole.",date:"28. oktober 2024",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-welding/600/400",caption:"På den erhvervs- og praksisfaglige linje kommer eleverne ud i virksomheder hver fredag.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/det-har-aendret-silas-skolegang",text:`<p>15-årige Silas Hilmer Gregersen går i niende klasse på den erhvervs- og praksisfaglige linje på Auning Skole.</p><p>“Det er vigtigt for mig, fordi i klasselokalet kan jeg ikke sidde helt stille. Jeg vil hellere ud at bruge hænderne,” siger han.</p>`},
-  {id:5,kicker:"Fællesskab",title:"Elever samlede 52.000 kroner ind til ukrainske børn",dek:"Det begyndte med hjemmebagte muffins og armbånd. Målet var 10.000 kroner.",date:"18. april 2022",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-ukraine/600/400",caption:"Eleverne på Auning Skole samlede mere end 52.000 kroner ind.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/imponerende-indsats-skoleelever-loeber-bager-og-rydder-op-til-fordel-for-ukrainske-boern",text:`<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine.</p>`},
-  {id:6,kicker:"Sport",title:"Skolefodboldhold blandt de 16 bedste i Danmark",dek:"Både pigernes og drengenes hold på Auning Skole nåede kredsfinalerne i DBU Skolepokalen.",date:"9. december 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-football/600/400",caption:"Auning Skoles fodboldhold nåede blandt de 16 bedste skolehold i Danmark.",source:"Din Avis",sourceUrl:"https://dinavis.dk/sport/ECE18824841/skolefodboldhold-imponerer-flot-i-landsdaekkende-turnering-i-30aaret-for-historisk-sejr-i-skolefodboldturneringen/",text:`<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen.</p>`},
-  {id:7,kicker:"Undervisning",title:"1. klasse gjorde læsning meningsfuld med halloween og pralbønner",dek:"I 1. klasse på Auning Skole læste eleverne korte, lydrette ord, der passede til halloween.",date:"27. juni 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-reading/600/400",caption:"Læseundervisningen på Auning Skole tager udgangspunkt i emner, der giver mening for eleverne.",source:"Viden om Læsning",sourceUrl:"https://videnomlaesning.dk/viden-og-vaerktoejer/webdok/m-som-i-meningsfuld-laeseundervisning/",text:`<p>I 1. klasse på Auning Skole læste og skrev eleverne korte, lydrette ord, der passede til halloween.</p>`},
-  {id:8,kicker:"Om skolen",title:"Auning Skole: 688 elever og et karaktergennemsnit på 6,8",dek:"Skolen har 21,4 elever pr. klasse og et karaktergennemsnit på 6,8 ved 9.-klasseprøverne i 2025/2026.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-stats/600/400",caption:"Auning Skole har 688 elever i skoleåret 2025/2026.",source:"skoleklar.nu",sourceUrl:"https://skoleklar.nu/skole/auning-skole/",text:`<p>Auning Skole har 688 elever og 21,4 elever pr. klasse i skoleåret 2025/2026.</p><p>Karaktergennemsnittet ved 9.-klasseprøverne var 6,8 — mod 7,0 i Norddjurs Kommune og 7,3 på landsplan.</p><p>85,6 % af eleverne har høj trivsel, og det samlede elevfravær var 7,9 %.</p>`},
-  {id:9,kicker:"Om skolen",title:"8 specialklasser, 2 modtagelsesklasser og 120 ansatte",dek:"Auning Skole rummer knap 700 elever fra 0. til 9. klasse — og har både specialklasser, modtagelsesklasser og gode mellemformer.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-special/600/400",caption:"Auning Skole har 8 specialklasser og 2 modtagelsesklasser.",source:"Auning Skole / Norddjurs Kommune",sourceUrl:"https://auning-skole.aula.dk/info/auning-skole/generel-information",text:`<p>Auning Skole har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. På skolen er der i alt 120 ansatte.</p>`},
-  {id:10,kicker:"Hverdag",title:"SFO'en har 135 elever — og skolen arbejder med “Såren”",dek:"Auning Skole har en SFO med 135 elever. Skolen har også gjort gode erfaringer med specialgruppen “Såren”.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-sfo/600/400",caption:"SFO'en på Auning Skole har 135 elever.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>Til Auning Skole er der tilknyttet en SFO med 135 elever.</p><p>Skolen har gjort gode erfaringer med den lokale specialgruppe “Såren”, som er et tilbud for udfordrede elever.</p>`},
-  {id:11,kicker:"Undervisning",title:"To voksne i klassen: Auning Skole styrker indskolingen",dek:"Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.",date:"2022/2023",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-indskoling/600/400",caption:"Auning Skole har to voksne i indskolingsklasserne i 10 lektioner om ugen.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>På Auning Skole vægter man teamsamarbejdet meget højt. Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.</p>`}
-];
+/* ══════════════════ CLOSE DATE & COUNTDOWN ══════════════════ */
+/*
+  Siden lukker 1. november 2026 kl. 00:00 i København (CET / UTC+1).
+  For at teste crash med det samme, skift til:
+    const CLOSE_DATE = new Date('2020-01-01T00:00:00Z');
+*/
+const CLOSE_DATE = new Date('2026-11-01T00:00:00+01:00');
+
+/* Format the close date in Copenhagen */
+const CPH_FORMATTER = new Intl.DateTimeFormat('da-DK', {
+  timeZone: 'Europe/Copenhagen',
+  weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+  hour: '2-digit', minute: '2-digit'
+});
+const LOCAL_FORMATTER = new Intl.DateTimeFormat('da-DK', {
+  weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+  hour: '2-digit', minute: '2-digit'
+});
+
+function describeDate(date, formatter) {
+  const parts = formatter.formatToParts(date);
+  const get = t => (parts.find(p => p.type === t)?.value || '');
+  return {
+    day: get('weekday'),
+    date: get('day') + '. ' + get('month') + ' ' + get('year'),
+    time: get('hour') + ':' + get('minute')
+  };
+}
+
+(function initCountdownLabels(){
+  const cph = describeDate(CLOSE_DATE, CPH_FORMATTER);
+  const local = describeDate(CLOSE_DATE, LOCAL_FORMATTER);
+  const whenEl = document.getElementById('cdWhen');
+  if (whenEl) whenEl.textContent = cph.day.charAt(0).toUpperCase() + cph.day.slice(1) + ' ' + cph.date + ' kl. ' + cph.time;
+  const localEl = document.getElementById('cdLocal');
+  if (localEl) localEl.textContent = local.day.charAt(0).toUpperCase() + local.day.slice(1) + ' ' + local.date + ' kl. ' + local.time;
+})();
+
+function pad(n){ return n < 10 ? '0' + n : String(n); }
+
+function updateCountdown(){
+  const diff = CLOSE_DATE.getTime() - Date.now();
+
+  if (diff <= 0) {
+    triggerCrash();
+    return;
+  }
+
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+
+  // Hero countdown
+  const cdDays = document.getElementById('cdDays');
+  const cdHours = document.getElementById('cdHours');
+  const cdMins = document.getElementById('cdMins');
+  const cdSecs = document.getElementById('cdSecs');
+  if (cdDays) cdDays.textContent = days;
+  if (cdHours) cdHours.textContent = pad(hours);
+  if (cdMins) cdMins.textContent = pad(mins);
+  if (cdSecs) cdSecs.textContent = pad(secs);
+
+  // Bar compact countdown
+  const barDays = document.getElementById('barDays');
+  const barHours = document.getElementById('barHours');
+  const barMins = document.getElementById('barMins');
+  const barSecs = document.getElementById('barSecs');
+  if (barDays) barDays.textContent = days;
+  if (barHours) barHours.textContent = pad(hours);
+  if (barMins) barMins.textContent = pad(mins);
+  if (barSecs) barSecs.textContent = pad(secs);
+
+  // Urgent state if under 24h
+  const wrap = document.getElementById('countdownWrap');
+  if (wrap) {
+    if (diff < 86400000) wrap.classList.add('urgent');
+    else wrap.classList.remove('urgent');
+  }
+}
+
+/* ══════════════════ CRASH ══════════════════ */
+let crashed = false;
+
+function triggerCrash(){
+  if (crashed) return;
+  crashed = true;
+
+  const crashView = document.getElementById('crashView');
+
+  // If already past the close date on page load, crash instantly
+  const immediate = Date.now() - CLOSE_DATE.getTime() > 2000;
+
+  if (immediate) {
+    document.body.classList.add('crashed');
+    if (crashView) crashView.hidden = false;
+    window.scrollTo(0, 0);
+    return;
+  }
+
+  // Smooth fade to black, then crash page
+  document.body.classList.add('crashing');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  setTimeout(() => {
+    document.body.classList.remove('crashing');
+    document.body.classList.add('crashed');
+    if (crashView) crashView.hidden = false;
+    window.scrollTo(0, 0);
+  }, 900);
+}
+
+/* Initial check on page load */
+(function checkOnLoad(){
+  if (Date.now() >= CLOSE_DATE.getTime()) {
+    crashed = true;
+    document.body.classList.add('crashed');
+    const crashView = document.getElementById('crashView');
+    if (crashView) crashView.hidden = false;
+    return;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
 
 /* ══════════════════ ANNOUNCEMENT EXPAND ══════════════════ */
 (function(){
@@ -507,6 +748,22 @@ const articles = [
     btn.firstChild.textContent = isOpen ? 'Skjul detaljer' : 'Læs mere om flytningen';
   });
 })();
+
+/* ══════════════════ ARTICLES ══════════════════ */
+const articles = [
+  {id:0,kicker:"Skolestruktur",title:"Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”",dek:"Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs.",date:"5. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-hero-school/1200/675",caption:"Auning Skole danner i dag rammen om udskolingen for elever fra flere mindre skoler i Norddjurs.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",text:`<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune.</p><p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted.</p><p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre på mødet.</p><p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år.</p>`},
+  {id:1,kicker:"Løb for Livet",title:"Løb for Livet: 24 timer med natbadminton, disko i svømmehallen og dyst på romaskiner",dek:"Det er ikke et almindeligt motionsløb. Når Auning Skoles udskoling går i gang med Løb for Livet, holder eleverne sig i bevægelse i et helt døgn.",date:"Tradition",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-lob/600/400",caption:"Løb for Livet er et 24-timers aktivitetsmaraton for hele udskolingen på Auning Skole.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",videoUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",text:`<p>Det er ikke et almindeligt motionsløb, når Auning Skoles udskoling afholder “Løb for Livet”. Det er et 24-timers aktivitetsmaraton, der starter klokken 10.00 dagen før efterårsferien.</p><p>Eleverne deltager på skift i de mange aktiviteter. Hver klasse skal holde en motionscykel kørende hele døgnet, og klasserne dyster samtidig om at ro længst på tid.</p><p>Programmet er pakket med idrætsaktiviteter, natbadminton, natdisko i svømmehallen, skakturnering og spinningkonkurrence.</p>`},
+  {id:2,kicker:"Budget",title:"1,7 millioner kroner frigivet: Auning Skole får nyt faglokale",dek:"Økonomiudvalget i Norddjurs Kommune har godkendt at frigive midlerne til et faglokale til håndværk og design.",date:"10. marts 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-budget/600/400",caption:"Det nye faglokale skal bruges til håndværk og design.",source:"Norddjurs Kommune",sourceUrl:"https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",text:`<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole.</p><p>Midlerne skal bruges til etablering af et faglokale til håndværk og design.</p>`},
+  {id:3,kicker:"Dialogmøde",title:"150 borgere stillede op: Skoleområdet mangler 10 millioner",dek:"Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne.",date:"9. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-meeting/600/400",caption:"Dialogmødet i Auning samlede omkring 150 borgere.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",text:`<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune.</p><p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning.</p>`},
+  {id:4,kicker:"Hverdag",title:"Hver fredag bliver klasselokalet til et svejseværksted",dek:"15-årige Silas Hilmer Gregersen går på den erhvervs- og praksisfaglige linje på Auning Skole.",date:"28. oktober 2024",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-welding/600/400",caption:"På den erhvervs- og praksisfaglige linje kommer eleverne ud i virksomheder hver fredag.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/det-har-aendret-silas-skolegang",text:`<p>15-årige Silas Hilmer Gregersen går i niende klasse på den erhvervs- og praksisfaglige linje på Auning Skole.</p><p>“Det er vigtigt for mig, fordi i klasselokalet kan jeg ikke sidde helt stille,” siger han.</p>`},
+  {id:5,kicker:"Fællesskab",title:"Elever samlede 52.000 kroner ind til ukrainske børn",dek:"Det begyndte med hjemmebagte muffins og armbånd. Målet var 10.000 kroner.",date:"18. april 2022",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-ukraine/600/400",caption:"Eleverne på Auning Skole samlede mere end 52.000 kroner ind.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/imponerende-indsats-skoleelever-loeber-bager-og-rydder-op-til-fordel-for-ukrainske-boern",text:`<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine.</p>`},
+  {id:6,kicker:"Sport",title:"Skolefodboldhold blandt de 16 bedste i Danmark",dek:"Både pigernes og drengenes hold på Auning Skole nåede kredsfinalerne i DBU Skolepokalen.",date:"9. december 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-football/600/400",caption:"Auning Skoles fodboldhold nåede blandt de 16 bedste skolehold i Danmark.",source:"Din Avis",sourceUrl:"https://dinavis.dk/sport/ECE18824841/skolefodboldhold-imponerer-flot-i-landsdaekkende-turnering-i-30aaret-for-historisk-sejr-i-skolefodboldturneringen/",text:`<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen.</p>`},
+  {id:7,kicker:"Undervisning",title:"1. klasse gjorde læsning meningsfuld med halloween og pralbønner",dek:"I 1. klasse på Auning Skole læste eleverne korte, lydrette ord, der passede til halloween.",date:"27. juni 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-reading/600/400",caption:"Læseundervisningen tager udgangspunkt i emner, der giver mening for eleverne.",source:"Viden om Læsning",sourceUrl:"https://videnomlaesning.dk/viden-og-vaerktoejer/webdok/m-som-i-meningsfuld-laeseundervisning/",text:`<p>I 1. klasse på Auning Skole læste og skrev eleverne korte, lydrette ord, der passede til halloween.</p>`},
+  {id:8,kicker:"Om skolen",title:"Auning Skole: 688 elever og et karaktergennemsnit på 6,8",dek:"Skolen har 21,4 elever pr. klasse og et karaktergennemsnit på 6,8 ved 9.-klasseprøverne i 2025/2026.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-stats/600/400",caption:"Auning Skole har 688 elever i skoleåret 2025/2026.",source:"skoleklar.nu",sourceUrl:"https://skoleklar.nu/skole/auning-skole/",text:`<p>Auning Skole har 688 elever og 21,4 elever pr. klasse i skoleåret 2025/2026.</p><p>Karaktergennemsnittet ved 9.-klasseprøverne var 6,8.</p><p>85,6 % af eleverne har høj trivsel.</p>`},
+  {id:9,kicker:"Om skolen",title:"8 specialklasser, 2 modtagelsesklasser og 120 ansatte",dek:"Auning Skole rummer knap 700 elever fra 0. til 9. klasse — og har både specialklasser, modtagelsesklasser og gode mellemformer.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-special/600/400",caption:"Auning Skole har 8 specialklasser og 2 modtagelsesklasser.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/info/auning-skole/generel-information",text:`<p>Auning Skole har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. På skolen er der i alt 120 ansatte.</p>`},
+  {id:10,kicker:"Hverdag",title:"SFO'en har 135 elever — og skolen arbejder med “Såren”",dek:"Auning Skole har en SFO med 135 elever. Skolen har også gjort gode erfaringer med specialgruppen “Såren”.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-sfo/600/400",caption:"SFO'en på Auning Skole har 135 elever.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>Til Auning Skole er der tilknyttet en SFO med 135 elever.</p><p>Skolen har gjort gode erfaringer med den lokale specialgruppe “Såren”.</p>`},
+  {id:11,kicker:"Undervisning",title:"To voksne i klassen: Auning Skole styrker indskolingen",dek:"Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.",date:"2022/2023",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-indskoling/600/400",caption:"Auning Skole har to voksne i indskolingsklasserne i 10 lektioner om ugen.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>På Auning Skole vægter man teamsamarbejdet meget højt. Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.</p>`}
+];
 
 /* ══════════════════ LAZY IMAGE FADE ══════════════════ */
 function initLazyImages(root){
@@ -580,7 +837,6 @@ function articlePageHTML(a){
     '<figure class="article-figure"><img src="' + a.image + '" alt="' + a.title + '">' + (a.caption ? '<figcaption>' + a.caption + '</figcaption>' : '') + '</figure>';
   return '<div class="article-page"><a href="#/" class="back-link" id="backToHome"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Tilbage til forsiden</a><header class="article-head"><span class="kicker">' + a.kicker + '</span><h1>' + a.title + '</h1><p class="article-dek">' + a.dek + '</p><div class="article-meta"><span class="author">' + a.byline + '</span><span class="sep">·</span><span>' + a.date + '</span></div></header>' + videoHTML + figureHTML + '<div class="article-body">' + a.text + '</div><div class="article-source"><strong>Kilde:</strong> <a href="' + a.sourceUrl + '" target="_blank" rel="noopener">' + a.source + '</a></div><section class="article-related"><h2>Læs også</h2><div class="grid">' + relatedHTML + '</div></section></div>';
 }
-
 function showArticle(a){
   const apply = () => {
     articleView.innerHTML = articlePageHTML(a);
@@ -597,7 +853,6 @@ function showArticle(a){
   if (document.startViewTransition) document.startViewTransition(apply);
   else apply();
 }
-
 function showHome(){
   homeView.hidden = false;
   articleView.hidden = true;
@@ -607,14 +862,13 @@ function showHome(){
   progress.style.width = '0%';
   backTop.classList.remove('show');
 }
-
 function smoothBackToHome(){
   if (document.startViewTransition) document.startViewTransition(showHome);
   else showHome();
   history.pushState(null, '', '#/');
 }
-
 function router(){
+  if (crashed) return;
   const match = location.hash.match(/^#\/artikel\/(\d+)/);
   if(match){ const a = articles.find(x => x.id === Number(match[1])); if(a){ showArticle(a); return; } }
   showHome();
@@ -656,6 +910,7 @@ let searchDebounceTimer;
 function escapeRegex(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function highlightText(t, term){ if(!term) return t; return t.replace(new RegExp('(' + escapeRegex(term) + ')', 'gi'), '<mark>$1</mark>'); }
 function openSearch(){
+  if (crashed) return;
   searchOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
   searchInput.value = '';
@@ -722,99 +977,8 @@ const infoTitle = document.getElementById('infoTitle');
 const infoBody = document.getElementById('infoBody');
 const infoClose = document.getElementById('infoClose');
 let infoLastFocus = null;
-
 const infoContent = {
   tv:{ title:'TV-guiden', body:'<p>TV-guiden er på vej på den nye side. Indtil da kan du se TV2 Østjyllands video fra <em>Løb for Livet</em> direkte i artiklen her.</p>' },
   radio:{ title:'Radio', body:'<p>Radioafspilleren er på vej på den nye side.</p>' },
   contact:{ title:'Kontakt redaktionen', body:'<p>Skriv til <a href="mailto:redaktion@auning.dk">redaktion@auning.dk</a>.</p>' },
-  privacy:{ title:'Privatlivspolitik', body:'<p>Vi indsamler ingen personlige oplysninger. Der er ingen login, ingen nyhedsbrevstilmelding og ingen cookies til sporing.</p>' },
-  cookies:{ title:'Cookieindstillinger', body:'<p>Vi bruger kun teknisk nødvendig lokal lagring.</p>' },
-  terms:{ title:'Vilkår', body:'<p>Indholdet på denne side er til personlig brug. Du må gerne citere os, hvis du angiver kilden.</p>' },
-  accessibility:{ title:'Tilgængelighed', body:'<p>Fuld tastaturnavigation. <kbd>Ctrl</kbd>+<kbd>K</kbd> åbner søgning, <kbd>Esc</kbd> lukker.</p>' }
-};
-
-function openInfo(key){
-  const c = infoContent[key]; if(!c) return;
-  infoLastFocus = document.activeElement;
-  infoTitle.textContent = c.title;
-  infoBody.innerHTML = c.body;
-  infoModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  infoClose.focus();
-}
-function closeInfo(){
-  infoModal.classList.remove('open');
-  document.body.style.overflow = '';
-  if(infoLastFocus) infoLastFocus.focus();
-}
-infoClose.addEventListener('click', closeInfo);
-infoModal.addEventListener('click', (e) => { if(e.target === infoModal) closeInfo(); });
-document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && infoModal.classList.contains('open')) closeInfo(); });
-
-/* ══════════════════ ACTIONS ══════════════════ */
-document.querySelectorAll('[data-action]').forEach(el => {
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
-    const action = el.dataset.action;
-    if(action === 'live'){
-      document.getElementById('breakingBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.scrollBy({ top: -80, behavior: 'smooth' });
-    }
-    else if(action === 'tv') openInfo('tv');
-    else if(action === 'radio') openInfo('radio');
-    else if(action === 'contact') openInfo('contact');
-    else if(action === 'privacy') openInfo('privacy');
-    else if(action === 'cookies') openInfo('cookies');
-    else if(action === 'terms') openInfo('terms');
-    else if(action === 'accessibility') openInfo('accessibility');
-    document.body.classList.remove('nav-open');
-  });
-});
-
-/* ══════════════════ FILTER ══════════════════ */
-document.querySelectorAll('[data-filter]').forEach(el => {
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
-    const filter = el.dataset.filter;
-    renderHome(filter);
-    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-    const navEl = document.querySelector('.nav a[data-filter="' + filter + '"]');
-    if(navEl) navEl.classList.add('active');
-    document.body.classList.remove('nav-open');
-    if(!articleView.hidden) showHome();
-    if(location.hash !== '#/' && location.hash !== '') location.hash = '#/';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
-
-/* ══════════════════ MISC ══════════════════ */
-(function(){
-  const d = new Date();
-  const s = d.toLocaleDateString('da-DK', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-  const el = document.getElementById('today');
-  if(el) el.textContent = s.charAt(0).toUpperCase() + s.slice(1);
-  const y = document.getElementById('year');
-  if(y) y.textContent = d.getFullYear();
-})();
-
-(function(){
-  const items = document.querySelectorAll('.ticker-item');
-  if(items.length < 2) return;
-  let i = 0;
-  setInterval(() => {
-    items[i].classList.remove('active');
-    i = (i + 1) % items.length;
-    items[i].classList.add('active');
-  }, 5000);
-})();
-
-(function(){
-  const btn = document.getElementById('menuBtn');
-  const body = document.body;
-  if(!btn) return;
-  btn.addEventListener('click', () => body.classList.toggle('nav-open'));
-  document.querySelectorAll('#mobileNav a').forEach(a => a.addEventListener('click', () => body.classList.remove('nav-open')));
-})();
-</script>
-</body>
-</html>
+  privacy:{ title:'Privatlivspolitik', body:'<p>Vi indsamler ingen personlige oplysninger. Der er ingen login, ingen nyhedsbrevstilmelding og ingen
