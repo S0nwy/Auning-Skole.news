@@ -28,8 +28,22 @@ ul{list-style:none}
 ::view-transition-new(root){animation:vtFadeIn .32s cubic-bezier(.2,.7,.3,1) both}
 @keyframes vtFadeOut{from{opacity:1}to{opacity:0;transform:scale(.98)}}
 @keyframes vtFadeIn{from{opacity:0;transform:scale(1.01)}to{opacity:1;transform:scale(1)}}
-.hero-img{view-transition-name:hero-img}
-.hero-headline{view-transition-name:hero-headline}
+
+/* ─── ANNOUNCEMENT BAR ─── */
+.announcement-bar{background:#0a0a0a;color:#fff;border-bottom:1px solid #1a1a1a}
+.announcement-bar .wrap{display:flex;align-items:center;gap:14px;min-height:48px;padding:8px 24px}
+.announcement-bar-dot{width:9px;height:9px;border-radius:50%;background:var(--red);flex:none;animation:pulse 1.5s infinite;box-shadow:0 0 0 0 rgba(226,0,26,.7)}
+.announcement-bar-text{flex:1;font-size:14px;font-weight:500;color:#d8d8d8;line-height:1.35}
+.announcement-bar-text strong{color:#fff;font-weight:800;letter-spacing:.02em}
+.announcement-bar-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#fff;padding:8px 16px;background:var(--red);border-radius:2px;transition:background .2s,transform .2s;flex:none;white-space:nowrap}
+.announcement-bar-link:hover{background:var(--red-dark);transform:translateX(2px)}
+.announcement-bar-link svg{transition:transform .2s}
+.announcement-bar-link:hover svg{transform:translateX(3px)}
+@media(max-width:720px){
+  .announcement-bar-text{font-size:13px}
+  .announcement-bar-text .announcement-bar-sub{display:none}
+  .announcement-bar-link{padding:7px 12px;font-size:12px}
+}
 
 /* ─── TOPBAR ─── */
 .topbar{background:#fff;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
@@ -84,7 +98,7 @@ body.nav-open .mobile-nav{display:block}
 .hero-main{padding-right:44px;border-right:1px solid var(--line)}
 .hero-side{padding-left:44px;display:flex;flex-direction:column}
 .kicker{display:inline-block;color:var(--red);font-weight:800;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
-.hero-main .kicker{margin-top:22px}
+.hero-main .kicker{margin-top:0}
 .hero-title{font-size:clamp(28px,3.3vw,46px);line-height:1.04;letter-spacing:-.032em;font-weight:800;margin-bottom:14px}
 .hero-title a{transition:color .2s}
 .hero-title a:hover{color:var(--red)}
@@ -98,6 +112,34 @@ body.nav-open .mobile-nav{display:block}
 .side-item:hover h3{color:var(--red)}
 .side-item .meta{margin-top:9px;font-size:12.5px}
 @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:24px}.hero-main{padding-right:0;border-right:0;padding-bottom:28px;border-bottom:1px solid var(--line)}.hero-side{padding-left:0;padding-top:12px}}
+
+/* ─── ANNOUNCEMENT HERO ─── */
+.announcement-hero{background:linear-gradient(135deg,#fff 0%,#fafafa 100%);border:1px solid var(--line);border-left:4px solid var(--red);padding:34px 34px 30px;position:relative}
+.announcement-hero .kicker{margin-bottom:12px}
+.announcement-hero .hero-title{font-size:clamp(26px,3vw,40px);margin-bottom:16px}
+.announcement-hero .hero-dek{font-size:clamp(15px,1.4vw,18px);margin-bottom:0}
+.announcement-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;align-items:center}
+.announcement-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--red);color:#fff;font-size:15px;font-weight:700;border-radius:2px;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 14px rgba(226,0,26,.2)}
+.announcement-cta:hover{background:var(--red-dark);transform:translateY(-1px);box-shadow:0 6px 18px rgba(226,0,26,.28)}
+.announcement-cta svg{transition:transform .2s}
+.announcement-cta:hover svg{transform:translateX(3px)}
+.announcement-expand{padding:14px 24px;background:transparent;color:var(--ink);font-size:15px;font-weight:700;border:1px solid var(--line);border-radius:2px;transition:background .2s,border-color .2s;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.announcement-expand:hover{background:var(--soft);border-color:var(--ink)}
+.announcement-expand svg{transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.announcement-expand.open svg{transform:rotate(180deg)}
+.announcement-details{max-height:0;overflow:hidden;opacity:0;margin-top:0;transition:max-height .6s cubic-bezier(.2,.7,.3,1),opacity .35s ease .05s,margin .3s}
+.announcement-details.open{max-height:900px;opacity:1;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
+.announcement-details h3{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:12px}
+.announcement-details p{font-size:15px;line-height:1.65;color:#3a3a3a;margin-bottom:14px}
+.announcement-details p:last-child{margin-bottom:0}
+.announcement-details a{color:var(--red);font-weight:700;text-decoration:underline;word-break:break-all}
+.announcement-details a:hover{color:var(--red-dark)}
+.announcement-url{display:inline-block;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:2px;font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--ink);word-break:break-all;margin:4px 0 12px}
+@media(max-width:640px){
+  .announcement-hero{padding:24px 20px}
+  .announcement-actions{flex-direction:column;align-items:stretch}
+  .announcement-cta,.announcement-expand{justify-content:center;width:100%}
+}
 
 /* ─── SECTIONS ─── */
 .section{margin-top:56px}
@@ -244,6 +286,21 @@ body.reading .read-progress{display:block}
 </head>
 <body>
 
+<!-- ANNOUNCEMENT BAR (top, always visible) -->
+<div class="announcement-bar">
+  <div class="wrap">
+    <span class="announcement-bar-dot" aria-hidden="true"></span>
+    <span class="announcement-bar-text">
+      <strong>Vigtig nyhed:</strong> Auning Skole Nyheder er flyttet
+      <span class="announcement-bar-sub">— den gamle side lukker snart</span>
+    </span>
+    <a class="announcement-bar-link" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
+      Besøg ny side
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</div>
+
 <div class="read-progress" id="readProgress"></div>
 
 <div class="topbar"><div class="wrap">
@@ -289,9 +346,9 @@ body.reading .read-progress{display:block}
 <div class="breaking" id="breakingBar"><div class="wrap">
   <div class="breaking-label"><span class="dot"></span><span>Breaking</span></div>
   <div class="ticker" id="ticker">
-    <a class="ticker-item active" href="#/artikel/0">Over 100 forældre mødte op på Auning Skole</a>
+    <a class="ticker-item active" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">Auning Skole Nyheder er flyttet til ny adresse — besøg den nye side</a>
+    <a class="ticker-item" href="#/artikel/0">Over 100 forældre mødte op på Auning Skole</a>
     <a class="ticker-item" href="#/artikel/2">1,7 mio. kr. frigivet til nyt faglokale</a>
-    <a class="ticker-item" href="#/artikel/1">Løb for Livet: 24 timer med natbadminton og disko</a>
   </div>
 </div></div>
 
@@ -299,13 +356,30 @@ body.reading .read-progress{display:block}
   <div id="homeView">
     <section class="hero">
       <div class="hero-main">
-        <div class="media r-16x9" data-article="0">
-          <img class="hero-img" src="https://picsum.photos/seed/auning-hero-school/1200/675" alt="Auning Skole" data-src="https://picsum.photos/seed/auning-hero-school/1200/675">
+        <div class="announcement-hero">
+          <span class="kicker">Vigtig nyhed</span>
+          <h1 class="hero-title">Auning Skole Nyheder flytter til en ny adresse</h1>
+          <p class="hero-dek">Vi har fået et nyt hjem. Fra nu af finder du alle nyheder om Auning Skole, skolestrukturen og lokalsamfundet på vores nye side. Den gamle side lukker snart — så skynd dig at skifte over.</p>
+          <div class="announcement-actions">
+            <a class="announcement-cta" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
+              Besøg den nye side
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <button class="announcement-expand" id="expandAnnouncement" aria-expanded="false" aria-controls="announcementDetails">
+              Læs mere om flytningen
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </div>
+          <div class="announcement-details" id="announcementDetails">
+            <h3>Hvad betyder det for dig?</h3>
+            <p>Vi har samlet alle vores nyheder, interviews og baggrundshistorier om Auning Skole på en helt ny hjemmeside. Den nye side har samme redaktionelle linje — men et mere moderne design, hurtigere indlæsning og bedre søgning.</p>
+            <p><strong>Den nye adresse er:</strong></p>
+            <span class="announcement-url">https://s0nwyy.github.io/Auning-Skole.news/</span>
+            <p>Alle vores eksisterende historier er stadig tilgængelige — inklusive dem om skolestrukturen, Løb for Livet, det nye faglokale og alle de andre sager, vi har dækket gennem tiden.</p>
+            <p>Hvis du har bogmærket denne side, så husk at opdatere bogmærket til den nye adresse. Du kan også følge Auning Skole direkte på deres <a href="https://www.facebook.com/AuningSkole" target="_blank" rel="noopener">Facebook</a> og <a href="https://auning-skole.aula.dk/" target="_blank" rel="noopener">Aula</a>.</p>
+            <p>Tak fordi du har læst med. Vi glæder os til at se dig på den nye side.</p>
+          </div>
         </div>
-        <span class="kicker">Skolestruktur</span>
-        <h1 class="hero-title hero-headline"><a href="#/artikel/0" data-article="0">Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”</a></h1>
-        <p class="hero-dek">Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs. I dag går børnene fra Langhøjskolen, Allingåbroskolen og Rougsøskolen videre til Auning Skole i 7. klasse — men den ordning kan snart være fortid.</p>
-        <div class="meta"><span>Af lokalredaktionen</span><span class="sep">·</span><span>5. oktober 2026</span></div>
       </div>
       <div class="hero-side">
         <div class="side-item" data-article="1">
@@ -316,8 +390,8 @@ body.reading .read-progress{display:block}
           <div><span class="kicker">Budget</span><h3>1,7 millioner kroner frigivet: Auning Skole får nyt faglokale</h3><div class="meta"><span>10. marts 2026</span></div></div>
           <div class="media r-4x3"><img src="https://picsum.photos/seed/auning-budget/300/225" alt="" loading="lazy"></div>
         </div>
-        <div class="side-item" data-article="3">
-          <div><span class="kicker">Dialogmøde</span><h3>150 borgere stillede op: Skoleområdet mangler 10 millioner</h3><div class="meta"><span>9. oktober 2026</span></div></div>
+        <div class="side-item" data-article="0">
+          <div><span class="kicker">Skolestruktur</span><h3>Over 100 forældre mødte op på Auning Skole</h3><div class="meta"><span>5. oktober 2026</span></div></div>
           <div class="media r-4x3"><img src="https://picsum.photos/seed/auning-meeting/300/225" alt="" loading="lazy"></div>
         </div>
       </div>
@@ -346,9 +420,13 @@ body.reading .read-progress{display:block}
     <section class="follow-section" id="followSection">
       <div>
         <h2>Følg Auning Skole</h2>
-        <p>Vi samler nyhederne om skolen her på siden. Skolens egen hverdag kan du følge på deres officielle kanaler — vi deler ikke dine oplysninger med nogen.</p>
+        <p>Vi samler nyhederne om skolen her på siden — men fra nu af finder du de nyeste historier på vores nye adresse. Skolens egen hverdag kan du følge på deres officielle kanaler.</p>
       </div>
       <div class="follow-links">
+        <a class="follow-link" href="https://s0nwyy.github.io/Auning-Skole.news/" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <span>Ny side</span>
+        </a>
         <a class="follow-link" href="https://www.facebook.com/AuningSkole" target="_blank" rel="noopener">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.8 3.8-3.8 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12z"/></svg>
           <span>Facebook</span>
@@ -375,12 +453,10 @@ body.reading .read-progress{display:block}
   </div>
 </footer>
 
-<!-- BACK TO TOP -->
 <button class="back-top" id="backTop" aria-label="Til toppen">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
 </button>
 
-<!-- SEARCH -->
 <div class="search-overlay" id="searchOverlay">
   <div class="search-box">
     <div class="search-header">
@@ -394,7 +470,6 @@ body.reading .read-progress{display:block}
   </div>
 </div>
 
-<!-- INFO MODAL -->
 <div class="modal-backdrop" id="infoModal">
   <div class="modal-box info-box">
     <button class="modal-close" id="infoClose" aria-label="Luk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
@@ -404,34 +479,49 @@ body.reading .read-progress{display:block}
 </div>
 
 <script>
-/* ══════════════════ ARTICLES — with NEW facts ══════════════════ */
+/* ══════════════════ ARTICLES ══════════════════ */
 const articles = [
-  {id:0,kicker:"Skolestruktur",title:"Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”",dek:"Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs. I dag går børnene fra Langhøjskolen, Allingåbroskolen og Rougsøskolen videre til Auning Skole i 7. klasse — men den ordning kan snart være fortid.",date:"5. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-hero-school/1200/675",caption:"Auning Skole danner i dag rammen om udskolingen for elever fra flere mindre skoler i Norddjurs.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",text:`<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune. Mødet var arrangeret i forlængelse af kommunens arbejde med at forme “Fremtidens Folkeskole”, som for alvor gik i gang i foråret, og hvor planerne nu er blevet til konkrete forslag.</p><p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. I dag flytter børnene fra disse skoler til Auning Skole, når de skal i syvende klasse. Men den ordning kan snart være fortid.</p><p>Ifølge TV2 Østjylland peger politikerne på to mulige modeller. Enten at samle alle eleverne på én skole og lukke de to andre. Eller at lade én af skolerne have elever helt fra 0. til 9. klasse og lade de to andre have elever op til 3. eller 6. klasse.</p><p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre på mødet.</p><p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Borgere kan stadig sende høringssvar frem til 15. oktober.</p><p>Debatten fortsætter i kommunalbestyrelsen, hvor der skal træffes endelig beslutning om skolestrukturen. For forældrene på Auning Skole handler det ikke kun om deres egen skole, men om hele lokalsamfundet i den nordvestlige del af Norddjurs.</p>`},
-  {id:1,kicker:"Løb for Livet",title:"Løb for Livet: 24 timer med natbadminton, disko i svømmehallen og dyst på romaskiner",dek:"Det er ikke et almindeligt motionsløb. Når Auning Skoles udskoling går i gang med Løb for Livet, holder eleverne sig i bevægelse i et helt døgn — med natbadminton, skakturnering, spinningkonkurrence og klasselokaler pyntet som forskellige lande.",date:"Tradition",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-lob/600/400",caption:"Løb for Livet er et 24-timers aktivitetsmaraton for hele udskolingen på Auning Skole.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",videoUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",text:`<p>Det er ikke et almindeligt motionsløb, når Auning Skoles udskoling afholder “Løb for Livet”. Det er et 24-timers aktivitetsmaraton, der starter klokken 10.00 dagen før efterårsferien — og hvor hele udskolingen er i bevægelse, indtil det hele slutter næste formiddag.</p><p>“Klokken 10.00 i dag lød startskuddet til dette års Løb for livet, som det næste døgn afvikles i hele vores udskoling,” har skolen tidligere skrevet om arrangementet.</p><p>Løb for Livet er en pendant til det klassiske motionsløb, som mange skoler traditionen tro afvikler fredag op til efterårsferien. Men hvor de fleste skoler sender eleverne ud på en rute, laver Auning Skoles udskoling alle mulige andre former for motion det næste døgn.</p><p>Eleverne deltager på skift i de mange aktiviteter. Hver klasse skal holde en motionscykel kørende hele døgnet, og klasserne dyster samtidig om at ro længst på tid på skolens romaskiner.</p><p>Programmet er pakket med idrætsaktiviteter, natbadminton, natdisko i svømmehallen, skakturnering, spinningkonkurrence, romaskiner, dans, bow combat og tiovli-aktiviteter — og ifølge skolen selv “meget, meget mere”.</p><p>På skolen er klasselokalerne pyntet i tema ud fra det land, som den enkelte klasse har fået tildelt. Om aftenen går det løs med blandt andet ridning på rodeotyr, disko-svømning og UV-fodbold.</p><p>“Et helt døgn med fuld knald på og masser af bevægelse — og helt sikkert masser af trætte unge mennesker i morgen kl. 10, når det hele slutter og efterårsferien starter,” har skolen skrevet om arrangementet.</p><p>For eleverne er Løb for Livet blevet en fast tradition og et af de arrangementer, de ser mest frem til i løbet af skoleåret.</p>`},
-  {id:2,kicker:"Budget",title:"1,7 millioner kroner frigivet: Auning Skole får nyt faglokale",dek:"Økonomiudvalget i Norddjurs Kommune har godkendt at frigive midlerne til et faglokale til håndværk og design. Pengene blev afsat i budgettet for 2026–2029.",date:"10. marts 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-budget/600/400",caption:"Det nye faglokale skal bruges til håndværk og design.",source:"Norddjurs Kommune",sourceUrl:"https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",text:`<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole. Beslutningen blev truffet den 10. marts 2026 og følger op på budgetaftalen for 2026–2029, hvor beløbet blev afsat.</p><p>Midlerne skal bruges til etablering af et faglokale til håndværk og design på Auning Skole. Ifølge sagsfremstillingen skal lokalet etableres i tæt dialog med skolen.</p><p>Derudover var der i 2025 et mindreforbrug på 0,7 millioner kroner på anlægsprojektet “Faglokaler inde og ude”, som også vedrører Auning Skole.</p><p>For Auning Skole betyder det, at arbejdet med at forbedre de fysiske rammer for håndværk og design nu kan gå videre.</p>`},
-  {id:3,kicker:"Dialogmøde",title:"150 borgere stillede op: Skoleområdet mangler 10 millioner",dek:"Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune.",date:"9. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-meeting/600/400",caption:"Dialogmødet i Auning samlede omkring 150 borgere.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",text:`<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune. Mødet var en del af den høringsproces, hvor borgere kan sende input frem til 15. oktober.</p><p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. Politikerne peger på et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år.</p><p>Dialogen fortsætter i kommunalbestyrelsen, og der er lagt op til en bred politisk behandling af sagen.</p>`},
-  {id:4,kicker:"Hverdag",title:"Hver fredag bliver klasselokalet til et svejseværksted",dek:"15-årige Silas Hilmer Gregersen går på den erhvervs- og praksisfaglige linje på Auning Skole. Hver fredag sendes han ud i erhvervspraktik og svejser små dele sammen.",date:"28. oktober 2024",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-welding/600/400",caption:"På den erhvervs- og praksisfaglige linje kommer eleverne ud i virksomheder hver fredag.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/det-har-aendret-silas-skolegang",text:`<p>15-årige Silas Hilmer Gregersen går i niende klasse på den erhvervs- og praksisfaglige linje på Auning Skole. Hver fredag sendes han ud i erhvervspraktik og svejser små dele sammen til en miniature gokart-model.</p><p>“Det er vigtigt for mig, fordi i klasselokalet kan jeg ikke sidde helt stille. Jeg vil hellere ud at bruge hænderne,” siger han.</p><p>Auning Skole har i flere år haft fokus på at gøre undervisningen mere praksisnær og relevant for eleverne. Norddjurs Kommune er ifølge en undersøgelse fra Dansk Industri blandt de bedste i Danmark til samarbejde mellem skoler og virksomheder.</p>`},
-  {id:5,kicker:"Fællesskab",title:"Elever samlede 52.000 kroner ind til ukrainske børn",dek:"Det begyndte med hjemmebagte muffins og armbånd. Målet var 10.000 kroner — men indsamlingen på Auning Skole voksede langt ud over alle forventninger.",date:"18. april 2022",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-ukraine/600/400",caption:"Eleverne på Auning Skole samlede mere end 52.000 kroner ind.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/imponerende-indsats-skoleelever-loeber-bager-og-rydder-op-til-fordel-for-ukrainske-boern",text:`<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine. Det begyndte med hjemmebagte muffins og armbånd, men voksede hurtigt til en indsats, der involverede store dele af byen.</p><p>“Jeg er mega imponeret af og stolt over de her børn, der har givet den en ordentlig skalle,” siger Kasper Fur Eriksen, der er lærer hos mellemtrinet på Auning Skole.</p><p>Eleverne samlede 227 kilo skrald ind i byen, vaskede vinduer, tømte opvaskemaskiner og lavede havearbejde for at tjene penge.</p>`},
-  {id:6,kicker:"Sport",title:"Skolefodboldhold blandt de 16 bedste i Danmark",dek:"Både pigernes og drengenes hold på Auning Skole nåede kredsfinalerne i DBU Skolepokalen. Det er 30 år efter pigernes historiske sejr i Parken.",date:"9. december 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-football/600/400",caption:"Auning Skoles fodboldhold nåede blandt de 16 bedste skolehold i Danmark.",source:"Din Avis",sourceUrl:"https://dinavis.dk/sport/ECE18824841/skolefodboldhold-imponerer-flot-i-landsdaekkende-turnering-i-30aaret-for-historisk-sejr-i-skolefodboldturneringen/",text:`<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen. Både pigernes og drengenes hold nåede kredsfinalerne og dermed blandt de 16 bedste skolehold i Danmark.</p><p>I kredsfinalerne måtte begge Auning-mandskaber imidlertid strække gevær. Pigerne tabte 4-1 til Morten Børup Skolen fra Skanderborg. Drengene tabte 3-0 til Østerhåbskolen Torsted.</p><p>Det er i år 30 år siden, at Auning Skoles piger gik hele vejen i turneringen til Parken i København.</p>`},
-  {id:7,kicker:"Undervisning",title:"1. klasse gjorde læsning meningsfuld med halloween og pralbønner",dek:"I 1. klasse på Auning Skole læste eleverne korte, lydrette ord, der passede til halloween. Senere handlede det om pralbønnens vej fra kim til plante.",date:"27. juni 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-reading/600/400",caption:"Læseundervisningen på Auning Skole tager udgangspunkt i emner, der giver mening for eleverne.",source:"Viden om Læsning",sourceUrl:"https://videnomlaesning.dk/viden-og-vaerktoejer/webdok/m-som-i-meningsfuld-laeseundervisning/",text:`<p>I 1. klasse på Auning Skole læste og skrev eleverne korte, lydrette ord, der passede til halloween. Da sommeren nærmede sig, handlede det om pralbønnens vej fra kim til plante.</p><p>Undervisningen var en del af projektet (Selv)sikker læsestart, hvor der er fokus på læse- og skriveundervisning, der er meningsfuld for eleverne.</p><p>Henriette Romme Lund, specialkonsulent i Nationalt Videncenter for Læsning, besøgte skolen og talte med lærerne Kirsten Bilde Fogh og Kirsten Gjødvad Klinge.</p>`},
-
-  /* ─── NEW STORIES from research ─── */
-  {id:9,kicker:"Om skolen",title:"Auning Skole: 688 elever og et karaktergennemsnit på 6,8",dek:"Skolen har 21,4 elever pr. klasse og et karaktergennemsnit på 6,8 ved 9.-klasseprøverne i 2025/2026. Det viser nye nøgletal fra skoleklar.nu.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-stats/600/400",caption:"Auning Skole har 688 elever i skoleåret 2025/2026.",source:"skoleklar.nu",sourceUrl:"https://skoleklar.nu/skole/auning-skole/",text:`<p>Auning Skole har 688 elever og 21,4 elever pr. klasse i skoleåret 2025/2026. Det er lidt over kommunegennemsnittet på 20,0 og landsgennemsnittet på 20,7, viser nøgletal fra skoleklar.nu.</p><p>Karaktergennemsnittet ved 9.-klasseprøverne var 6,8 i 2025/2026 — mod 7,0 i Norddjurs Kommune og 7,3 på landsplan. Undervisningseffekten er 0, hvilket betyder, at eleverne klarer sig som forventet ud fra deres socioøkonomiske baggrund.</p><p>85,6 % af eleverne har høj trivsel. Det samlede elevfravær var 7,9 %, og 84,2 % af eleverne var i gang med en ungdomsuddannelse i september året efter 9. eller 10. klasse.</p><p>Elevtallet er faldet fra 693 i 2018/2019 til 688 i 2025/2026.</p>`},
-  {id:10,kicker:"Om skolen",title:"8 specialklasser, 2 modtagelsesklasser og 120 ansatte",dek:"Auning Skole rummer knap 700 elever fra 0. til 9. klasse — og har både specialklasser, modtagelsesklasser og gode mellemformer.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-special/600/400",caption:"Auning Skole har 8 specialklasser og 2 modtagelsesklasser.",source:"Auning Skole / Norddjurs Kommune",sourceUrl:"https://auning-skole.aula.dk/info/auning-skole/generel-information",text:`<p>Auning Skole har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. På skolen er der i alt 120 ansatte, herunder ledelse, lærere, pædagoger, tekniske servicemedarbejdere samt it- og administrativt personale.</p><p>Specialklasserne er placeret blandt de almene klasser på skolen, og personalet er uddannet inden for specialfeltet. Skolen har modtagerklasser i henholdsvis indskoling, mellemtrin og udskoling — typisk for elever med flygtningebaggrund.</p><p>Norddjurs Kommunes modtagerklasser er placeret i Grenaa og Auning. To af de tre modtagelsesklasser ligger på Auning Skole. Fra skoleåret 2026-27 udfases ordningen til fordel for hurtigere integration i almenskolen.</p>`},
-  {id:11,kicker:"Hverdag",title:"SFO'en har 135 elever — og skolen arbejder med “Såren”",dek:"Auning Skole har en SFO med 135 elever. Skolen har også gjort gode erfaringer med specialgruppen “Såren” for udfordrede elever i 1.–6. årgang.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-sfo/600/400",caption:"SFO'en på Auning Skole har 135 elever.",source:"Auning Skole / Norddjurs Kommune",sourceUrl:"https://auning-skole.aula.dk/sites/auning-skole.aula.dk/files/arkiv/Download_filer/Uddannelsesplan - 1. og 2. niveau.pdf",text:`<p>Til Auning Skole er der tilknyttet en SFO med 135 elever. Skolen har 650 elever på hele skolen og i alt 120 ansatte ifølge skolens uddannelsesplan.</p><p>På Auning Skole har der i en årrække været gjort gode erfaringer med den lokale specialgruppe “Såren”, som har været et tilbud for udfordrede elever i 1.–6. årgang. Fra skoleåret 2019/20 hedder tilbuddet “55åren” og tilbydes elever i 7. klasse.</p><p>Skolen arbejder også med “VPS” — videnproducerende skole — hvor lærerne systematisk producerer viden om praksis for at styrke undervisningskvaliteten.</p>`},
-  {id:12,kicker:"Undervisning",title:"To voksne i klassen: Auning Skole styrker indskolingen",dek:"Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen. Skolen vægter teamsamarbejde højt.",date:"2022/2023",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-indskoling/600/400",caption:"Auning Skole har to voksne i indskolingsklasserne i 10 lektioner om ugen.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/sites/auning-skole.aula.dk/files/arkiv/Download_filer/Uddannelsesplan - 1. og 2. niveau.pdf",text:`<p>På Auning Skole vægter man teamsamarbejdet meget højt. Skolen er inddelt i årgangsteam, som består af 4-5 lærere, der i fællesskab har ansvaret for planlægningen og tilrettelæggelsen af undervisningen på en bestemt årgang.</p><p>Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen. Det skal skabe trygge og faste rammer, hvor eleverne lærer, trives og deltager i fællesskabet.</p><p>Skolen arbejder ud fra PLF (Professionelle læringsfællesskaber) og har stort fokus på at skabe gode overgange mellem skole og dagtilbud, mellem de forskellige afdelinger og til ungdomsuddannelse.</p>`}
+  {id:0,kicker:"Skolestruktur",title:"Flere end 100 forældre mødte op på Auning Skole: “Vi vil ikke have, at vores skole bliver revet væk under os”",dek:"Det var et fyldt lokale, da forældre og politikere tirsdag aften skulle tale om fremtidens folkeskoler i Norddjurs.",date:"5. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-hero-school/1200/675",caption:"Auning Skole danner i dag rammen om udskolingen for elever fra flere mindre skoler i Norddjurs.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/flere-hundrede-er-samlet-for-at-kaempe-for-landsbyskoler-fbd9b",text:`<p>Det var et fyldt lokale på Auning Skole tirsdag aften, da mere end 100 forældre mødte op for at tale om fremtidens folkeskoler i Norddjurs Kommune. Mødet var arrangeret i forlængelse af kommunens arbejde med at forme “Fremtidens Folkeskole”, som for alvor gik i gang i foråret, og hvor planerne nu er blevet til konkrete forslag.</p><p>I den nordvestlige del af kommunen er der lige nu tre skoler med lige over 100 elever på hver: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted. I dag flytter børnene fra disse skoler til Auning Skole, når de skal i syvende klasse. Men den ordning kan snart være fortid.</p><p>Ifølge TV2 Østjylland peger politikerne på to mulige modeller. Enten at samle alle eleverne på én skole og lukke de to andre. Eller at lade én af skolerne have elever helt fra 0. til 9. klasse og lade de to andre have elever op til 3. eller 6. klasse.</p><p>“Vi vil ikke have, at vores skole bliver revet væk under os,” lød det fra en af de fremmødte forældre på mødet.</p><p>Baggrunden er et skoleområde, der ventes at overskride budgettet med 10 millioner kroner næste år. Borgere kan stadig sende høringssvar frem til 15. oktober.</p>`},
+  {id:1,kicker:"Løb for Livet",title:"Løb for Livet: 24 timer med natbadminton, disko i svømmehallen og dyst på romaskiner",dek:"Det er ikke et almindeligt motionsløb. Når Auning Skoles udskoling går i gang med Løb for Livet, holder eleverne sig i bevægelse i et helt døgn.",date:"Tradition",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-lob/600/400",caption:"Løb for Livet er et 24-timers aktivitetsmaraton for hele udskolingen på Auning Skole.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",videoUrl:"https://www.tv2ostjylland.dk/skoleelever-loeber-i-24-timer",text:`<p>Det er ikke et almindeligt motionsløb, når Auning Skoles udskoling afholder “Løb for Livet”. Det er et 24-timers aktivitetsmaraton, der starter klokken 10.00 dagen før efterårsferien — og hvor hele udskolingen er i bevægelse, indtil det hele slutter næste formiddag.</p><p>Eleverne deltager på skift i de mange aktiviteter. Hver klasse skal holde en motionscykel kørende hele døgnet, og klasserne dyster samtidig om at ro længst på tid på skolens romaskiner.</p><p>Programmet er pakket med idrætsaktiviteter, natbadminton, natdisko i svømmehallen, skakturnering, spinningkonkurrence og meget mere.</p>`},
+  {id:2,kicker:"Budget",title:"1,7 millioner kroner frigivet: Auning Skole får nyt faglokale",dek:"Økonomiudvalget i Norddjurs Kommune har godkendt at frigive midlerne til et faglokale til håndværk og design.",date:"10. marts 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-budget/600/400",caption:"Det nye faglokale skal bruges til håndværk og design.",source:"Norddjurs Kommune",sourceUrl:"https://norddjurs.meetingsplus.dk/welcome-da/udvalg/okonomiudvalget/10-03-2026/protocol/15-anlaegsbevilling-til-faglokaler-pa-auning-skolepdf",text:`<p>Økonomiudvalget i Norddjurs Kommune har godkendt at frigive 1,7 millioner kroner til et nyt faglokale på Auning Skole.</p><p>Midlerne skal bruges til etablering af et faglokale til håndværk og design på Auning Skole.</p>`},
+  {id:3,kicker:"Dialogmøde",title:"150 borgere stillede op: Skoleområdet mangler 10 millioner",dek:"Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne.",date:"9. oktober 2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-meeting/600/400",caption:"Dialogmødet i Auning samlede omkring 150 borgere.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/tre-skoler-lige-nu-i-spil-som-lukningstruede-i-norddjurs-a869d",text:`<p>Omkring 150 borgere mødte op til dialogmøde i Auning for at få svar på planerne for fremtidens folkeskoler i Norddjurs Kommune.</p><p>Tre skoler i den nordvestlige del af kommunen er i spil til lukning: Langhøjskolen i Vivild, Allingåbroskolen og Rougsøskolen i Ørsted.</p>`},
+  {id:4,kicker:"Hverdag",title:"Hver fredag bliver klasselokalet til et svejseværksted",dek:"15-årige Silas Hilmer Gregersen går på den erhvervs- og praksisfaglige linje på Auning Skole.",date:"28. oktober 2024",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-welding/600/400",caption:"På den erhvervs- og praksisfaglige linje kommer eleverne ud i virksomheder hver fredag.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/det-har-aendret-silas-skolegang",text:`<p>15-årige Silas Hilmer Gregersen går i niende klasse på den erhvervs- og praksisfaglige linje på Auning Skole.</p><p>“Det er vigtigt for mig, fordi i klasselokalet kan jeg ikke sidde helt stille. Jeg vil hellere ud at bruge hænderne,” siger han.</p>`},
+  {id:5,kicker:"Fællesskab",title:"Elever samlede 52.000 kroner ind til ukrainske børn",dek:"Det begyndte med hjemmebagte muffins og armbånd. Målet var 10.000 kroner.",date:"18. april 2022",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-ukraine/600/400",caption:"Eleverne på Auning Skole samlede mere end 52.000 kroner ind.",source:"TV2 Østjylland",sourceUrl:"https://www.tv2ostjylland.dk/norddjurs/imponerende-indsats-skoleelever-loeber-bager-og-rydder-op-til-fordel-for-ukrainske-boern",text:`<p>Eleverne på Auning Skole, særligt fra 5. årgang, samlede mere end 52.000 kroner ind til fordel for børn i Ukraine.</p>`},
+  {id:6,kicker:"Sport",title:"Skolefodboldhold blandt de 16 bedste i Danmark",dek:"Både pigernes og drengenes hold på Auning Skole nåede kredsfinalerne i DBU Skolepokalen.",date:"9. december 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-football/600/400",caption:"Auning Skoles fodboldhold nåede blandt de 16 bedste skolehold i Danmark.",source:"Din Avis",sourceUrl:"https://dinavis.dk/sport/ECE18824841/skolefodboldhold-imponerer-flot-i-landsdaekkende-turnering-i-30aaret-for-historisk-sejr-i-skolefodboldturneringen/",text:`<p>Auning Skoles fodboldhold markerede sig flot i årets DBU Skolepokalen.</p>`},
+  {id:7,kicker:"Undervisning",title:"1. klasse gjorde læsning meningsfuld med halloween og pralbønner",dek:"I 1. klasse på Auning Skole læste eleverne korte, lydrette ord, der passede til halloween.",date:"27. juni 2025",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-reading/600/400",caption:"Læseundervisningen på Auning Skole tager udgangspunkt i emner, der giver mening for eleverne.",source:"Viden om Læsning",sourceUrl:"https://videnomlaesning.dk/viden-og-vaerktoejer/webdok/m-som-i-meningsfuld-laeseundervisning/",text:`<p>I 1. klasse på Auning Skole læste og skrev eleverne korte, lydrette ord, der passede til halloween.</p>`},
+  {id:8,kicker:"Om skolen",title:"Auning Skole: 688 elever og et karaktergennemsnit på 6,8",dek:"Skolen har 21,4 elever pr. klasse og et karaktergennemsnit på 6,8 ved 9.-klasseprøverne i 2025/2026.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-stats/600/400",caption:"Auning Skole har 688 elever i skoleåret 2025/2026.",source:"skoleklar.nu",sourceUrl:"https://skoleklar.nu/skole/auning-skole/",text:`<p>Auning Skole har 688 elever og 21,4 elever pr. klasse i skoleåret 2025/2026.</p><p>Karaktergennemsnittet ved 9.-klasseprøverne var 6,8 — mod 7,0 i Norddjurs Kommune og 7,3 på landsplan.</p><p>85,6 % af eleverne har høj trivsel, og det samlede elevfravær var 7,9 %.</p>`},
+  {id:9,kicker:"Om skolen",title:"8 specialklasser, 2 modtagelsesklasser og 120 ansatte",dek:"Auning Skole rummer knap 700 elever fra 0. til 9. klasse — og har både specialklasser, modtagelsesklasser og gode mellemformer.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-special/600/400",caption:"Auning Skole har 8 specialklasser og 2 modtagelsesklasser.",source:"Auning Skole / Norddjurs Kommune",sourceUrl:"https://auning-skole.aula.dk/info/auning-skole/generel-information",text:`<p>Auning Skole har 8 specialklasser, 2 modtagelsesklasser og “gode mellemformer”. På skolen er der i alt 120 ansatte.</p>`},
+  {id:10,kicker:"Hverdag",title:"SFO'en har 135 elever — og skolen arbejder med “Såren”",dek:"Auning Skole har en SFO med 135 elever. Skolen har også gjort gode erfaringer med specialgruppen “Såren”.",date:"2025/2026",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-sfo/600/400",caption:"SFO'en på Auning Skole har 135 elever.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>Til Auning Skole er der tilknyttet en SFO med 135 elever.</p><p>Skolen har gjort gode erfaringer med den lokale specialgruppe “Såren”, som er et tilbud for udfordrede elever.</p>`},
+  {id:11,kicker:"Undervisning",title:"To voksne i klassen: Auning Skole styrker indskolingen",dek:"Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.",date:"2022/2023",byline:"Af lokalredaktionen",image:"https://picsum.photos/seed/auning-indskoling/600/400",caption:"Auning Skole har to voksne i indskolingsklasserne i 10 lektioner om ugen.",source:"Auning Skole",sourceUrl:"https://auning-skole.aula.dk/",text:`<p>På Auning Skole vægter man teamsamarbejdet meget højt. Fra skoleår 22/23 har alle klasser fra 0. til og med 3. klasse haft to voksne i klassen i 10 lektioner om ugen.</p>`}
 ];
 
+/* ══════════════════ ANNOUNCEMENT EXPAND ══════════════════ */
+(function(){
+  const btn = document.getElementById('expandAnnouncement');
+  const details = document.getElementById('announcementDetails');
+  if (!btn || !details) return;
+  btn.addEventListener('click', () => {
+    const isOpen = details.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+    btn.firstChild.textContent = isOpen ? 'Skjul detaljer' : 'Læs mere om flytningen';
+  });
+})();
+
 /* ══════════════════ LAZY IMAGE FADE ══════════════════ */
-document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-  img.classList.add('lazy');
-  if (img.complete && img.naturalHeight !== 0) {
-    img.classList.add('loaded');
-  } else {
-    img.addEventListener('load', () => img.classList.add('loaded'));
-    img.addEventListener('error', () => img.classList.add('loaded'));
-  }
-});
+function initLazyImages(root){
+  (root || document).querySelectorAll('img[loading="lazy"]').forEach(img => {
+    if (!img.classList.contains('lazy')) {
+      img.classList.add('lazy');
+      if (img.complete && img.naturalHeight !== 0) img.classList.add('loaded');
+      else {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        img.addEventListener('error', () => img.classList.add('loaded'));
+      }
+    }
+  });
+}
+initLazyImages();
 
 /* ══════════════════ HOME RENDER ══════════════════ */
 const latestList = document.getElementById('latestList');
@@ -468,14 +558,7 @@ function renderHome(filter){
   structureGrid.innerHTML = ids.slice(0, 4).map(cardHTML).join('');
   practiceGrid.innerHTML = ids.slice(0, 4).map(cardHTML).join('');
   ids.slice(0, 5).forEach((id, i) => renderMostRead(id, i));
-  // re-init lazy images inside rendered HTML
-  document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-    if (!img.classList.contains('lazy')) {
-      img.classList.add('lazy');
-      if (img.complete && img.naturalHeight !== 0) img.classList.add('loaded');
-      else img.addEventListener('load', () => img.classList.add('loaded'));
-    }
-  });
+  initLazyImages();
 }
 renderHome('all');
 
@@ -498,7 +581,6 @@ function articlePageHTML(a){
   return '<div class="article-page"><a href="#/" class="back-link" id="backToHome"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>Tilbage til forsiden</a><header class="article-head"><span class="kicker">' + a.kicker + '</span><h1>' + a.title + '</h1><p class="article-dek">' + a.dek + '</p><div class="article-meta"><span class="author">' + a.byline + '</span><span class="sep">·</span><span>' + a.date + '</span></div></header>' + videoHTML + figureHTML + '<div class="article-body">' + a.text + '</div><div class="article-source"><strong>Kilde:</strong> <a href="' + a.sourceUrl + '" target="_blank" rel="noopener">' + a.source + '</a></div><section class="article-related"><h2>Læs også</h2><div class="grid">' + relatedHTML + '</div></section></div>';
 }
 
-/* Smooth transition using View Transitions API when available */
 function showArticle(a){
   const apply = () => {
     articleView.innerHTML = articlePageHTML(a);
@@ -510,18 +592,10 @@ function showArticle(a){
     progress.style.width = '0%';
     const back = document.getElementById('backToHome');
     if(back) back.addEventListener('click', (e) => { e.preventDefault(); smoothBackToHome(); });
-    // lazy init for related images
-    articleView.querySelectorAll('img[loading="lazy"]').forEach(img => {
-      img.classList.add('lazy');
-      if (img.complete) img.classList.add('loaded');
-      else img.addEventListener('load', () => img.classList.add('loaded'));
-    });
+    initLazyImages(articleView);
   };
-  if (document.startViewTransition) {
-    document.startViewTransition(apply);
-  } else {
-    apply();
-  }
+  if (document.startViewTransition) document.startViewTransition(apply);
+  else apply();
 }
 
 function showHome(){
@@ -535,11 +609,8 @@ function showHome(){
 }
 
 function smoothBackToHome(){
-  if (document.startViewTransition) {
-    document.startViewTransition(showHome);
-  } else {
-    showHome();
-  }
+  if (document.startViewTransition) document.startViewTransition(showHome);
+  else showHome();
   history.pushState(null, '', '#/');
 }
 
@@ -559,7 +630,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* Reading progress + back-to-top */
 function updateProgress(){
   const doc = document.documentElement;
   const total = doc.scrollHeight - doc.clientHeight;
@@ -570,7 +640,6 @@ function updateProgress(){
 }
 window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', updateProgress);
-
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 /* ══════════════════ SEARCH ══════════════════ */
@@ -655,13 +724,13 @@ const infoClose = document.getElementById('infoClose');
 let infoLastFocus = null;
 
 const infoContent = {
-  tv:{ title:'TV-guiden', body:'<p>TV-guiden er på vej. Indtil da kan du se TV2 Østjyllands video fra <em>Løb for Livet</em> direkte i artiklen her på siden.</p>' },
-  radio:{ title:'Radio', body:'<p>Radioafspilleren er på vej. Indtil da kan du læse alle vores historier om Auning Skole her på siden.</p>' },
-  contact:{ title:'Kontakt redaktionen', body:'<p>Har du et tip, et billede eller en historie fra Auning Skole, du synes vi skal dække?</p><p>Skriv til <a href="mailto:redaktion@auning.dk">redaktion@auning.dk</a>.</p>' },
-  privacy:{ title:'Privatlivspolitik', body:'<p>Vi indsamler ingen personlige oplysninger. Der er ingen login, ingen nyhedsbrevstilmelding og ingen cookies til sporing.</p><p>Siden bruger kun lokal lagring til at huske din søgning i den aktuelle session.</p>' },
-  cookies:{ title:'Cookieindstillinger', body:'<p>Vi bruger kun teknisk nødvendig lokal lagring. Ingen sporing, ingen reklame, ingen deling med tredjeparter.</p>' },
-  terms:{ title:'Vilkår', body:'<p>Indholdet på denne side er til personlig brug. Du må gerne citere os, hvis du angiver kilden og linker tilbage til artiklen.</p>' },
-  accessibility:{ title:'Tilgængelighed', body:'<p>Siden er bygget med fuld tastaturnavigation, skærmlæser-venlige labels og høj kontrast.</p><p>Genveje: <kbd>Ctrl</kbd>+<kbd>K</kbd> åbner søgning, <kbd>Esc</kbd> lukker, <kbd>↑</kbd>/<kbd>↓</kbd> navigerer i søgeresultater.</p>' }
+  tv:{ title:'TV-guiden', body:'<p>TV-guiden er på vej på den nye side. Indtil da kan du se TV2 Østjyllands video fra <em>Løb for Livet</em> direkte i artiklen her.</p>' },
+  radio:{ title:'Radio', body:'<p>Radioafspilleren er på vej på den nye side.</p>' },
+  contact:{ title:'Kontakt redaktionen', body:'<p>Skriv til <a href="mailto:redaktion@auning.dk">redaktion@auning.dk</a>.</p>' },
+  privacy:{ title:'Privatlivspolitik', body:'<p>Vi indsamler ingen personlige oplysninger. Der er ingen login, ingen nyhedsbrevstilmelding og ingen cookies til sporing.</p>' },
+  cookies:{ title:'Cookieindstillinger', body:'<p>Vi bruger kun teknisk nødvendig lokal lagring.</p>' },
+  terms:{ title:'Vilkår', body:'<p>Indholdet på denne side er til personlig brug. Du må gerne citere os, hvis du angiver kilden.</p>' },
+  accessibility:{ title:'Tilgængelighed', body:'<p>Fuld tastaturnavigation. <kbd>Ctrl</kbd>+<kbd>K</kbd> åbner søgning, <kbd>Esc</kbd> lukker.</p>' }
 };
 
 function openInfo(key){
