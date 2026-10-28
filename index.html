@@ -140,15 +140,54 @@ body.nav-open .mobile-nav{display:block}
 .newsletter{background:#0a0a0a;color:#fff;margin:64px 0 10px;padding:48px 48px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
 .newsletter h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;letter-spacing:-.028em;margin-bottom:10px}
 .newsletter p{color:#b4b4b4;font-size:15px;max-width:54ch;line-height:1.5}
-.nl-form{display:flex;gap:10px;flex-wrap:wrap}
-.nl-form input{font:inherit;font-size:15px;padding:0 16px;height:50px;width:280px;max-width:100%;border:1px solid #3a3a3a;background:#1c1c1c;color:#fff;border-radius:2px}
-.nl-form input::placeholder{color:#8a8a8a}
-.nl-form input:focus{outline:none;border-color:var(--red)}
-.nl-form button{height:50px;padding:0 28px;background:var(--red);color:#fff;font-weight:700;font-size:15px;border-radius:2px;transition:background .15s}
-.nl-form button:hover{background:var(--red-dark)}
-.nl-msg{font-size:14px;color:#7ee2a8;margin-top:10px;display:none}
-.nl-msg.show{display:block}
-@media (max-width:860px){.newsletter{grid-template-columns:1fr;padding:36px 24px}}
+.nl-form-wrap{min-width:340px;max-width:440px;width:100%}
+.nl-form{display:flex;flex-direction:column;gap:10px}
+.nl-input-row{display:flex;gap:10px}
+.nl-input-row input{
+  font:inherit;font-size:15px;padding:0 16px;height:50px;flex:1;min-width:0;
+  border:1px solid #3a3a3a;background:#1c1c1c;color:#fff;border-radius:2px;
+  transition:border-color .15s,background .15s;
+}
+.nl-input-row input::placeholder{color:#8a8a8a}
+.nl-input-row input:focus{outline:none;border-color:var(--red);background:#232323}
+.nl-input-row input:disabled{opacity:.6;cursor:wait}
+.nl-input-row button{
+  height:50px;padding:0 24px;background:var(--red);color:#fff;font-weight:700;font-size:15px;
+  border-radius:2px;transition:background .15s,opacity .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:118px;flex:none;
+}
+.nl-input-row button:hover:not(:disabled){background:var(--red-dark)}
+.nl-input-row button:disabled{opacity:.85;cursor:wait}
+.nl-form.error .nl-input-row input{border-color:#ff5555;background:#2a1414}
+.nl-feedback{font-size:13px;min-height:18px;line-height:1.4;color:#ff8888;transition:color .2s}
+.nl-feedback:empty{visibility:hidden}
+.nl-btn-spinner{
+  display:inline-block;width:14px;height:14px;
+  border:2px solid rgba(255,255,255,.35);border-top-color:#fff;
+  border-radius:50%;animation:spinnerSpin .6s linear infinite;flex:none;
+}
+@keyframes spinnerSpin{to{transform:rotate(360deg)}}
+
+/* SUCCESS CARD */
+.nl-success{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:18px 20px;background:#132a1a;border-left:3px solid #7ee2a8;border-radius:2px;
+  animation:successIn .5s cubic-bezier(.2,.7,.3,1);
+}
+.nl-success svg{flex:none;width:38px;height:38px;margin-top:2px}
+.nl-success circle{stroke:#7ee2a8;stroke-width:2.5;fill:none;stroke-dasharray:126;stroke-dashoffset:126;animation:drawCircle .6s ease forwards}
+.nl-success path{stroke:#7ee2a8;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:drawCheck .4s .45s ease forwards}
+.nl-success strong{display:block;font-size:16px;font-weight:800;color:#fff;margin-bottom:5px}
+.nl-success p{font-size:14px;color:#c8d8c8;line-height:1.55;margin:0;max-width:none}
+.nl-success-email{color:#7ee2a8;font-weight:600;word-break:break-all}
+@keyframes drawCircle{to{stroke-dashoffset:0}}
+@keyframes drawCheck{to{stroke-dashoffset:0}}
+@keyframes successIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+@media (max-width:860px){
+  .newsletter{grid-template-columns:1fr;padding:36px 24px}
+  .nl-form-wrap{min-width:0}
+}
 
 /* ---------- FOOTER ---------- */
 footer{background:#0a0a0a;color:#c9c9c9;margin-top:64px;padding-top:52px;font-size:14px}
@@ -193,20 +232,8 @@ body.reading .read-progress{display:block}
 .article-body p:last-child{margin-bottom:0}
 
 /* ---------- VIDEO ---------- */
-.video-block{
-  margin:32px 0;
-  background:#000;
-  aspect-ratio:16/9;
-  position:relative;
-  overflow:hidden;
-}
-.video-block iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
+.video-block{margin:32px 0;background:#000;aspect-ratio:16/9;position:relative;overflow:hidden}
+.video-block iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 .article-source{
   max-width:720px;margin-top:36px;padding:18px 20px;background:var(--soft);
@@ -226,7 +253,7 @@ body.reading .read-progress{display:block}
   .article-body p:first-of-type::first-letter{font-size:52px}
 }
 
-/* ================= SEARCH (smooth) ================= */
+/* ================= SEARCH ================= */
 .search-overlay{
   position:fixed;inset:0;
   background:rgba(15,15,15,.55);
@@ -239,156 +266,71 @@ body.reading .read-progress{display:block}
 }
 .search-overlay.open{opacity:1;visibility:visible}
 .search-box{
-  background:#fff;
-  width:100%;max-width:680px;
-  box-shadow:0 30px 90px rgba(0,0,0,.4);
-  overflow:hidden;
+  background:#fff;width:100%;max-width:680px;
+  box-shadow:0 30px 90px rgba(0,0,0,.4);overflow:hidden;
   transform:translateY(-24px) scale(.98);
   transition:transform .34s cubic-bezier(.2,.7,.3,1);
 }
 .search-overlay.open .search-box{transform:translateY(0) scale(1)}
-
-.search-header{
-  display:flex;align-items:center;gap:14px;
-  padding:18px 22px;border-bottom:1px solid var(--line);
-}
+.search-header{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line)}
 .search-header svg{color:var(--muted);flex:none}
-.search-header input{
-  flex:1;font:inherit;font-size:19px;padding:6px 0;
-  border:0;outline:none;background:transparent;color:var(--ink);
-}
+.search-header input{flex:1;font:inherit;font-size:19px;padding:6px 0;border:0;outline:none;background:transparent;color:var(--ink)}
 .search-header input::placeholder{color:#b0b0b0}
-.search-close{
-  width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
-  transition:background .15s,transform .15s;color:var(--muted);flex:none;
-}
+.search-close{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;transition:background .15s,transform .15s;color:var(--muted);flex:none}
 .search-close:hover{background:var(--soft);color:var(--ink);transform:rotate(90deg)}
-
-.search-meta{
-  padding:10px 22px;font-size:11.5px;font-weight:700;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);
-  background:#fafafa;
-}
-
-.search-results{
-  max-height:52vh;overflow-y:auto;
-  padding:0;
-  scrollbar-width:thin;
-}
+.search-meta{padding:10px 22px;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);background:#fafafa}
+.search-results{max-height:52vh;overflow-y:auto;padding:0;scrollbar-width:thin}
 .search-results::-webkit-scrollbar{width:8px}
 .search-results::-webkit-scrollbar-thumb{background:#ddd;border-radius:4px}
 .search-results::-webkit-scrollbar-thumb:hover{background:#bbb}
-
-.search-result{
-  display:flex;gap:16px;align-items:center;
-  padding:14px 22px;
-  cursor:pointer;
-  border-bottom:1px solid var(--line);
-  transition:background .12s ease;
-  outline:none;
-}
+.search-result{display:flex;gap:16px;align-items:center;padding:14px 22px;cursor:pointer;border-bottom:1px solid var(--line);transition:background .12s ease;outline:none}
 .search-result:last-child{border-bottom:0}
-.search-result:hover,
-.search-result.selected{background:var(--soft)}
-.search-result .thumb{
-  width:84px;flex:none;aspect-ratio:3/2;
-  background:#e8e8e8;overflow:hidden;
-}
+.search-result:hover,.search-result.selected{background:var(--soft)}
+.search-result .thumb{width:84px;flex:none;aspect-ratio:3/2;background:#e8e8e8;overflow:hidden}
 .search-result .thumb img{width:100%;height:100%;object-fit:cover}
 .search-result .info{flex:1;min-width:0}
-.search-result .info .cat{
-  font-size:10.5px;font-weight:800;color:var(--red);
-  letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;
-  display:block;
-}
-.search-result .info h4{
-  font-size:15px;font-weight:700;line-height:1.3;color:var(--ink);
-  letter-spacing:-.01em;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-.search-result .info .date{
-  font-size:12px;color:var(--muted);margin-top:4px;
-}
-.search-result mark{
-  background:rgba(226,0,26,.16);color:var(--ink);
-  padding:0 1px;border-radius:2px;font-weight:800;
-}
-.search-empty{
-  padding:48px 22px;text-align:center;color:var(--muted);font-size:15px;line-height:1.6;
-}
+.search-result .info .cat{font-size:10.5px;font-weight:800;color:var(--red);letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;display:block}
+.search-result .info h4{font-size:15px;font-weight:700;line-height:1.3;color:var(--ink);letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.search-result .info .date{font-size:12px;color:var(--muted);margin-top:4px}
+.search-result mark{background:rgba(226,0,26,.16);color:var(--ink);padding:0 1px;border-radius:2px;font-weight:800}
+.search-empty{padding:48px 22px;text-align:center;color:var(--muted);font-size:15px;line-height:1.6}
 .search-empty strong{color:var(--ink)}
-
-.search-hint{
-  display:flex;gap:18px;padding:12px 22px;
-  border-top:1px solid var(--line);background:#fafafa;
-  font-size:12px;color:var(--muted);
-}
+.search-hint{display:flex;gap:18px;padding:12px 22px;border-top:1px solid var(--line);background:#fafafa;font-size:12px;color:var(--muted)}
 .search-hint span{display:inline-flex;align-items:center;gap:6px}
-.search-hint kbd{
-  display:inline-block;background:#fff;border:1px solid #ddd;
-  border-radius:3px;padding:1px 6px;font-size:11px;
-  font-family:inherit;font-weight:700;color:var(--ink);
-  box-shadow:0 1px 0 #ddd;
-}
-
+.search-hint kbd{display:inline-block;background:#fff;border:1px solid #ddd;border-radius:3px;padding:1px 6px;font-size:11px;font-family:inherit;font-weight:700;color:var(--ink);box-shadow:0 1px 0 #ddd}
 @media (max-width:600px){
   .search-overlay{padding:0;align-items:stretch}
-  .search-box{max-width:100%;transform:translateY(100%)}
+  .search-box{max-width:100%;transform:translateY(100%);display:flex;flex-direction:column;height:100%}
   .search-overlay.open .search-box{transform:translateY(0)}
   .search-results{max-height:none;flex:1}
-  .search-box{display:flex;flex-direction:column;height:100%}
   .search-hint{display:none}
 }
 
 /* ================= INFO MODAL ================= */
 .info-modal{
-  position:fixed;inset:0;
-  background:rgba(15,15,15,.6);
+  position:fixed;inset:0;background:rgba(15,15,15,.6);
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-  z-index:500;
-  display:flex;align-items:center;justify-content:center;
-  padding:24px;
-  opacity:0;visibility:hidden;
-  transition:opacity .28s ease,visibility .28s ease;
+  z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;
 }
 .info-modal.open{opacity:1;visibility:visible}
 .info-box{
-  background:#fff;max-width:460px;width:100%;
-  padding:34px 32px 30px;
-  position:relative;
-  transform:translateY(16px) scale(.97);
-  transition:transform .34s cubic-bezier(.2,.7,.3,1);
+  background:#fff;max-width:460px;width:100%;padding:34px 32px 30px;position:relative;
+  transform:translateY(16px) scale(.97);transition:transform .34s cubic-bezier(.2,.7,.3,1);
   box-shadow:0 25px 80px rgba(0,0,0,.35);
 }
 .info-modal.open .info-box{transform:translateY(0) scale(1)}
-.info-box h3{
-  font-size:22px;font-weight:800;letter-spacing:-.025em;line-height:1.15;
-  margin-bottom:14px;padding-right:32px;
-}
-.info-box p{
-  font-size:15px;line-height:1.6;color:#3a3a3a;margin-bottom:14px;
-}
+.info-box h3{font-size:22px;font-weight:800;letter-spacing:-.025em;line-height:1.15;margin-bottom:14px;padding-right:32px}
+.info-box p{font-size:15px;line-height:1.6;color:#3a3a3a;margin-bottom:14px}
 .info-box p:last-child{margin-bottom:0}
 .info-box a{color:var(--red);font-weight:700;text-decoration:underline}
-.info-close{
-  position:absolute;top:12px;right:12px;
-  width:36px;height:36px;display:grid;place-items:center;
-  border-radius:50%;color:var(--muted);
-  transition:background .15s,color .15s,transform .15s;
-}
+.info-close{position:absolute;top:12px;right:12px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;color:var(--muted);transition:background .15s,color .15s,transform .15s}
 .info-close:hover{background:var(--soft);color:var(--ink);transform:rotate(90deg)}
 .login-form{display:flex;flex-direction:column;gap:14px;margin-top:18px}
 .login-form label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink)}
-.login-form input{
-  font:inherit;font-size:15px;padding:12px 14px;
-  border:1px solid var(--line);border-radius:2px;outline:none;
-  transition:border-color .15s;
-}
+.login-form input{font:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line);border-radius:2px;outline:none;transition:border-color .15s}
 .login-form input:focus{border-color:var(--red)}
-.login-form button{
-  padding:14px;background:var(--red);color:#fff;font-weight:700;font-size:15px;
-  border-radius:2px;margin-top:6px;transition:background .15s;
-}
+.login-form button{padding:14px;background:var(--red);color:#fff;font-weight:700;font-size:15px;border-radius:2px;margin-top:6px;transition:background .15s}
 .login-form button:hover{background:var(--red-dark)}
 
 @media (prefers-reduced-motion:reduce){
@@ -419,7 +361,6 @@ body.reading .read-progress{display:block}
 <header class="site-header">
   <div class="wrap header-inner">
     <a href="#/" class="logo" aria-label="Auning Skole Nyheder">auning</a>
-
     <nav class="nav" aria-label="Hovedmenu" id="mainNav">
       <a href="#/" class="active" data-filter="all">Forside</a>
       <a href="#/" data-filter="Skolen">Skolen</a>
@@ -428,21 +369,15 @@ body.reading .read-progress{display:block}
       <a href="#/" data-filter="Skolestruktur">Skolestruktur</a>
       <a href="#/" data-filter="Hverdag">Hverdag</a>
     </nav>
-
     <div class="actions">
       <button class="icon-btn" id="searchBtn" aria-label="Søg (Ctrl+K)">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/>
-        </svg>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/></svg>
       </button>
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-          <path d="M4 7h16M4 12h16M4 17h16"/>
-        </svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
-
   <div class="mobile-nav" id="mobileNav">
     <a href="#/" data-filter="all">Forside</a>
     <a href="#/" data-filter="Skolen">Skolen</a>
@@ -532,7 +467,6 @@ body.reading .read-progress{display:block}
           </div>
           <div class="grid grid-2" id="practiceGrid"></div>
         </div>
-
         <aside class="most-read">
           <h2>Mest læst</h2>
           <div id="mostReadList"></div>
@@ -540,16 +474,31 @@ body.reading .read-progress{display:block}
       </div>
     </section>
 
+    <!-- NEWSLETTER -->
     <section class="newsletter" id="newsletterSection">
       <div>
         <h2>Få morgenoverblikket</h2>
-        <p>De vigtigste historier om Auning Skole — leveret til din indbakke hver hverdag kl. 7.</p>
-        <div class="nl-msg" id="nlMsg">Tak — du er nu tilmeldt!</div>
+        <p>De vigtigste historier om Auning Skole — leveret til din indbakke hver hverdag kl. 7. Afmeld når som helst.</p>
       </div>
-      <form class="nl-form" id="nlForm">
-        <input type="email" placeholder="Din e-mailadresse" aria-label="Din e-mailadresse" required>
-        <button type="submit">Tilmeld</button>
-      </form>
+      <div class="nl-form-wrap">
+        <form class="nl-form" id="nlForm" novalidate>
+          <div class="nl-input-row">
+            <input type="email" id="nlEmail" placeholder="Din e-mailadresse" aria-label="Din e-mailadresse" autocomplete="email" required>
+            <button type="submit" id="nlSubmit">Tilmeld</button>
+          </div>
+          <div class="nl-feedback" id="nlFeedback" role="status" aria-live="polite"></div>
+        </form>
+        <div class="nl-success" id="nlSuccess" hidden>
+          <svg viewBox="0 0 52 52" aria-hidden="true">
+            <circle cx="26" cy="26" r="20"/>
+            <path d="M16 27l7 7 13-14"/>
+          </svg>
+          <div>
+            <strong>Du er tilmeldt!</strong>
+            <p>Vi sender dig de vigtigste historier om Auning Skole til <span class="nl-success-email"></span> hver hverdag kl. 7.</p>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 
@@ -597,30 +546,30 @@ body.reading .read-progress{display:block}
 </footer>
 
 <!-- SEARCH OVERLAY -->
-<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-labelledby="searchLabel">
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true">
   <div class="search-box">
     <div class="search-header">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
         <circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4"/>
       </svg>
-      <input type="search" id="searchInput" placeholder="Søg i nyheder om Auning Skole..." autocomplete="off" aria-labelledby="searchLabel">
+      <input type="search" id="searchInput" placeholder="Søg i nyheder om Auning Skole..." autocomplete="off">
       <button class="search-close" id="searchClose" aria-label="Luk søgning">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <div class="search-meta" id="searchMeta">Alle historier</div>
-    <div class="search-results" id="searchResults" role="listbox" id="searchLabel"></div>
+    <div class="search-meta" id="searchMeta">Seneste historier</div>
+    <div class="search-results" id="searchResults" role="listbox"></div>
     <div class="search-hint">
       <span><kbd>↑</kbd><kbd>↓</kbd> Naviger</span>
       <span><kbd>↵</kbd> Åbn</span>
       <span><kbd>Esc</kbd> Luk</span>
-      <span style="margin-left:auto"><kbd>Ctrl</kbd>+<kbd>K</kbd> for søgning</span>
+      <span style="margin-left:auto"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
     </div>
   </div>
 </div>
 
 <!-- INFO MODAL -->
-<div class="info-modal" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+<div class="info-modal" id="infoModal" role="dialog" aria-modal="true">
   <div class="info-box">
     <button class="info-close" id="infoClose" aria-label="Luk">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -831,19 +780,16 @@ function renderHome(filter) {
   structureGrid.innerHTML = '';
   practiceGrid.innerHTML = '';
   mostReadList.innerHTML = '';
-
   let ids = articles.map(a => a.id);
   if (filter && filter !== 'all') {
     ids = articles.filter(a => a.kicker === filter).map(a => a.id);
   }
   if (ids.length === 0) ids = articles.map(a => a.id);
-
   ids.forEach(renderLatest);
   structureGrid.innerHTML = ids.slice(0,4).map(cardHTML).join('');
   practiceGrid.innerHTML = ids.slice(0,4).map(cardHTML).join('');
   ids.slice(0,5).forEach((id, i) => renderMostRead(id, i));
 }
-
 renderHome('all');
 
 /* ================= ARTICLE PAGE ================= */
@@ -861,15 +807,11 @@ function articlePageHTML(a) {
       <div class="meta"><span>${x.date}</span></div>
     </div>`).join('');
 
-  // Only the video, nothing else
   const videoHTML = a.videoUrl ? `
     <div class="video-block">
-      <iframe
-        src="${a.videoUrl}"
-        title="${a.title}"
+      <iframe src="${a.videoUrl}" title="${a.title}"
         allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-        allowfullscreen
-        loading="lazy"
+        allowfullscreen loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>` : '';
 
@@ -885,7 +827,6 @@ function articlePageHTML(a) {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
       Tilbage til forsiden
     </a>
-
     <header class="article-head">
       <span class="kicker">${a.kicker}</span>
       <h1>${a.title}</h1>
@@ -896,16 +837,12 @@ function articlePageHTML(a) {
         <span>${a.date}</span>
       </div>
     </header>
-
     ${videoHTML}
     ${figureHTML}
-
     <div class="article-body">${a.text}</div>
-
     <div class="article-source">
       <strong>Kilde:</strong> <a href="${a.sourceUrl}" target="_blank" rel="noopener">${a.source}</a>
     </div>
-
     <section class="article-related">
       <h2>Læs også</h2>
       <div class="grid">${relatedHTML}</div>
@@ -921,7 +858,6 @@ function showArticle(a) {
   document.title = a.title + ' — Auning Skole Nyheder';
   window.scrollTo(0, 0);
   progress.style.width = '0%';
-
   const back = document.getElementById('backToHome');
   if (back) back.addEventListener('click', (e) => { e.preventDefault(); location.hash = '#/'; });
 }
@@ -935,7 +871,6 @@ function showHome() {
   progress.style.width = '0%';
 }
 
-/* ================= ROUTER ================= */
 function router() {
   const match = location.hash.match(/^#\/artikel\/(\d+)/);
   if (match) {
@@ -947,7 +882,6 @@ function router() {
 window.addEventListener('hashchange', router);
 window.addEventListener('DOMContentLoaded', router);
 
-/* ================= CLICK DELEGATION ================= */
 document.addEventListener('click', (e) => {
   const trigger = e.target.closest('[data-article]');
   if (trigger) {
@@ -956,7 +890,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* ================= READING PROGRESS ================= */
 function updateProgress() {
   if (articleView.hidden) return;
   const doc = document.documentElement;
@@ -967,7 +900,7 @@ function updateProgress() {
 window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', updateProgress);
 
-/* ================= SEARCH (smooth) ================= */
+/* ================= SEARCH ================= */
 const searchOverlay = document.getElementById('searchOverlay');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
@@ -978,10 +911,7 @@ let searchSelectedIndex = -1;
 let searchCurrentResults = [];
 let searchDebounceTimer;
 
-function escapeRegex(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function highlightText(text, term) {
   if (!term) return text;
   const re = new RegExp('(' + escapeRegex(term) + ')', 'gi');
@@ -996,17 +926,14 @@ function openSearch() {
   renderSearch('');
   setTimeout(() => searchInput.focus(), 60);
 }
-
 function closeSearch() {
   searchOverlay.classList.remove('open');
   document.body.style.overflow = '';
   searchSelectedIndex = -1;
 }
-
 function renderSearch(query) {
   const term = query.trim();
   const lower = term.toLowerCase();
-
   if (!term) {
     searchCurrentResults = articles.slice(0, 8);
     searchMeta.textContent = 'Seneste historier';
@@ -1019,12 +946,10 @@ function renderSearch(query) {
       ? 'Ingen resultater'
       : searchCurrentResults.length + (searchCurrentResults.length === 1 ? ' resultat' : ' resultater');
   }
-
   if (searchCurrentResults.length === 0) {
     searchResults.innerHTML = `<div class="search-empty">Ingen historier matcher <strong>“${term}”</strong>.<br>Prøv et andet søgeord som <em>Løb</em>, <em>budget</em> eller <em>fodbold</em>.</div>`;
     return;
   }
-
   searchResults.innerHTML = searchCurrentResults.map((a, i) => `
     <div class="search-result${i === searchSelectedIndex ? ' selected' : ''}" role="option" data-result-index="${i}">
       <div class="thumb"><img src="${a.image}" alt="" loading="lazy"></div>
@@ -1035,30 +960,21 @@ function renderSearch(query) {
       </div>
     </div>`).join('');
 }
-
 function updateSearchSelection() {
   const items = searchResults.querySelectorAll('.search-result');
   items.forEach((el, i) => el.classList.toggle('selected', i === searchSelectedIndex));
-  if (searchSelectedIndex >= 0 && items[searchSelectedIndex]) {
-    items[searchSelectedIndex].scrollIntoView({ block: 'nearest' });
-  }
+  if (searchSelectedIndex >= 0 && items[searchSelectedIndex]) items[searchSelectedIndex].scrollIntoView({ block: 'nearest' });
 }
-
-function openResultById(id) {
-  closeSearch();
-  location.hash = '#/artikel/' + id;
-}
+function openResultById(id) { closeSearch(); location.hash = '#/artikel/' + id; }
 
 searchBtn.addEventListener('click', openSearch);
 searchClose.addEventListener('click', closeSearch);
 searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) closeSearch(); });
-
 searchInput.addEventListener('input', (e) => {
   searchSelectedIndex = -1;
   clearTimeout(searchDebounceTimer);
   searchDebounceTimer = setTimeout(() => renderSearch(e.target.value), 90);
 });
-
 searchInput.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown') {
     e.preventDefault();
@@ -1076,29 +992,19 @@ searchInput.addEventListener('keydown', (e) => {
     if (searchCurrentResults[pick]) openResultById(searchCurrentResults[pick].id);
   }
 });
-
 searchResults.addEventListener('click', (e) => {
   const item = e.target.closest('[data-result-index]');
   if (item) {
-    const idx = Number(item.dataset.resultIndex);
-    const a = searchCurrentResults[idx];
+    const a = searchCurrentResults[Number(item.dataset.resultIndex)];
     if (a) openResultById(a.id);
   }
 });
-
-/* Global keyboard shortcuts */
 document.addEventListener('keydown', (e) => {
   const tag = (document.activeElement && document.activeElement.tagName) || '';
   const inField = tag === 'INPUT' || tag === 'TEXTAREA';
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-    e.preventDefault();
-    openSearch();
-  } else if (e.key === '/' && !inField && !searchOverlay.classList.contains('open')) {
-    e.preventDefault();
-    openSearch();
-  } else if (e.key === 'Escape' && searchOverlay.classList.contains('open')) {
-    closeSearch();
-  }
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openSearch(); }
+  else if (e.key === '/' && !inField && !searchOverlay.classList.contains('open')) { e.preventDefault(); openSearch(); }
+  else if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
 });
 
 /* ================= INFO MODAL ================= */
@@ -1109,47 +1015,19 @@ const infoClose = document.getElementById('infoClose');
 let infoLastFocus = null;
 
 const infoContent = {
-  tv: {
-    title: 'TV-guiden',
-    body: `<p>TV-guiden er på vej. Indtil da kan du se TV2 Østjyllands dækning af Auning Skole direkte på deres hjemmeside — blandt andet videoen fra <em>Løb for Livet</em>, som du finder i artiklen her på siden.</p>`
-  },
-  radio: {
-    title: 'Radio',
-    body: `<p>Radioafspilleren er på vej. Indtil da kan du læse alle vores historier om Auning Skole her på siden.</p>`
-  },
-  login: {
-    title: 'Log ind',
-    body: `<p>Log ind for at gemme artikler og få personlige anbefalinger.</p>
-      <form class="login-form" onsubmit="event.preventDefault(); this.querySelector('.nl-msg-inline')?.remove(); const m=document.createElement('p'); m.className='nl-msg-inline'; m.style.color='var(--red)'; m.style.fontSize='13px'; m.style.marginTop='4px'; m.textContent='Login er ikke sat op endnu — prøv igen senere.'; this.appendChild(m);">
-        <label>E-mail<input type="email" required placeholder="dig@eksempel.dk"></label>
-        <label>Adgangskode<input type="password" required placeholder="••••••••"></label>
-        <button type="submit">Log ind</button>
-      </form>`
-  },
-  contact: {
-    title: 'Kontakt redaktionen',
-    body: `<p>Har du et tip, et billede eller en historie fra Auning Skole, du synes vi skal dække?</p>
-      <p>Skriv til <a href="mailto:redaktion@auning.dk">redaktion@auning.dk</a> — vi læser alt og vender tilbage, hvis vi kan bruge det.</p>`
-  },
-  privacy: {
-    title: 'Privatlivspolitik',
-    body: `<p>Vi indsamler kun anonym besøgsstatistik for at forstå, hvilke historier der bliver læst. Vi deler ikke data med tredjeparter, og vi sælger ikke annoncer.</p>
-      <p>Nyhedsbrevet bruges udelukkende til at sende dig de vigtigste historier om Auning Skole. Du kan altid afmelde dig igen.</p>`
-  },
-  cookies: {
-    title: 'Cookieindstillinger',
-    body: `<p>Vi bruger kun nødvendige cookies for at få siden til at virke — for eksempel til at huske din søgning i den aktuelle session. Ingen sporing, ingen reklame, ingen deling.</p>`
-  },
-  terms: {
-    title: 'Vilkår',
-    body: `<p>Indholdet på denne side er til personlig brug. Du må gerne citere os, hvis du angiver kilden og linker tilbage til artiklen.</p>
-      <p>Historierne er baseret på offentligt tilgængelige kilder og er skrevet med respekt for de involverede.</p>`
-  },
-  accessibility: {
-    title: 'Tilgængelighed',
-    body: `<p>Siden er bygget med fokus på tilgængelighed: fuld tastaturnavigation, skærmlæser-venlige labels, høj kontrast og respekt for <em>prefers-reduced-motion</em>.</p>
-      <p>Genveje: <kbd>Ctrl</kbd>+<kbd>K</kbd> åbner søgning, <kbd>Esc</kbd> lukker, <kbd>↑</kbd>/<kbd>↓</kbd> navigerer i søgeresultater.</p>`
-  }
+  tv: { title: 'TV-guiden', body: `<p>TV-guiden er på vej. Indtil da kan du se TV2 Østjyllands video fra <em>Løb for Livet</em> direkte i artiklen her på siden.</p>` },
+  radio: { title: 'Radio', body: `<p>Radioafspilleren er på vej. Indtil da kan du læse alle vores historier om Auning Skole her på siden.</p>` },
+  login: { title: 'Log ind', body: `<p>Log ind for at gemme artikler og få personlige anbefalinger.</p>
+    <form class="login-form" onsubmit="event.preventDefault(); const m=document.createElement('p'); m.style.color='var(--red)'; m.style.fontSize='13px'; m.style.marginTop='4px'; m.textContent='Login er ikke sat op endnu — prøv igen senere.'; this.appendChild(m);">
+      <label>E-mail<input type="email" required placeholder="dig@eksempel.dk"></label>
+      <label>Adgangskode<input type="password" required placeholder="••••••••"></label>
+      <button type="submit">Log ind</button>
+    </form>` },
+  contact: { title: 'Kontakt redaktionen', body: `<p>Har du et tip, et billede eller en historie fra Auning Skole, du synes vi skal dække?</p><p>Skriv til <a href="mailto:redaktion@auning.dk">redaktion@auning.dk</a>.</p>` },
+  privacy: { title: 'Privatlivspolitik', body: `<p>Vi indsamler kun anonym besøgsstatistik. E-mailadresser fra nyhedsbrevet gemmes lokalt i din browser og sendes kun videre, hvis redaktionen har koblet en formular-tjeneste på.</p><p>Du kan altid afmelde nyhedsbrevet ved at svare på en af vores e-mails.</p>` },
+  cookies: { title: 'Cookieindstillinger', body: `<p>Vi bruger kun nødvendige cookies for at få siden til at virke. Ingen sporing, ingen reklame, ingen deling.</p>` },
+  terms: { title: 'Vilkår', body: `<p>Indholdet på denne side er til personlig brug. Du må gerne citere os, hvis du angiver kilden og linker tilbage til artiklen.</p>` },
+  accessibility: { title: 'Tilgængelighed', body: `<p>Siden er bygget med fuld tastaturnavigation, skærmlæser-venlige labels og høj kontrast.</p><p>Genveje: <kbd>Ctrl</kbd>+<kbd>K</kbd> åbner søgning, <kbd>Esc</kbd> lukker, <kbd>↑</kbd>/<kbd>↓</kbd> navigerer.</p>` }
 };
 
 function openInfo(key) {
@@ -1162,18 +1040,14 @@ function openInfo(key) {
   document.body.style.overflow = 'hidden';
   infoClose.focus();
 }
-
 function closeInfo() {
   infoModal.classList.remove('open');
   document.body.style.overflow = '';
   if (infoLastFocus) infoLastFocus.focus();
 }
-
 infoClose.addEventListener('click', closeInfo);
 infoModal.addEventListener('click', (e) => { if (e.target === infoModal) closeInfo(); });
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && infoModal.classList.contains('open')) closeInfo();
-});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && infoModal.classList.contains('open')) closeInfo(); });
 
 /* ================= TOP BAR & FOOTER ACTIONS ================= */
 function scrollToNewsletter() {
@@ -1188,7 +1062,6 @@ function scrollToNewsletter() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-
 document.querySelectorAll('[data-action]').forEach(el => {
   el.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1196,25 +1069,15 @@ document.querySelectorAll('[data-action]').forEach(el => {
     if (action === 'live') {
       document.getElementById('breakingBar').scrollIntoView({ behavior: 'smooth', block: 'start' });
       window.scrollBy({ top: -80, behavior: 'smooth' });
-    } else if (action === 'newsletter') {
-      scrollToNewsletter();
-    } else if (action === 'login') {
-      openInfo('login');
-    } else if (action === 'tv') {
-      openInfo('tv');
-    } else if (action === 'radio') {
-      openInfo('radio');
-    } else if (action === 'contact') {
-      openInfo('contact');
-    } else if (action === 'privacy') {
-      openInfo('privacy');
-    } else if (action === 'cookies') {
-      openInfo('cookies');
-    } else if (action === 'terms') {
-      openInfo('terms');
-    } else if (action === 'accessibility') {
-      openInfo('accessibility');
-    }
+    } else if (action === 'newsletter') scrollToNewsletter();
+    else if (action === 'login') openInfo('login');
+    else if (action === 'tv') openInfo('tv');
+    else if (action === 'radio') openInfo('radio');
+    else if (action === 'contact') openInfo('contact');
+    else if (action === 'privacy') openInfo('privacy');
+    else if (action === 'cookies') openInfo('cookies');
+    else if (action === 'terms') openInfo('terms');
+    else if (action === 'accessibility') openInfo('accessibility');
     document.body.classList.remove('nav-open');
   });
 });
@@ -1233,6 +1096,120 @@ document.querySelectorAll('[data-filter]').forEach(el => {
     if (location.hash !== '#/' && location.hash !== '') location.hash = '#/';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+});
+
+/* ================= NEWSLETTER (WORKING) ================= */
+/*
+  ═══════════════════════════════════════════════════════════════════
+  HANK ON — how to make this send real emails:
+
+  1. Go to https://formspree.io and create a free account
+  2. Create a new form, verify your email
+  3. Formspree gives you an endpoint like:
+       https://formspree.io/f/xyzabcd
+  4. Paste that endpoint into NL_ENDPOINT below (between the quotes)
+  5. Done — every signup will land in your inbox
+
+  Until you do that, the form still works locally:
+  every email is saved to localStorage under 'auning_subscribers_v1',
+  and duplicates are already detected. You can view saved subscribers
+  by opening the browser console and running:
+
+    JSON.parse(localStorage.getItem('auning_subscribers_v1'))
+  ═══════════════════════════════════════════════════════════════════
+*/
+const NL_ENDPOINT = "";  // ← paste your Formspree endpoint here
+const NL_STORAGE_KEY = "auning_subscribers_v1";
+
+const nlForm = document.getElementById('nlForm');
+const nlEmail = document.getElementById('nlEmail');
+const nlSubmit = document.getElementById('nlSubmit');
+const nlFeedback = document.getElementById('nlFeedback');
+const nlSuccess = document.getElementById('nlSuccess');
+
+function isValidEmail(v) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+}
+function getSubscribers() {
+  try { return JSON.parse(localStorage.getItem(NL_STORAGE_KEY) || '[]'); }
+  catch { return []; }
+}
+function saveSubscriber(email) {
+  const list = getSubscribers();
+  const norm = email.toLowerCase();
+  if (!list.includes(norm)) {
+    list.push(norm);
+    try { localStorage.setItem(NL_STORAGE_KEY, JSON.stringify(list)); } catch {}
+  }
+}
+function setFeedback(msg) {
+  nlFeedback.textContent = msg || '';
+  nlForm.classList.toggle('error', !!msg);
+}
+function setLoading(on) {
+  nlSubmit.disabled = on;
+  nlEmail.disabled = on;
+  if (on) {
+    nlSubmit.innerHTML = '<span class="nl-btn-spinner"></span><span>Tilmelder…</span>';
+  } else {
+    nlSubmit.textContent = 'Tilmeld';
+  }
+}
+
+nlEmail.addEventListener('input', () => {
+  if (nlForm.classList.contains('error')) setFeedback('');
+});
+
+nlForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = nlEmail.value.trim();
+
+  if (!email) {
+    setFeedback('Indtast din e-mailadresse.');
+    nlEmail.focus();
+    return;
+  }
+  if (!isValidEmail(email)) {
+    setFeedback('Indtast en gyldig e-mailadresse.');
+    nlEmail.focus();
+    return;
+  }
+  if (getSubscribers().includes(email.toLowerCase())) {
+    setFeedback('Denne e-mailadresse er allerede tilmeldt.');
+    return;
+  }
+
+  setFeedback('');
+  setLoading(true);
+
+  try {
+    if (NL_ENDPOINT) {
+      const res = await fetch(NL_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          _subject: 'Ny tilmelding — Auning Skole Nyheder',
+          source: location.href
+        })
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+    } else {
+      // No endpoint set — simulate a short delay so the UX feels real
+      await new Promise(r => setTimeout(r, 800));
+    }
+
+    saveSubscriber(email);
+
+    nlForm.hidden = true;
+    nlSuccess.hidden = false;
+    const emailEl = nlSuccess.querySelector('.nl-success-email');
+    if (emailEl) emailEl.textContent = email;
+  } catch (err) {
+    setFeedback('Noget gik galt. Tjek din forbindelse og prøv igen.');
+  } finally {
+    setLoading(false);
+  }
 });
 
 /* ================= MISC ================= */
@@ -1269,17 +1246,6 @@ document.querySelectorAll('[data-filter]').forEach(el => {
       body.classList.remove('nav-open');
       btn.setAttribute('aria-expanded', 'false');
     });
-  });
-})();
-
-(function () {
-  const form = document.getElementById('nlForm');
-  const msg = document.getElementById('nlMsg');
-  if (!form) return;
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    msg.classList.add('show');
-    form.reset();
   });
 })();
 </script>
